@@ -1,9 +1,9 @@
 import math
 
 class Vector2():
-    def __init__(self):
-        self.x = 0
-        self.y = 0
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
 
     def __add__(self, other):
         return Vector2(self.x + other.x, self.y + other.y)
@@ -26,5 +26,8 @@ class Vector2():
     def normalised(self):
         length = self.length()
         if (length == 0):
-            return 0
+            return Vector2(0, 0)
         return Vector2(self.x/length, self.y/length)
+
+    def __str__(self) -> str:
+        return "(" + self.x + ", " + self.y + ")"

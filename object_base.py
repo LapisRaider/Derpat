@@ -3,7 +3,7 @@ import tkinter as tk
 from sprite_anim import SpriteAnim
 
 class ObjectBase():
-    def __init__(self, gif, num_frames, delay=0.1):
+    def __init__(self, gif, num_frames, delay=0.1, loop = True):
         # Create a window
         self.window = tk.Toplevel()
         # Make window draw over all others
@@ -18,7 +18,7 @@ class ObjectBase():
         self.window.wm_attributes('-transparentcolor', 'black')
 
         # Create animations.
-        self.anim = SpriteAnim(gif, num_frames, delay)
+        self.anim = SpriteAnim(gif, num_frames, delay, loop)
         self.label = tk.Label(self.window, image = self.anim.get_frame(), bd=0, bg='black')
         self.label.pack()
 

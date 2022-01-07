@@ -15,6 +15,7 @@ class PetState(enum.IntEnum):
     GOT_MOUSE = 4
     DRAG_WINDOW = 5
     CREATE_WINDOW = 6
+    MAKE_NOTE = 7
 
 class PetAnimState(enum.IntEnum):
     IDLE = 0
@@ -22,7 +23,10 @@ class PetAnimState(enum.IntEnum):
     WALK_RIGHT = 2
 
 class Pet():
-    FOOT_PRINT_SPAWN = 0.8 
+    FOOT_PRINT_SPAWN = 0.4
+    FOOT_X_LEFT_OFFSET = 64
+    FOOT_X_RIGHT_OFFSET = -5
+    FOOT_Y_OFFSET = 80
 
     def __init__(self):
         # Create a window
@@ -109,19 +113,28 @@ class Pet():
 
         #update and check those who are inactive
         for footprint in self.footPrintsStorer:
-            footprint.update()
-
             if not footprint.active:
                 deleteQueue.append(footprint)
-        
+                continue
+
+            footprint.update()
+
         #remove inactive
         for footprint in deleteQueue:
             self.footPrintsStorer.remove(footprint)
+            del footprint
 
-        if time.time() < self.footPrintTime + Pet.FOOT_PRINT_SPAWN:
+        deleteQueue.clear()
+
+        if self.anim_state == PetAnimState.IDLE:
             return
 
+        #check to see if should spawn footprints
+        if time.time() < self.footPrintTime + Pet.FOOT_PRINT_SPAWN:
+            return
         self.footPrintTime = time.time()
 
-        #TODO:: should have an offset base on where the player is walking
-        self.footPrintsStorer.append(Footprints(self.pos))
+        walkingLeft = self.anim_state == PetAnimState.WALK_LEFT
+        footPrintOffset = Vector2(Pet.FOOT_X_LEFT_OFFSET, Pet.FOOT_Y_OFFSET) if self.anim_state == PetAnimState.WALK_LEFT else Vector2(Pet.FOOT_X_RIGHT_OFFSET, Pet.FOOT_Y_OFFSET)
+
+        self.footPrintsStorer.append(Footprints(self.pos.__add__(footPrintOffset), walkingLeft))

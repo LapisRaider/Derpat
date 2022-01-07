@@ -12,21 +12,21 @@ class SpriteAnim():
         self.is_finished = False
 
     def update(self):
-        if is_finished:
+        if self.is_finished:
             return
 
         if (self.last_update + self.delay < time.time()):
             self.frame_index = self.frame_index + 1
             
-            if not loop and self.frame_index == self.num_frames:
-                is_finished = True
+            if not self.loop and self.frame_index == self.num_frames:
+                self.is_finished = True
                 return
 
             self.frame_index = self.frame_index%self.num_frames
             self.last_update = time.time()
 
-    def is_finished(self):
-        return is_finished
+    def finished(self):
+        return self.is_finished
 
     def reset(self):
         self.frame_index = 0

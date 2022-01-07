@@ -3,7 +3,7 @@ import random
 
 from system import System
 from mouseController import *
-from pet_states import PetState
+from pet import PetState
 
 class CatchMouse(System):
     FOLLOW_SPEED = 10

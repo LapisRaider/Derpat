@@ -1,5 +1,5 @@
 import time
-from pet_states import PetState
+from pet import PetState
 
 class System():
     def __init__(self, delay=0, action_state = PetState.DEFAULT):
@@ -18,6 +18,7 @@ class System():
         # Check if we should run this system.
         if (pet.curr_state == self.action_state) and (time.time() > self.last_update + self.delay):
             self.action(pet)
+            self.last_update = time.time()
 
         # Update previous state.
         pet.prev_state = pet.curr_state

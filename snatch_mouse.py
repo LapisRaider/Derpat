@@ -1,5 +1,6 @@
 import time
 import random
+import monitor
 
 from system import System
 from vector2 import Vector2
@@ -19,9 +20,10 @@ class SnatchMouse(System):
     #to be init at the start
     def on_enter(self, pet):
         pet.snatchStartTime = time.time()
-        pet.snatchTimeAmt = random.randrange(SnatchMouse.MIN_SNATCH_TIME_AMT, SnatchMouse.MAX_SNATCH_TIME_AMT)
-        self.runDir = Vector2(random.randrange(-1, 1), random.uniform(-1, 1))
+        pet.snatchTimeAmt = random.randrange(SnatchMouse.MIN_SNATCH_TIME_AMT, SnatchMouse.MAX_SNATCH_TIME_AMT)   
         self.mouseOffset = SnatchMouse.MOUSE_OFFSET_RUN_LEFT if pet.anim_state == PetAnimState.WALK_LEFT else SnatchMouse.MOUSE_OFFSET_RUN_RIGHT
+
+        self.randomizeDir(pet)
 
     # update snatching the mouse
     def action(self, pet):
@@ -30,10 +32,11 @@ class SnatchMouse(System):
             pet.next_state = PetState.IDLE
             return
 
-        #TODO:: able to run in a random direction and change
-        pet.translate(round(self.runDir.x) * SnatchMouse.RUN_SPEED, round(self.runDir.y) * SnatchMouse.RUN_SPEED)
+        #check if out of screen and change direction
+        if monitor.outOfRangeHori(pet.pos) or monitor.outOfRangeVert(pet.pos):
+            self.randomizeDir(pet)
 
-        #check if run out of a certain amt out of screen, come back
+        pet.translate(round(self.runDir.x) * SnatchMouse.RUN_SPEED, round(self.runDir.y) * SnatchMouse.RUN_SPEED)
 
         #update animation
         if (self.runDir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
@@ -43,6 +46,15 @@ class SnatchMouse(System):
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
             self.mouseOffset = SnatchMouse.MOUSE_OFFSET_RUN_RIGHT
 
+        #update mouse pos
         newMousePos = self.mouseOffset.__add__(pet.pos)
         setMousePos(newMousePos.x, newMousePos.y) #mouse attached to pet
+
+    def randomizeDir(self, pet):
+        active_monitor = monitor.getMonitorOnScrPos(pet.get_position())
+        self.minSize = Vector2(active_monitor.x, active_monitor.y)
+        self.maxSize = Vector2(active_monitor.x + active_monitor.width, active_monitor.y + active_monitor.height)
+        
+        nextRandomPos = Vector2(random.randrange(self.minSize.x, self.maxSize.x), random.randrange(self.minSize.y, self.maxSize.y))
+        self.runDir =(nextRandomPos.__sub__(pet.pos)).normalised()
 

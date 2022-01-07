@@ -1,4 +1,5 @@
 # Pet
+from monitor import initMonitors
 from pet import Pet
 from pet import PetState
 
@@ -18,6 +19,9 @@ import keyboard
 if __name__ == "__main__":
     #List of windows for testing
     windows = []
+
+    monitor.initMonitors()
+
     # Pet
     pet = Pet()
     # Systems
@@ -25,6 +29,7 @@ if __name__ == "__main__":
     stroll = Stroll(0, PetState.STROLL)
     headpat = Headpat(6, PetState.HEADPAT)
     catch_mouse = CatchMouse(0, PetState.CATCH_MOUSE)
+    snatch_mouse = SnatchMouse(0, PetState.GOT_MOUSE)
     open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     move_window = MoveWindow(0,PetState.DRAG_WINDOW)
     # notepad = Notepad(width=400, height=200)
@@ -37,6 +42,7 @@ if __name__ == "__main__":
         stroll.update(pet)
         headpat.update(pet)
         catch_mouse.update(pet)
+        snatch_mouse.update(pet)
         open_window.update(pet)
         move_window.update(pet)
 

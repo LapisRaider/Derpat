@@ -1,19 +1,21 @@
 from screeninfo import get_monitors
 
-for monitor in get_monitors():
-    print(str(monitor)), #debugging purpose
-
-
-leftPosX = 0
-rightPosX = 0
+minPosX = 0
+maxPosX = 0
 
 def initMonitors():
-    for monitor in get_monitors():
-        if monitor.x < leftPosX:
-            leftPosX = monitor.x
+    global minPosX
+    global maxPosX
 
-        if monitor.width + monitor.x > rightPosX:
-            rightPosX = monitor.width + monitor.x
+    minPosX = 0
+    maxPosX = 0
+
+    for monitor in get_monitors():
+        if monitor.x < minPosX:
+            minPosX = monitor.x
+
+        if monitor.width + monitor.x > maxPosX:
+            maxPosX = monitor.width + monitor.x
 
 #get which monitor you're in depending on pos X, y is unimpt here
 def getMonitorOnScrPos(pos):
@@ -25,10 +27,13 @@ def getMonitorOnScrPos(pos):
 
 #check if out of monitor hori axis
 def outOfRangeHori(pos):
-    return pos.x < leftPosX or pos.x > rightPosX
+    global minPosX
+    global maxPosX
+
+    return pos.x < minPosX or pos.x > maxPosX
 
 #change if out of monitors vert axis
 def outOfRangeVert(pos):
     currMonitor = getMonitorOnScrPos(pos)
-    return pos.y > currMonitor.y + currMonitor.height or pos.y < 0
+    return pos.y > currMonitor.y + currMonitor.height or pos.y < currMonitor.y
  

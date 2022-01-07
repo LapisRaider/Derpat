@@ -26,9 +26,3 @@ class ObjectBase():
 
     def update(self):
         pass
-
-    def startObj(self, pos):
-        pass
-
-    def clone():
-        pass

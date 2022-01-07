@@ -5,6 +5,7 @@ from pet import PetState
 # Systems
 from idle import Idle
 from stroll import Stroll
+from headpat import Headpat
 from snatch_mouse import SnatchMouse
 from catch_mouse import CatchMouse
 
@@ -21,6 +22,7 @@ if __name__ == "__main__":
     # Systems
     idle = Idle(0, PetState.IDLE)
     stroll = Stroll(0, PetState.STROLL)
+    headpat = Headpat(6, PetState.HEADPAT)
     catch_mouse = CatchMouse(0, PetState.CATCH_MOUSE)
     open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     # notepad = Notepad(width=400, height=200)
@@ -30,6 +32,7 @@ if __name__ == "__main__":
         # System Update
         idle.update(pet)
         stroll.update(pet)
+        headpat.update(pet)
         catch_mouse.update(pet)
         open_window.update(pet)
 

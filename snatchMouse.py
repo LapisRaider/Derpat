@@ -6,7 +6,12 @@ from petStates import PetState
 
 FOLLOW_SPEED = 10
 MOUSE_CATCH_OFFSET = 10 
-SNATCH_TIME_AMT = 5 # in seconds
+
+MAX_FOLLOW_TIME_AMT = 5 # after a certain amt of time give up
+MIN_FOLLOW_TIME_AMT = 2 
+
+MAX_SNATCH_TIME_AMT = 5 # in seconds
+MIN_SNATCH_TIME_AMT = 2
 
 #pet follows the mouse ard
 def followMouse(pet):
@@ -31,10 +36,14 @@ def snatchMouseUpdate(pet):
         pet.snatchStartTime = time.time()
         pet.state = PetState.CHASE_MOUSE
 
+def initTakeMouse(pet):
+    pet.snatchStartTime = 0
+    pet.snatchTime = 0
+
 #behavior for taking the mouse and running away
 def takeMouse(pet):
     #let go of mouse after a while
-    if (time.time() > pet.snatchStartTime + SNATCH_TIME_AMT)
+    if (time.time() > pet.snatchStartTime + MAX_SNATCH_TIME_AMT):
         return False
 
     #set random directions

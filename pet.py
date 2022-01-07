@@ -2,6 +2,9 @@ import tkinter as tk
 import time
 import random
 
+from petStates import PetState
+from vector2 import *
+
 class Pet():
     def __init__(self):
         # Create a window
@@ -43,5 +46,5 @@ class Pet():
         self.pos.y += y_offset
 
     def update(self):
-        self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))
+        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
         self.window.update()

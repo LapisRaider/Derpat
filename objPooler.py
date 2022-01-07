@@ -1,4 +1,4 @@
-from footprints import Footprints
+from vector2 import Vector2
 
 class ObjectPooler():
     SPAWN_AMT = 5
@@ -17,8 +17,8 @@ class ObjectPooler():
 
     #add more obj into the obj pooler
     def spawnMoreObj(self, spawnAmt):
-        for i in spawnAmt:
-            self.objs.insert(self.objToSpawn.clone())
+        for i in range(spawnAmt):
+            self.objs.append(self.objToSpawn.clone())
 
     #get an inactive obj
     def getInactiveObj(self):
@@ -27,9 +27,9 @@ class ObjectPooler():
                 return obj
         
         self.spawnMoreObj(ObjectPooler.SPAWN_AMT)
-        return self.InactiveObj()
+        return self.getInactiveObj()
 
     #set obj pos and activate it
     def setObjPos(self, pos):
         obj = self.getInactiveObj()
-        obj.startObj(pos)
+        obj.startObj(Vector2(round(pos.x), round(pos.y)))

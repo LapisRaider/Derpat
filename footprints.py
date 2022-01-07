@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from window_objects import ObjectBase
+from object_base import ObjectBase
 
 class Footprints(ObjectBase):
     NUM_FRAMES = 4

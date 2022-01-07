@@ -18,3 +18,4 @@ pip install pynput (mouse)
 pip install screeninfo (monitor information)
 pip install keyboard (keyboard)
 pip install pywin32 (for moving of windows)
+pip install playsound==1.2.2

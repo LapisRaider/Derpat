@@ -5,6 +5,7 @@ import enum
 
 from vector2 import *
 from sprite_anim import SpriteAnim
+from footprints import Footprints
 
 class PetState(enum.IntEnum):
     DEFAULT = 0
@@ -21,6 +22,8 @@ class PetAnimState(enum.IntEnum):
     WALK_RIGHT = 2
 
 class Pet():
+    FOOT_PRINT_SPAWN = 0.8 
+
     def __init__(self):
         # Create a window
         self.window = tk.Tk()
@@ -37,6 +40,10 @@ class Pet():
 
         # X & Y Coordinates of our window.
         self.pos = Vector2(500, 0)
+
+        #for tracking footprints
+        self.footPrintsStorer = []
+        self.footPrintTime = time.time()
 
         #set default state
         self.next_state = PetState.IDLE
@@ -96,3 +103,25 @@ class Pet():
 
     def get_next_state(self):
         return self.next_state
+
+    def track_footprints(self):
+        deleteQueue = []
+
+        #update and check those who are inactive
+        for footprint in self.footPrintsStorer:
+            footprint.update()
+
+            if not footprint.active:
+                deleteQueue.append(footprint)
+        
+        #remove inactive
+        for footprint in deleteQueue:
+            self.footPrintsStorer.remove(footprint)
+
+        if time.time() < self.footPrintTime + Pet.FOOT_PRINT_SPAWN:
+            return
+
+        self.footPrintTime = time.time()
+
+        #TODO:: should have an offset base on where the player is walking
+        self.footPrintsStorer.append(Footprints(self.pos))

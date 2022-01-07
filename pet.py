@@ -2,7 +2,7 @@ import tkinter as tk
 import time
 import random
 
-from petStates import PetState
+from pet_states import PetState
 from vector2 import *
 
 class Pet():
@@ -24,7 +24,8 @@ class Pet():
         self.pos = Vector2(0, 0)
 
         #set default state
-        self.state = PetState.IDLE
+        self.curr_state = PetState.IDLE
+        self.prev_state = PetState.DEFAULT
 
         #variables for snatching the mouse
         self.snatchStartTime = 0
@@ -48,3 +49,7 @@ class Pet():
     def update(self):
         self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
         self.window.update()
+
+    def change_state(self, state):
+        self.prev_state = self.curr_state
+        self.curr_state = state

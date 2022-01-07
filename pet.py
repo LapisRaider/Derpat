@@ -101,6 +101,7 @@ class Pet():
 
         # Update Window
         self.window.geometry('+{x}+{y}'.format(x=str(round(self.pos.x)), y=str(round(self.pos.y))))
+        #self.window.lift()
         self.window.update()
 
         # Update Previous

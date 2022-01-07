@@ -38,12 +38,17 @@ def translateWindow(window,x,y):
     #else:
     #    return False
 
+def setWindowPosition(window,x,y):
+    rect = win32gui.GetWindowRect(window)
+    win32gui.MoveWindow(window,round(x),round(y),rect[2]-rect[0],rect[3]-rect[1],True)
+
+
 # Callback function for EnumWindows
 def windowEnumHandler(hwnd, list):
     tempMonitor = monitor.getMonitorOnScrPos(Vector2(0,0)) # Used to get screen width/height
 
     #Just tons of checks to make sure I don't get any invalid windows
-    if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) != '' and win32gui.GetWindowText(hwnd) != 'tk' and win32gui.GetWindowText(hwnd) != 'Task Manager':
+    if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) != '' and win32gui.GetWindowText(hwnd) != 'tk' and win32gui.GetWindowText(hwnd) != 'Task Manager' and win32gui.GetWindowText(hwnd) != 'Meme' and win32gui.GetWindowText(hwnd) != 'You have a note!':
         dwmapi.DwmGetWindowAttribute(HWND(hwnd), DWORD(DWMWA_CLOAKED), ctypes.byref(isCloaked), ctypes.sizeof(isCloaked))
         if(isCloaked.value == 0): # Checking if window is suspended
             rect = win32gui.GetWindowRect(hwnd)
@@ -81,6 +86,7 @@ class MoveWindow(System):
         self.distanceTravelled = 0
         rect = win32gui.GetWindowRect(self.targetWindow)
         direction = Vector2(rect[0]-pet.window.winfo_width(),rect[1]).__sub__(pet.pos)
+        self.targetWindowPos = Vector2(rect[0],rect[1])
         if direction.x > 0:
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
         else:
@@ -107,8 +113,10 @@ class MoveWindow(System):
             #if getActiveWindow() != self.targetWindow:
             #    pet.change_state(PetState.IDLE)
         elif self.state == 1:
-            pet.translate(1 * MoveWindow.MOVEMENT_SPEED,0)
-            # If window loses focus, return tto idle state
-            self.distanceTravelled = self.distanceTravelled + (1 * MoveWindow.MOVEMENT_SPEED * delta_time)
-            if not translateWindow(self.targetWindow,1 * MoveWindow.MOVEMENT_SPEED * delta_time,0) or self.distanceTravelled >= MoveWindow.DISTANCE_TO_TRAVEL:
+            movement = 1 * MoveWindow.MOVEMENT_SPEED * delta_time
+            pet.translate(movement,0)
+            self.distanceTravelled = self.distanceTravelled + movement
+            self.targetWindowPos.x = self.targetWindowPos.x + movement
+            setWindowPosition(self.targetWindow,self.targetWindowPos.x,self.targetWindowPos.y)
+            if self.distanceTravelled >= MoveWindow.DISTANCE_TO_TRAVEL:
                 pet.change_state(PetState.IDLE)

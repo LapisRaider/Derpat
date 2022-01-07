@@ -87,6 +87,8 @@ class OpenWindow(System):
                     self.targetWindow.window.update()
                 else:
                     self.targetWindow = Notepad(width=300,height = 300)
+
+                pet.window.lift()
                 self.windows.append(self.targetWindow)
                 # Spawning the window
                 if self.screenDir == 0:

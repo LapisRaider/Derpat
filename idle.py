@@ -50,6 +50,9 @@ class Idle(System):
         # Else, 10% chance of creating window.
         elif (random.randrange(0, 10) < 1):
             pet.change_state(PetState.CREATE_WINDOW)
+        # Else, 10% chance of screaming.
+        elif (random.randrange(0, 10) < 1):
+            pet.change_state(PetState.SCREAM)
         # Else, stroll.
         else:
             pet.change_state(PetState.STROLL)

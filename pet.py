@@ -2,21 +2,26 @@ import tkinter as tk
 import time
 import random
 
-class pet():
+class Pet():
     def __init__(self):
         # Create a window
         self.window = tk.Tk()
         # Make window draw over all others
         self.window.attributes('-topmost', True)
-        # Make window frameless.
-        # self.window.overrideredirect(True)
+        # Make window borderless.
+        self.window.overrideredirect(True)
 
-        # Timestamp to check whether to advance frame.
-        self.timestamp = time.time()
+        # WINDOWS ONLY
+        # Set focushighlight to black when the window does not have focus.
+        self.window.config(highlightbackground='black')
+        # Turn black into transparency.
+        self.window.wm_attributes('-transparentcolor', 'black')
 
         # X & Y Coordinates of our window.
         self.x = 0
         self.y = 0
+
+        # self.state = 
 
         # Placeholder image.
         self.img = tk.PhotoImage(file='images/placeholder.png')
@@ -24,11 +29,7 @@ class pet():
         self.num_frames = 1
 
         # Create a label as a container for our image.
-        self.label = tk.Label(self.window, image=self.img).pack()
-
-        # Run self.update() after 0ms when mainloop starts.
-        self.window.after(0, self.update)
-        #self.window.mainloop()
+        self.label = tk.Label(self.window, image=self.img, bd=0, bg='black').pack()
 
     def set_position(self, x_pos, y_pos):
         self.x = x_pos
@@ -39,14 +40,5 @@ class pet():
         self.y += y_offset
 
     def update(self):
-        # Update if 50ms have passed.
-        if time.time() < self.timestamp + 0.05:
-            return
-        self.timestamp = time.time()
-
-        # Update goes here.
-
-    def updateRender(self):
         self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))
         self.window.update()
-        

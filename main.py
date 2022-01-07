@@ -1,15 +1,17 @@
-from pet import *
-from snatchMouse import *
+from pet import Pet
+from snatch_mouse import SnatchMouse
 
 import sys
 print(sys.executable)
 
 if __name__ == "__main__":
-    mainPet = pet()
+    # Pet
+    pet = Pet()
+    # Systems
+    snatch_mouse = SnatchMouse()
 
     while True:
-        snatchMouseUpdate(mainPet)
-        mainPet.updateRender()
-
-        
-    
+        # System Update
+        snatch_mouse.action(pet)
+        # Pet Update
+        pet.update()

@@ -8,7 +8,7 @@ from pet import PetState
 from pet import PetAnimState
 
 class Stroll(System):
-    STROLL_SPEED = 10
+    STROLL_SPEED = 150
 
     def on_enter(self, pet):
         active_monitor = monitor.getMonitorOnScrPos(pet.get_position())

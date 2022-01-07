@@ -36,7 +36,7 @@ class window():
 
 
 class OpenWindow(System):
-    MOVEMENT_SPEED = 5
+    MOVEMENT_SPEED = 200
 
     def __init__(self, delay=0, action_state=PetState.DEFAULT, windows=[]):
         self.windows = windows
@@ -63,14 +63,14 @@ class OpenWindow(System):
             self.corner.x = self.corner.x - pet.window.winfo_width()
         return
 
-    def action(self,pet):
+    def action(self,pet,delta_time):
         #print("Monitor height = ",monitor.getMonitorOnScrPos(Vector2(0,0)).height)
         
         # Going towards the corner
         if self.state == 0:
             #print("IT'S RUNNING in state 0")
             direction = self.corner.__sub__(pet.pos)
-            normal = direction.normalised() * OpenWindow.MOVEMENT_SPEED
+            normal = direction.normalised() * OpenWindow.MOVEMENT_SPEED * delta_time
             pet.translate(normal.x,normal.y)
             # Has reached destination
             
@@ -106,7 +106,7 @@ class OpenWindow(System):
             else:
                 direction.x = -1
             #print("IT'S RUNNING in state 1")
-            direction = direction * OpenWindow.MOVEMENT_SPEED
+            direction = direction * OpenWindow.MOVEMENT_SPEED * delta_time
             pet.translate(direction.x,direction.y)
             self.targetWindow.pos = self.targetWindow.pos.__add__(direction)
             #print("Monitor width = ", self.tempMonitor.width)

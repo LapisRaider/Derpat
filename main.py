@@ -40,7 +40,7 @@ if __name__ == "__main__":
     while True:
         # Calculate delta time.
         curr_time = time.time()
-        delta_time = curr_time = prev_time
+        delta_time = curr_time - prev_time
         prev_time = curr_time
 
         # System Update

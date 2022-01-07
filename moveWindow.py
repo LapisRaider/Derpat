@@ -65,7 +65,7 @@ def getRandomWindow():
 
 class MoveWindow(System):
     DISTANCE_TO_TRAVEL = 500
-    MOVEMENT_SPEED = 5
+    MOVEMENT_SPEED = 300
 
     def __init__(self, delay=0, action_state=PetState.DEFAULT):
         # State 0 = moving to window, State 1 = moving window
@@ -86,7 +86,7 @@ class MoveWindow(System):
         else:
             pet.set_anim_state(PetAnimState.WALK_LEFT)
 
-    def action(self,pet):
+    def action(self,pet,delta_time):
         if self.targetWindow == None:
             pet.change_state(PetState.IDLE)
             return
@@ -101,7 +101,7 @@ class MoveWindow(System):
                 shell.SendKeys('%')
                 win32gui.SetForegroundWindow(self.targetWindow)
             else:
-                normal = direction.normalised() * MoveWindow.MOVEMENT_SPEED
+                normal = direction.normalised() * MoveWindow.MOVEMENT_SPEED * delta_time
                 pet.translate(normal.x,normal.y)
             # If window loses focus, return to idle state
             #if getActiveWindow() != self.targetWindow:
@@ -109,6 +109,6 @@ class MoveWindow(System):
         elif self.state == 1:
             pet.translate(1 * MoveWindow.MOVEMENT_SPEED,0)
             # If window loses focus, return tto idle state
-            self.distanceTravelled = self.distanceTravelled + (1 * MoveWindow.MOVEMENT_SPEED)
-            if not translateWindow(self.targetWindow,1 * MoveWindow.MOVEMENT_SPEED,0) or self.distanceTravelled >= MoveWindow.DISTANCE_TO_TRAVEL:
+            self.distanceTravelled = self.distanceTravelled + (1 * MoveWindow.MOVEMENT_SPEED * delta_time)
+            if not translateWindow(self.targetWindow,1 * MoveWindow.MOVEMENT_SPEED * delta_time,0) or self.distanceTravelled >= MoveWindow.DISTANCE_TO_TRAVEL:
                 pet.change_state(PetState.IDLE)

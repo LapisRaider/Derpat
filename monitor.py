@@ -1,6 +1,7 @@
 from screeninfo import get_monitors
 
-#print(str(monitors)), debugging purpose
+for monitor in get_monitors():
+    print(str(monitor)), #debugging purpose
 
 
 leftPosX = 0
@@ -13,8 +14,6 @@ def initMonitors():
 
         if monitor.width + monitor.x > rightPosX:
             rightPosX = monitor.width + monitor.x
-
-
 
 #get which monitor you're in depending on pos X, y is unimpt here
 def getMonitorOnScrPos(pos):

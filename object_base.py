@@ -2,8 +2,7 @@ import tkinter as tk
 
 from sprite_anim import SpriteAnim
 
-class WindowObjects():
-
+class ObjectBase():
     def __init__(self, gif, num_frames, delay=0.1):
         # Create a window
         self.window = tk.Toplevel()
@@ -29,4 +28,7 @@ class WindowObjects():
         pass
 
     def startObj(self, pos):
+        pass
+
+    def clone():
         pass

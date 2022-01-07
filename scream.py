@@ -21,7 +21,7 @@ class Scream(System):
         pet.screamIntervalStart = time.time()
         
         pet.set_anim_state(random.randint(PetAnimState.ATTACK_LEFT, PetAnimState.ATTACK_RIGHT))
-        playsound("sfx/catScream.wav", block=False)
+        playsound("sfx/cat_scream.wav", block=False)
 
     def action(self, pet, delta_time):
         #check when to stop screaming
@@ -31,7 +31,7 @@ class Scream(System):
         
         #scream after a certain interval
         if time.time() > pet.screamIntervalStart + Scream.SCREAM_INTERVALS:
-            playsound("sfx/catScream.wav", block=False)
+            playsound("sfx/cat_scream.wav", block=False)
             pet.screamIntervalStart = time.time()
         
     

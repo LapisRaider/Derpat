@@ -7,6 +7,7 @@ from pet import PetAnimState, PetState
 from vector2 import Vector2
 import monitor
 import os
+from makeNotes import *
 
 class window():
 
@@ -74,11 +75,12 @@ class OpenWindow(System):
             if direction.length() < 1:
                 pet.pos = self.corner
                 self.state = 1
-                filePaths = os.listdir('images')
-                randomPath = filePaths[random.randint(0,len(filePaths)-1)]
-                self.targetWindow = window('images/' + randomPath,0,0)
-                # update() is required to update the window width, otherwise it returns 1
-                self.targetWindow.window.update()
+                # filePaths = os.listdir('images')
+                # randomPath = filePaths[random.randint(0,len(filePaths)-1)]
+                # self.targetWindow = window('images/' + randomPath,0,0)
+                # # update() is required to update the window width, otherwise it returns 1
+                # self.targetWindow.window.update()
+                self.targetWindow = Notepad()
                 self.windows.append(self.targetWindow)
                 # Spawning the window
                 if self.screenDir == 0:

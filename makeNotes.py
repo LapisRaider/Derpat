@@ -9,65 +9,6 @@ from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
 
-class window():
-    def __init__(self, x, y):
-        self.window = tk.Toplevel()
-        # Boolean to prevent the program from closing immediately
-        self.closing = False
-        # self.img = tk.PhotoImage(file=imagePath)
-        self.window.attributes('-topmost',True)
-        #newWindow.overrideredirect(True)
-        self.pos = Vector2(x,y)
-        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
-        self.label = tk.Label(self.window, image=self.img, bd=0, bg='black').pack()
-        #self.window.mainloop()
-        #self.window.after(0,self.update)
-        self.window.protocol("WM_DELETE_WINDOW",self.close) # The X button now calls self.close
-       
-    def update(self):
-        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
-        self.window.update()
-
-    def close(self):
-        self.closing = True
-
-class OpenWindow(System):
-    def __init__(self, delay=0, action_state=PetState.DEFAULT, windows=[]):
-        self.windows = windows
-        # State 0 = GOING TO CORNER
-        # State 1 = MOVING WINDOW
-        self.state = 0
-        super().__init__(delay=delay, action_state=action_state)
-
-    def on_enter(self, pet):
-        pet.set_anim_state(PetAnimState.WALK_LEFT)
-        print("Notepad")
-        return
-
-    def action(self,pet):
-        corner = Vector2(0,0)
-
-        # Going towards the corner
-        if self.state == 0:
-            direction = corner.__sub__(pet.pos)
-            normal = direction.normalised()
-            pet.translate(round(normal.x),round(normal.y))
-
-            if direction.length() < 2:
-                pet.pos = corner
-                self.state = 1
-                self.targetWindow = window(0, 0)
-                print("width=",self.targetWindow.window.winfo_width())
-                self.targetWindow.pos = corner.__sub__(Vector2(300,0))
-                self.windows.append(self.targetWindow)
-                pet.set_anim_state(PetAnimState.WALK_RIGHT)
-        # Pushing/Pulling the window
-        elif self.state == 1:
-            # For now, let it move right
-            direction = Vector2(1,0)
-            pet.translate(direction.x,direction.y)
-            self.targetWindow.pos = self.targetWindow.pos.__add__(direction)
-
 class Notepad():
     notes = ["STORE", "YOUR", "MEME", "MESSAGES", "HERE"]
     noteLen = len(notes)    
@@ -117,6 +58,8 @@ class Notepad():
         # For right-allign
         top = (screenHeight / 2) - (self.__thisHeight / 2)
 
+        self.pos = Vector2(left,top)
+
         # For top and bottom
         self.__root.geometry('%dx%d+%d+%d' % (self.__thisWidth,
                                               self.__thisHeight,
@@ -137,11 +80,12 @@ class Notepad():
         self.__thisScrollBar.config(command=self.__thisTextArea.yview)
         self.__thisTextArea.config(yscrollcommand=self.__thisScrollBar.set)
 
-    def run(self):
-        # Run main application
-        self.__root.mainloop()
+    def update(self):
+        self.__root.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
+        #self.window.update()
 
-notepad = Notepad(width=400, height=200)
-notepad.run()
+    # def run(self):
+    #     # Run main application
+    #     self.__root.mainloop()
 
-print(notepad)
+#notepad.run()

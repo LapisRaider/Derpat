@@ -2,6 +2,9 @@
 Basic Tutorial: https://seebass22.github.io/python-desktop-pet-tutorial/
 Handling Mouse Input: https://pythonhosted.org/pynput/mouse.html
 
+#Instructions
+- how to quite application via controls: CTRL + ALT + 9 + numpad 7 (yes, it is possible)
+
 # Dependencies:
 Screen Information: pip install screeninfo
 Mouse: pip install pynput

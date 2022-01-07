@@ -23,7 +23,7 @@ def getMonitorOnScrPos(pos):
         if pos.x >= monitor.x and pos.x <= monitor.x + monitor.width:
             return monitor
 
-    return None
+    return get_monitors()[0]
 
 #check if out of monitor hori axis
 def outOfRangeHori(pos):

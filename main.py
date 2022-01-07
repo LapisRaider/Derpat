@@ -31,11 +31,11 @@ if __name__ == "__main__":
     headpat = Headpat(6, PetState.HEADPAT)
     catch_mouse = CatchMouse(0, PetState.CATCH_MOUSE)
     snatch_mouse = SnatchMouse(0, PetState.GOT_MOUSE)
-    open_window = OpenWindow(0, PetState.CREATE_WINDOW)
+    open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     move_window = MoveWindow(0,PetState.DRAG_WINDOW)
     scream = Scream(0,PetState.SCREAM)
-    # notepad = Notepad(width=400, height=200)
-    #pet.change_state(PetState.SCREAM)
+    # notepad = Notepad(width=400, height=200)5
+    # pet.change_state(PetState.CREATE_WINDOW)
     
     # Main Loop
     prev_time = time.time()

@@ -26,7 +26,7 @@ class SnatchMouse(System):
         self.randomizeDir(pet)
 
     # update snatching the mouse
-    def action(self, pet):
+    def action(self, pet, delta_time):
         #let go of mouse after a while
         if (time.time() > pet.snatchStartTime + SnatchMouse.MAX_SNATCH_TIME_AMT):
             pet.next_state = PetState.IDLE

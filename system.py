@@ -7,7 +7,7 @@ class System():
         self.delay = delay
         self.action_state = action_state
 
-    def update(self, pet):
+    def update(self, pet, delta_time):
         # If there was a state change, check if we entered or exited this system.
         if (pet.get_curr_state() != pet.get_prev_state()):
             if (self.action_state == pet.get_curr_state()):
@@ -17,7 +17,7 @@ class System():
 
         # Check if we should run this system.
         if (pet.get_curr_state() == self.action_state) and (time.time() > self.last_update + self.delay):
-            self.action(pet)
+            self.action(pet, delta_time)
             self.last_update = time.time()
 
     def on_enter(self, pet):
@@ -26,6 +26,6 @@ class System():
     def on_exit(self, pet):
         pass
 
-    def action(self, pet):
+    def action(self, pet, delta_time):
         pass
 

@@ -17,12 +17,15 @@ class PetState(enum.IntEnum):
     CREATE_WINDOW = 6
     MAKE_NOTE = 7
     HEADPAT = 8
+    SCREAM = 9
 
 class PetAnimState(enum.IntEnum):
     IDLE = 0
     HEADPAT = 1
     WALK_LEFT = 2
     WALK_RIGHT = 3
+    ATTACK_LEFT = 4
+    ATTACK_RIGHT = 5
 
 class Pet():
     FOOT_PRINT_SPAWN = 0.4
@@ -57,7 +60,13 @@ class Pet():
         self.prev_state = PetState.DEFAULT
 
         # Create animations.
-        self.anims = [SpriteAnim('animations/derpat/idle.gif', 6), SpriteAnim('animations/derpat/headpat.gif', 6), SpriteAnim('animations/derpat/walk_left.gif', 4), SpriteAnim('animations/derpat/walk_right.gif', 4)]
+        self.anims = [ \
+            SpriteAnim('animations/derpat/idle.gif', 6),
+            SpriteAnim('animations/derpat/headpat.gif', 6), \
+            SpriteAnim('animations/derpat/walk_left.gif', 4), \
+            SpriteAnim('animations/derpat/walk_right.gif', 4), \
+            SpriteAnim('animations/derpat/attack_left.gif', 5), \
+            SpriteAnim('animations/derpat/attack_right.gif', 5)]
         self.anim_state = PetAnimState.IDLE
         self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
         self.label.pack()
@@ -86,7 +95,7 @@ class Pet():
     def get_position(self):
         return self.pos
 
-    def update(self):
+    def update(self, delta_time):
         self.anims[self.anim_state].update()
         self.label.configure(image=self.anims[self.anim_state].get_frame()) # Update animation frame.
 

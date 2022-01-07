@@ -36,18 +36,24 @@ if __name__ == "__main__":
     pet.change_state(PetState.CREATE_WINDOW)
     
     # Main Loop
+    prev_time = time.time()
     while True:
+        # Calculate delta time.
+        curr_time = time.time()
+        delta_time = curr_time = prev_time
+        prev_time = curr_time
+
         # System Update
-        idle.update(pet)
-        stroll.update(pet)
-        headpat.update(pet)
-        catch_mouse.update(pet)
-        snatch_mouse.update(pet)
-        open_window.update(pet)
-        move_window.update(pet)
+        idle.update(pet, delta_time)
+        stroll.update(pet, delta_time)
+        headpat.update(pet, delta_time)
+        catch_mouse.update(pet, delta_time)
+        snatch_mouse.update(pet, delta_time)
+        open_window.update(pet, delta_time)
+        move_window.update(pet, delta_time)
 
         # Pet Update
-        pet.update()
+        pet.update(delta_time)
 
         # Updating all windows
         for x in windows:

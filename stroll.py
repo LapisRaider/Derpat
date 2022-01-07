@@ -21,7 +21,7 @@ class Stroll(System):
     def on_exit(self, pet):
         pass
 
-    def action(self, pet):
+    def action(self, pet, delta_time):
         dir = self.target_pos - pet.get_position()
         if (dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)

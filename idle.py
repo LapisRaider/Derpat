@@ -30,7 +30,7 @@ class Idle(System):
         # Stop mouse listener.
         self.listener.stop()
 
-    def action(self, pet):
+    def action(self, pet, delta_time):
         # If clicked on, change to headpat state.
         if Idle.CLICK_POS is not None:
             minX = pet.get_position().x

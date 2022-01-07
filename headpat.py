@@ -13,5 +13,5 @@ class Headpat(System):
     def on_exit(self, pet):
         pass
 
-    def action(self, pet):
+    def action(self, pet, delta_time):
         pet.change_state(PetState.IDLE)

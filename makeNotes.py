@@ -5,7 +5,7 @@ from vector2 import Vector2
 class Notepad(): 
     def __init__(self, **kwargs):
         notes = ["Your CAP cannot even afford mentos.", "KEITH WAS HERE WOOOO.", "I couldn't think of anything to write.",
-         "Your life is like poopoo.", "HEHEXD."]
+         "Your life is like poopoo.", "HEHEXD.", "Am I a Dog? A Cat? You'll never find out ;)", "Bark Bark Meow Meow", "Your mouse looking real good right now", "Doing work? Not when I'm here."]
         noteLen = len(notes)    
         note = notes[random.randint(0, noteLen - 1)]
 

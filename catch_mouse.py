@@ -14,7 +14,6 @@ class CatchMouse(System):
 
     #to be init at the start
     def on_enter(self, pet):
-        print("omo")
         pet.followStartTime = time.time()
         pet.followAmt = random.randrange(CatchMouse.MIN_FOLLOW_TIME_AMT, CatchMouse.MAX_FOLLOW_TIME_AMT)
 

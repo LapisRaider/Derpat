@@ -16,11 +16,13 @@ class PetState(enum.IntEnum):
     DRAG_WINDOW = 5
     CREATE_WINDOW = 6
     MAKE_NOTE = 7
+    HEADPAT = 8
 
 class PetAnimState(enum.IntEnum):
     IDLE = 0
-    WALK_LEFT = 1
-    WALK_RIGHT = 2
+    HEADPAT = 1
+    WALK_LEFT = 2
+    WALK_RIGHT = 3
 
 class Pet():
     FOOT_PRINT_SPAWN = 0.4
@@ -55,7 +57,7 @@ class Pet():
         self.prev_state = PetState.DEFAULT
 
         # Create animations.
-        self.anims = [SpriteAnim('animations/derpat/idle.gif', 6), SpriteAnim('animations/derpat/walk_left.gif', 4), SpriteAnim('animations/derpat/walk_right.gif', 4)]
+        self.anims = [SpriteAnim('animations/derpat/idle.gif', 6), SpriteAnim('animations/derpat/headpat.gif', 6), SpriteAnim('animations/derpat/walk_left.gif', 4), SpriteAnim('animations/derpat/walk_right.gif', 4)]
         self.anim_state = PetAnimState.IDLE
         self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
         self.label.pack()
@@ -107,6 +109,12 @@ class Pet():
 
     def get_next_state(self):
         return self.next_state
+
+    def get_width(self):
+        return self.label.winfo_width()
+
+    def get_height(self):
+        return self.label.winfo_height()
 
     def track_footprints(self):
         deleteQueue = []

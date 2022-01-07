@@ -1,3 +1,4 @@
+from vector2 import Vector2
 from pynput.mouse import Button
 from pynput.mouse import Listener
 
@@ -15,6 +16,6 @@ def on_click(x, y, button, pressed):
         left_click_pos = Vector2(x, y) if pressed else None
     return True
 
-# Collect events until released
-with Listener(on_move=None, on_click=on_click, on_scroll=on_scroll) as listener:
-    listener.join()
+# Non-blocking mouse listener.
+listener = pynput.mouse.Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll)
+listener.start()

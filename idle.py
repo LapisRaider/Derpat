@@ -21,9 +21,16 @@ class Idle(System):
 
         # If clicked on, change to headpat state.
         if mouse_listener.left_click_pos is not None:
-            pet.change_state(PetState.HEADPAT)
+            minX = pet.get_position().x
+            maxX = pet.get_position().x + pet.get_width()
+            minY = pet.get_position().y
+            maxY = pet.get_position().y + pet.get_height()
+            if (minX < left_click_pos.x and left_click_pos.x < maxX) and (minY < left_click_pos.y and left_click_pos.y < maxY):
+                pet.change_state(PetState.HEADPAT)
+                return
+
         # Else, 30% chance of catching mouse.
-        elif (random.randrange(0, 10) < 3):
+        if (random.randrange(0, 10) < 3):
             pet.change_state(PetState.CATCH_MOUSE)
         # Else, 10% chance of creating window.
         elif (random.randrange(0, 10) < 1):

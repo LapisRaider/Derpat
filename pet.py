@@ -15,6 +15,7 @@ class PetState(enum.IntEnum):
     GOT_MOUSE = 4
     DRAG_WINDOW = 5
     CREATE_WINDOW = 6
+    MAKE_NOTE = 7
 
 class PetAnimState(enum.IntEnum):
     IDLE = 0

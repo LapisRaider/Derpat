@@ -1,21 +1,18 @@
 # AnnoyingPet
-Hopefully it'll become a very annoying desktop pet
+Basic Tutorial: https://seebass22.github.io/python-desktop-pet-tutorial/
+Handling Mouse Input: https://pythonhosted.org/pynput/mouse.html
 
-Tutorial to render on screen: https://seebass22.github.io/python-desktop-pet-tutorial/
+# Dependencies:
+Screen Information: pip install screeninfo
+Mouse: pip install pynput
+Keyboard: pip install keyboard
+Window Movement: pip install pywin32
+Audio: pip install playsound==1.2.2
 
-Handling Mouse: https://pythonhosted.org/pynput/mouse.html
-
-Import pynput issues:
-If you have issues, do 
+# Solving pynput dependency issue:
+Print out Python's PATH using Python.
+```
 import sys
 print(sys.executable)
-
-copy the file path there and do "fileOutput -m pip install pynput"
-
-
-things need to install:
-pip install pynput (mouse)
-pip install screeninfo (monitor information)
-pip install keyboard (keyboard)
-pip install pywin32 (for moving of windows)
-pip install playsound==1.2.2
+```
+Copy the path printed onto the terminal type `<path> -m pip install pynput`

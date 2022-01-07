@@ -12,9 +12,14 @@ class Scream(System):
     MAX_SCREAM_TIME = 5
     MIN_SCREAM_TIME = 2
 
+    SCREAM_INTERVALS = 2
+
     def on_enter(self, pet):
         pet.screamStartTime = time.time()
         pet.screamTime = random.randrange(Scream.MIN_SCREAM_TIME, Scream.MAX_SCREAM_TIME)
+        
+        pet.screamIntervalStart = time.time()
+
         pet.set_anim_state(PetAnimState.ATTACK_LEFT)
         playsound("sfx/cat_meow.mp3", block=False)
 
@@ -24,8 +29,9 @@ class Scream(System):
             pet.change_state(PetState.IDLE)
             return
         
-        #maybe if u pet the cat a few times go to headpat
-
-        #scream
+        #scream after a certain interval
+        if time.time() > pet.screamIntervalStart + Scream.SCREAM_INTERVALS:
+            playsound("sfx/cat_meow.mp3", block=False)
+            pet.screamIntervalStart = time.time()
         
     

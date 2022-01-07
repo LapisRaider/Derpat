@@ -1,33 +1,26 @@
 import tkinter as tk
-import time
 import random
-from tkinter.constants import CURRENT
-from system import System
-from pet import PetAnimState, PetState
 from vector2 import Vector2
-from tkinter import *
-from tkinter.messagebox import *
-from tkinter.filedialog import *
 
-class Notepad():
-    notes = ["STORE", "YOUR", "MEME", "MESSAGES", "HERE"]
-    noteLen = len(notes)    
-    note = notes[random.randint(0, noteLen - 1)]
-
-    __root = Tk()
-
-    # default window width and height
-    __thisWidth = 300
-    __thisHeight = 300
-    __thisTextArea = Text(__root)
-    __thisMenuBar = Menu(__root)
-
-    # To add scrollbar
-    __thisScrollBar = Scrollbar(__thisTextArea)
-    
-    __thisTextArea.insert(tk.END, note)
- 
+class Notepad(): 
     def __init__(self, **kwargs):
+        notes = ["STORE", "YOUR", "MEME", "MESSAGES", "HERE"]
+        noteLen = len(notes)    
+        note = notes[random.randint(0, noteLen - 1)]
+
+        self.__root = tk.Toplevel()
+
+        # default window width and height
+        self.__thisWidth = 300
+        self.__thisHeight = 300
+        self.__thisTextArea = tk.Text(self.__root)
+        self.__thisMenuBar = tk.Menu(self.__root)
+
+        # To add scrollbar
+        self.__thisScrollBar = tk.Scrollbar(self.__thisTextArea)
+        
+        self.__thisTextArea.insert(tk.END, note)
+
         # Set icon
         try:
             self.__root.wm_iconbitmap("Notepad.ico")
@@ -70,11 +63,11 @@ class Notepad():
         self.__root.grid_columnconfigure(0, weight=1)
 
         # Add controls (widget)
-        self.__thisTextArea.grid(sticky=N + E + S + W)
+        self.__thisTextArea.grid(sticky=tk.N + tk.E + tk.S + tk.W)
 
         self.__root.config(menu=self.__thisMenuBar)
 
-        self.__thisScrollBar.pack(side=RIGHT, fill=Y)
+        self.__thisScrollBar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Scrollbar will adjust automatically according to the content
         self.__thisScrollBar.config(command=self.__thisTextArea.yview)
@@ -82,10 +75,4 @@ class Notepad():
 
     def update(self):
         self.__root.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
-        #self.window.update()
-
-    # def run(self):
-    #     # Run main application
-    #     self.__root.mainloop()
-
-#notepad.run()
+        self.__root.update()

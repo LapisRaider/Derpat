@@ -28,7 +28,7 @@ if __name__ == "__main__":
     open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     move_window = MoveWindow(0,PetState.DRAG_WINDOW)
     # notepad = Notepad(width=400, height=200)
-    pet.change_state(PetState.DRAG_WINDOW)
+    pet.change_state(PetState.CREATE_WINDOW)
     
     # Main Loop
     while True:

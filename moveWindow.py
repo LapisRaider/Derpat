@@ -48,7 +48,8 @@ def windowEnumHandler(hwnd, list):
     tempMonitor = monitor.getMonitorOnScrPos(Vector2(0,0)) # Used to get screen width/height
 
     #Just tons of checks to make sure I don't get any invalid windows
-    if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) != '' and win32gui.GetWindowText(hwnd) != 'tk' and win32gui.GetWindowText(hwnd) != 'Task Manager' and win32gui.GetWindowText(hwnd) != 'Meme' and win32gui.GetWindowText(hwnd) != 'You have a note!':
+    invalid_windows = ['', 'tk', 'Task Manager', 'Meme', 'You have a note!']
+    if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) not in invalid_windows:
         dwmapi.DwmGetWindowAttribute(HWND(hwnd), DWORD(DWMWA_CLOAKED), ctypes.byref(isCloaked), ctypes.sizeof(isCloaked))
         if(isCloaked.value == 0): # Checking if window is suspended
             rect = win32gui.GetWindowRect(hwnd)

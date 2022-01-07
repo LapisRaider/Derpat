@@ -41,11 +41,11 @@ class CatchMouse(System):
     def action(self, pet, delta_time):
         #give up chasing
         if time.time() > pet.followStartTime + pet.followAmt:
-            pet.next_state = PetState.IDLE
+            pet.change_state(PetState.IDLE)
             return
 
         self.follow_mouse(pet, delta_time) #follow the mouse
 
         #caught the mouse
         if self.check_get_mouse(pet):
-            pet.next_state = PetState.GOT_MOUSE
+            pet.change_state(PetState.GOT_MOUSE)

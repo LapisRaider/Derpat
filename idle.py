@@ -19,7 +19,7 @@ class Idle(System):
 
     def on_enter(self, pet):
         pet.set_anim_state(PetAnimState.IDLE)
-        self.duration = random.randrange(10, 15)
+        self.duration = random.randrange(5, 10)
         self.start = time.time()
 
         # Non-blocking mouse listener.

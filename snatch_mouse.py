@@ -29,7 +29,7 @@ class SnatchMouse(System):
     def action(self, pet, delta_time):
         #let go of mouse after a while
         if (time.time() > pet.snatchStartTime + SnatchMouse.MAX_SNATCH_TIME_AMT):
-            pet.next_state = PetState.IDLE
+            pet.change_state(PetState.IDLE)
             return
 
         #check if out of screen and change direction

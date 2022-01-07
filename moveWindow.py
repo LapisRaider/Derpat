@@ -3,17 +3,21 @@ import time
 import random
 import win32gui
 
+## For moving non-tkInter windows
+
 # Gets the current active window
 # Rect[0] = x, Rect[1] = y, Rect[2] = width, Rect[3] = height
 def getActiveWindow():
     return win32gui.GetForegroundWindow()
 
 def translateWindow(window,x,y):
+    # Only moves the window if it is in the foreground
     if win32gui.GetForegroundWindow() == window:
         rect = win32gui.GetWindowRect(window)
         win32gui.MoveWindow(window,rect[0]+x,rect[1]+y,rect[2]-rect[0],rect[3]-rect[1],True)
         #win32gui.SetWindowPos(window,0,0,0,rect[2],rect[3],0x0004)
         rect = win32gui.GetWindowRect(window)
+        # For debugging
         print(win32gui.GetWindowText(window))
         print(rect)
         return True
@@ -22,7 +26,7 @@ def translateWindow(window,x,y):
 
 # Callback function for EnumWindows
 def windowEnumHandler(hwnd, list):
-    if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) != '' and win32gui.GetWindowText(hwnd) == "Command Prompt":
+    if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) != '':
         list.append(hwnd)
         print("Window Name:", win32gui.GetWindowText(hwnd))
     return True

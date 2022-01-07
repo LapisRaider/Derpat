@@ -1,5 +1,6 @@
 import time
 import random
+import mouse_listener
 
 from system import System
 from pet import PetState
@@ -18,12 +19,15 @@ class Idle(System):
         if (time.time() < self.start + self.duration):
             return
 
-        # 30% chance of catching mouse.
-        if (random.randrange(0, 10) < 3):
+        # If clicked on, change to headpat state.
+        if mouse_listener.left_click_pos is not None:
+            pet.change_state(PetState.HEADPAT)
+        # Else, 30% chance of catching mouse.
+        elif (random.randrange(0, 10) < 3):
             pet.change_state(PetState.CATCH_MOUSE)
-        # 10% chance of creating window.
+        # Else, 10% chance of creating window.
         elif (random.randrange(0, 10) < 1):
             pet.change_state(PetState.CREATE_WINDOW)
-        # Stroll
+        # Else, stroll.
         else:
             pet.change_state(PetState.STROLL)

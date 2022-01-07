@@ -4,75 +4,81 @@ from vector2 import Vector2
 
 class Notepad(): 
     def __init__(self, **kwargs):
-        notes = ["STORE", "YOUR", "MEME", "MESSAGES", "HERE"]
+        notes = ["Your CAP cannot even afford mentos.", "KEITH WAS HERE WOOOO.", "I couldn't think of anything to write.",
+         "Your life is like poopoo.", "HEHEXD."]
         noteLen = len(notes)    
         note = notes[random.randint(0, noteLen - 1)]
 
-        self.__root = tk.Toplevel()
+        self.window = tk.Toplevel()
+        self.closing = False
 
         # default window width and height
-        self.__thisWidth = 300
-        self.__thisHeight = 300
-        self.__thisTextArea = tk.Text(self.__root)
-        self.__thisMenuBar = tk.Menu(self.__root)
+        self.thisWidth = 300
+        self.hisHeight = 300
+        self.thisTextArea = tk.Text(self.window)
+        self.thisMenuBar = tk.Menu(self.window)
 
         # To add scrollbar
-        self.__thisScrollBar = tk.Scrollbar(self.__thisTextArea)
+        self.thisScrollBar = tk.Scrollbar(self.thisTextArea)
         
-        self.__thisTextArea.insert(tk.END, note)
+        self.thisTextArea.insert(tk.END, note)
 
         # Set icon
         try:
-            self.__root.wm_iconbitmap("Notepad.ico")
+            self.window.wm_iconbitmap("Notepad.ico")
         except:
             pass
 
         # Set window size (the default is 300x300)
         try:
-            self.__thisWidth = kwargs['width']
+            self.thisWidth = kwargs['width']
         except KeyError:
             pass
 
         try:
-            self.__thisHeight = kwargs['height']
+            self.thisHeight = kwargs['height']
         except KeyError:
             pass
 
         # Set the window text
-        self.__root.title("You have a note!")
+        self.window.title("You have a note!")
 
         # Center the window
-        screenWidth = self.__root.winfo_screenwidth()
-        screenHeight = self.__root.winfo_screenheight()
+        screenWidth = self.window.winfo_screenwidth()
+        screenHeight = self.window.winfo_screenheight()
 
         # For left-alling
-        left = (screenWidth / 2) - (self.__thisWidth / 2)
+        left = (screenWidth / 2) - (self.thisWidth / 2)
 
         # For right-allign
-        top = (screenHeight / 2) - (self.__thisHeight / 2)
+        top = (screenHeight / 2) - (self.thisHeight / 2)
 
         self.pos = Vector2(left,top)
 
         # For top and bottom
-        self.__root.geometry('%dx%d+%d+%d' % (self.__thisWidth,
-                                              self.__thisHeight,
+        self.window.geometry('%dx%d+%d+%d' % (self.thisWidth,
+                                              self.thisHeight,
                                               left, top))
 
         # To make the textarea auto resizable
-        self.__root.grid_rowconfigure(0, weight=1)
-        self.__root.grid_columnconfigure(0, weight=1)
+        self.window.grid_rowconfigure(0, weight=1)
+        self.window.grid_columnconfigure(0, weight=1)
 
         # Add controls (widget)
-        self.__thisTextArea.grid(sticky=tk.N + tk.E + tk.S + tk.W)
+        self.thisTextArea.grid(sticky=tk.N + tk.E + tk.S + tk.W)
 
-        self.__root.config(menu=self.__thisMenuBar)
+        self.window.config(menu=self.thisMenuBar)
 
-        self.__thisScrollBar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.thisScrollBar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Scrollbar will adjust automatically according to the content
-        self.__thisScrollBar.config(command=self.__thisTextArea.yview)
-        self.__thisTextArea.config(yscrollcommand=self.__thisScrollBar.set)
+        self.thisScrollBar.config(command=self.thisTextArea.yview)
+        self.thisTextArea.config(yscrollcommand=self.thisScrollBar.set)
+        self.window.protocol("WM_DELETE_WINDOW",self.close)
 
     def update(self):
-        self.__root.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
-        self.__root.update()
+        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
+        self.window.update()
+
+    def close(self):
+        self.closing = True

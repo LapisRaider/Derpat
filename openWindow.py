@@ -74,18 +74,24 @@ class OpenWindow(System):
             
             if direction.length() < 1:
                 pet.pos = self.corner
-                #self.isNotepad = random.randint(1,1) # 0 for False, 1 for True
                 self.state = 1
-                filePaths = os.listdir('images')
-                randomPath = filePaths[random.randint(0,len(filePaths)-1)]
-                self.targetWindow = window('images/' + randomPath,0,0)
-                # update() is required to update the window width, otherwise it returns 1
-                self.targetWindow.window.update()
-                #self.targetWindow = Notepad(width=400,height = 200)
+                
+                self.isNotepad = random.randint(0,1) # 0 for False, 1 for True
+                if self.isNotepad == 0:
+                    filePaths = os.listdir('images')
+                    randomPath = filePaths[random.randint(0,len(filePaths)-1)]
+                    self.targetWindow = window('images/' + randomPath,0,0)
+                    # update() is required to update the window width, otherwise it returns 1
+                    self.targetWindow.window.update()
+                else:
+                    self.targetWindow = Notepad(width=300,height = 300)
                 self.windows.append(self.targetWindow)
                 # Spawning the window
                 if self.screenDir == 0:
-                    self.targetWindow.pos = self.corner.__sub__(Vector2(self.targetWindow.window.winfo_width(),0))
+                    if self.isNotepad == 0:
+                        self.targetWindow.pos = self.corner.__sub__(Vector2(self.targetWindow.window.winfo_width(),0))
+                    else:
+                        self.targetWindow.pos = self.corner.__sub__(Vector2(self.targetWindow.thisWidth,0))
                     pet.set_anim_state(PetAnimState.WALK_RIGHT)
                 else:
                     self.targetWindow.pos = self.corner.__add__(Vector2(pet.window.winfo_width(),0))

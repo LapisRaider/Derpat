@@ -11,6 +11,8 @@ class PetState(enum.IntEnum):
     IDLE = 1
     CATCH_MOUSE = 2
     GOT_MOUSE = 3
+    DRAG_WINDOW = 4
+    CREATE_WINDOW = 5
 
 class PetAnimState(enum.IntEnum):
     IDLE = 0
@@ -33,7 +35,7 @@ class Pet():
         self.window.wm_attributes('-transparentcolor', 'black')
 
         # X & Y Coordinates of our window.
-        self.pos = Vector2(0, 0)
+        self.pos = Vector2(500, 0)
 
         #set default state
         self.curr_state = PetState.IDLE

@@ -18,16 +18,12 @@ class Idle(System):
         if (time.time() < self.start + self.duration):
             return
 
-        # 50% chance of strolling.
-        if (random.randrange(0, 10) < 5):
-            pet.change_state(PetState.STROLL)
         # 30% chance of catching mouse.
-        elif (random.randrange(0, 10) < 3):
+        if (random.randrange(0, 10) < 3):
             pet.change_state(PetState.CATCH_MOUSE)
         # 10% chance of creating window.
         elif (random.randrange(0, 10) < 1):
             pet.change_state(PetState.CREATE_WINDOW)
-        # Idle again.
+        # Stroll
         else:
-            self.duration = random.randrange(5, 10)
-            self.start = time.time()
+            pet.change_state(PetState.STROLL)

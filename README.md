@@ -16,4 +16,5 @@ copy the file path there and do "fileOutput -m pip install pynput"
 things need to install:
 pip install pynput (mouse)
 pip install screeninfo (monitor information)
+pip install keyboard (keyboard)
 

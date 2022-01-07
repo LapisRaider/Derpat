@@ -58,24 +58,16 @@ class Pet():
     def set_position(self, x_pos, y_pos):
         self.pos.x = x_pos
         self.pos.y = y_pos
-        self.pos.x = round(self.pos.x)
-        self.pos.y = round(self.pos.y)
 
     def set_position_vec2(self, pos):
         self.pos = pos
-        self.pos.x = round(self.pos.x)
-        self.pos.y = round(self.pos.y)
 
     def translate(self, x_offset, y_offset):
         self.pos.x += x_offset
         self.pos.y += y_offset
-        self.pos.x = round(self.pos.x)
-        self.pos.y = round(self.pos.y)
 
     def translate_vec2(self, offset):
         self.pos = self.pos + offset
-        self.pos.x = round(self.pos.x)
-        self.pos.y = round(self.pos.y)
 
     def get_position(self):
         return self.pos
@@ -85,7 +77,7 @@ class Pet():
         self.label.configure(image=self.anims[self.anim_state].get_frame()) # Update animation frame.
 
         # Update Window
-        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
+        self.window.geometry('+{x}+{y}'.format(x=str(round(self.pos.x)), y=str(round(self.pos.y))))
         self.window.update()
 
         # Update Previous

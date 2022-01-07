@@ -1,7 +1,3 @@
-print("Fuck")
-import sys
-print(sys.executable)
-
 # Pet
 from pet import Pet
 from pet import PetState

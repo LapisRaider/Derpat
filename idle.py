@@ -1,10 +1,10 @@
 import time
 import random
-import mouse_listener
 
 from system import System
 from pet import PetState
 from pet import PetAnimState
+from mouse_listener import left_click_pos
 
 class Idle(System):
     def on_enter(self, pet):
@@ -20,7 +20,7 @@ class Idle(System):
             return
 
         # If clicked on, change to headpat state.
-        if mouse_listener.left_click_pos is not None:
+        if left_click_pos is not None:
             minX = pet.get_position().x
             maxX = pet.get_position().x + pet.get_width()
             minY = pet.get_position().y

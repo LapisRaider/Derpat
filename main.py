@@ -1,7 +1,7 @@
 from pet import Pet
 from snatch_mouse import SnatchMouse
 from catch_mouse import CatchMouse
-from pet_states import PetState
+from pet import PetState
 
 import sys
 print(sys.executable)

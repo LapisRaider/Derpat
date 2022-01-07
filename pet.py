@@ -1,9 +1,21 @@
 import tkinter as tk
 import time
 import random
+import enum
 
-from pet_states import PetState
 from vector2 import *
+from sprite_anim import SpriteAnim
+
+class PetState(enum.IntEnum):
+    DEFAULT = 0
+    IDLE = 1
+    CATCH_MOUSE = 2
+    GOT_MOUSE = 3
+
+class PetAnimState(enum.IntEnum):
+    IDLE = 0
+    WALK_LEFT = 1
+    WALK_RIGHT = 2
 
 class Pet():
     def __init__(self):
@@ -27,16 +39,15 @@ class Pet():
         self.curr_state = PetState.IDLE
         self.prev_state = PetState.DEFAULT
 
-        #variables for snatching the mouse
-        self.snatchStartTime = 0
+        # Create animations.
+        self.anims = [SpriteAnim('animations/derpat/idle.gif', 6), SpriteAnim('animations/derpat/walk_left.gif', 4), SpriteAnim('animations/derpat/walk_right.gif', 4)]
+        self.anim_state = PetAnimState.IDLE
+        self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
+        self.label.pack()
 
-        # Placeholder image.
-        self.img = tk.PhotoImage(file='images/placeholder.png')
-        self.frame_index = 0
-        self.num_frames = 1
-
-        # Create a label as a container for our image.
-        self.label = tk.Label(self.window, image=self.img, bd=0, bg='black').pack()
+    def set_anim_state(self, anim_state):
+        self.anims[self.anim_state].reset() # Reset previous animation.
+        self.anim_state = anim_state # Switch to new animation.
 
     def set_position(self, x_pos, y_pos):
         self.pos.x = x_pos
@@ -47,6 +58,10 @@ class Pet():
         self.pos.y += y_offset
 
     def update(self):
+        self.anims[self.anim_state].update()
+        self.label.configure(image=self.anims[self.anim_state].get_frame()) # Update animation frame.
+
+        # Update Window
         self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
         self.window.update()
 

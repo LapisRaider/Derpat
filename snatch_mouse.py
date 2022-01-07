@@ -4,7 +4,7 @@ import random
 from system import System
 from vector2 import Vector2
 from mouseController import *
-from pet_states import PetState
+from pet import PetState
 
 class SnatchMouse(System):
     MAX_SNATCH_TIME_AMT = 5 # in seconds

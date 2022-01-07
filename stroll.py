@@ -18,15 +18,17 @@ class Stroll(System):
         maxY = active_monitor.y + active_monitor.height
         self.target_pos = Vector2(random.randrange(minX, maxY), random.randrange(minY, maxY))
 
+    def on_exit(self, pet):
+        pass
+
     def action(self, pet):
         dir = self.target_pos - pet.get_position()
         if (dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
-
-        if (dir.x >= 0 and pet.get_anim_state() != PetAnimState.WALK_RIGHT):
+        elif (dir.x >= 0 and pet.get_anim_state() != PetAnimState.WALK_RIGHT):
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
 
-        if (dir.length_squared() > 5):
+        if (dir.length_squared() > 3):
             pet.translate_vec2(dir.normalised() * Stroll.STROLL_SPEED)
         else:
             pet.change_state(PetState.IDLE)

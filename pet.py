@@ -39,7 +39,8 @@ class Pet():
         self.pos = Vector2(500, 0)
 
         #set default state
-        self.curr_state = PetState.IDLE
+        self.next_state = PetState.IDLE
+        self.curr_state = PetState.DEFAULT
         self.prev_state = PetState.DEFAULT
 
         # Create animations.
@@ -82,6 +83,16 @@ class Pet():
 
         # Update Previous
         self.prev_state = self.curr_state
+        self.curr_state = self.next_state
 
     def change_state(self, state):
-        self.curr_state = state
+        self.next_state = state
+
+    def get_prev_state(self):
+        return self.prev_state
+
+    def get_curr_state(self):
+        return self.curr_state
+
+    def get_next_state(self):
+        return self.next_state

@@ -30,4 +30,4 @@ class Vector2():
         return Vector2(self.x/length, self.y/length)
 
     def __str__(self) -> str:
-        return "(" + self.x + ", " + self.y + ")"
+        return "(" + str(self.x) + ", " + str(self.y) + ")"

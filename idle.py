@@ -11,6 +11,9 @@ class Idle(System):
         self.duration = random.randrange(5, 10)
         self.start = time.time()
 
+    def on_exit(self, pet):
+        pass
+
     def action(self, pet):
         if (time.time() < self.start + self.duration):
             return

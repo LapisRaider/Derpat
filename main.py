@@ -25,8 +25,6 @@ if __name__ == "__main__":
 
     # Main Loop
     while True:
-        print("Current State: " + str(pet.curr_state))
-
         # System Update
         idle.update(pet)
         stroll.update(pet)

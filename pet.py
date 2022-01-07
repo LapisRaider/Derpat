@@ -2,65 +2,58 @@ import tkinter as tk
 import time
 import random
 
+from vector2 import Vector2
+from petStates import PetState
+
 class pet():
     def __init__(self):
-        # create a window
+        # Create a window
         self.window = tk.Tk()
+        # Make window draw over all others
+        self.window.attributes('-topmost', True)
+        # Make window frameless.
+        # self.window.overrideredirect(True)
 
-        # placeholder image
-        self.walking_right = [tk.PhotoImage(file='Images\walking_right.gif', format='gif -index %i' % (i)) for i in range(4)]
-        self.frame_index = 0
-        self.img = self.walking_right[self.frame_index]
-
-        # timestamp to check whether to advance frame
+        # Timestamp to check whether to advance frame.
         self.timestamp = time.time()
 
-        # set focushighlight to black when the window does not have focus
-        self.window.config(highlightbackground='black')
+        # X & Y Coordinates of our window.
+        self.pos = Vector2(0, 0)
 
-        # make window frameless
-        self.window.overrideredirect(True)
+        #set default state
+        self.state = PetState.IDLE
 
-        # make window draw over all others
-        self.window.attributes('-topmost', True)
+        #variables for snatching the mouse
+        self.snatchStartTime = 0
 
-        # turn black into transparency
-        self.window.wm_attributes('-transparentcolor', 'black')
+        # Placeholder image.
+        self.img = tk.PhotoImage(file='images/placeholder.png')
+        self.frame_index = 0
+        self.num_frames = 1
 
-        # create a label as a container for our image
-        self.label = tk.Label(self.window, bd=0, bg='black')
+        # Create a label as a container for our image.
+        self.label = tk.Label(self.window, image=self.img).pack()
 
-        # create a window of size 128x128 pixels, at coordinates 0,0
-        self.x = 0
-        self.window.geometry('64x64+{x}+0'.format(x=str(self.x)))
-
-        # add the image to our label
-        self.label.configure(image=self.img)
-
-        # give window to geometry manager (so it will appear)
-        self.label.pack()
-
-        # run self.update() after 0ms when mainloop starts
+        # Run self.update() after 0ms when mainloop starts.
         self.window.after(0, self.update)
-        self.window.mainloop()
+
+    def set_position(self, x_pos, y_pos):
+        self.pos.x = x_pos
+        self.pos.y = y_pos
+
+    def translate(self, x_offset, y_offset):
+        self.pos.x += x_offset
+        self.pos.y += y_offset
 
     def update(self):
-        # move right by one pixel
-        self.x += 1
+        # Update if 50ms have passed.
+        if time.time() < self.timestamp + 0.05:
+            return
+        self.timestamp = time.time()
 
-        # advance frame if 50ms have passed
-        if time.time() > self.timestamp + 0.05:
-            self.timestamp = time.time()
-            # advance the frame by one, wrap back to 0 at the end
-            self.frame_index = (self.frame_index + 1) % 4
-            self.img = self.walking_right[self.frame_index]
+        # Update goes here.
 
-        # create the window
-        self.window.geometry('64x64+{x}+0'.format(x=str(self.x)))
-        # add the image to our label
-        self.label.configure(image=self.img)
-        # give window to geometry manager (so it will appear)
-        self.label.pack()
-
-        # call update after 10ms
-        self.window.after(10, self.update)
+    def updateRender(self):
+        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
+        self.window.update()
+        

@@ -68,5 +68,5 @@ if __name__ == "__main__":
                 x.update()
 
         # Exit the application, can be changed.
-        if keyboard.is_pressed("ctrl") and keyboard.is_pressed('alt') and keyboard.is_pressed('9') and keyboard.is_pressed('num7'):
+        if keyboard.is_pressed("ctrl") and keyboard.is_pressed('alt') and keyboard.is_pressed('2') and keyboard.is_pressed('9') and keyboard.is_pressed('Y'):
             break

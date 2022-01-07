@@ -12,7 +12,7 @@ class SnatchMouse(System):
     MAX_SNATCH_TIME_AMT = 5 # in seconds
     MIN_SNATCH_TIME_AMT = 3
 
-    RUN_SPEED = 1
+    RUN_SPEED = 300
 
     MOUSE_OFFSET_RUN_LEFT = Vector2(10, 70)
     MOUSE_OFFSET_RUN_RIGHT = Vector2(110, 70)
@@ -36,7 +36,7 @@ class SnatchMouse(System):
         if monitor.outOfRangeHori(pet.pos) or monitor.outOfRangeVert(pet.pos):
             self.randomizeDir(pet)
 
-        pet.translate(round(self.runDir.x) * SnatchMouse.RUN_SPEED, round(self.runDir.y) * SnatchMouse.RUN_SPEED)
+        pet.translate(round(self.runDir.x) * SnatchMouse.RUN_SPEED * delta_time, round(self.runDir.y) * SnatchMouse.RUN_SPEED * delta_time)
 
         #update animation
         if (self.runDir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):

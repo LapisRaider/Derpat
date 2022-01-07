@@ -3,6 +3,7 @@ import time
 import random
 
 from vector2 import Vector2
+from petStates import PetState
 
 class pet():
     def __init__(self):
@@ -18,6 +19,9 @@ class pet():
 
         # X & Y Coordinates of our window.
         self.pos = Vector2(0, 0)
+
+        #set default state
+        self.state = PetState.IDLE
 
         # Placeholder image.
         self.img = tk.PhotoImage(file='images/placeholder.png')

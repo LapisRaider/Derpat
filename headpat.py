@@ -3,10 +3,12 @@ import time
 from system import System
 from pet import PetState
 from pet import PetAnimState
+from playsound import playsound
 
 class Headpat(System):
     def on_enter(self, pet):
         pet.set_anim_state(PetAnimState.HEADPAT)
+        playsound("sfx/cat_meow.mp3", block=False)
 
     def on_exit(self, pet):
         pass

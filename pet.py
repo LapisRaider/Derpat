@@ -49,13 +49,25 @@ class Pet():
         self.anims[self.anim_state].reset() # Reset previous animation.
         self.anim_state = anim_state # Switch to new animation.
 
+    def get_anim_state(self):
+        return self.anim_state
+
     def set_position(self, x_pos, y_pos):
         self.pos.x = x_pos
         self.pos.y = y_pos
 
+    def set_position(self, pos):
+        self.pos = pos
+
     def translate(self, x_offset, y_offset):
         self.pos.x += x_offset
         self.pos.y += y_offset
+
+    def translate(self, offset):
+        self.pos = self.pos + offset
+
+    def get_position(self):
+        return self.pos
 
     def update(self):
         self.anims[self.anim_state].update()

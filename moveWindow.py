@@ -1,7 +1,7 @@
 import tkinter as tk
 import time
 import random
-import win32gui
+import win32gui, win32com.client
 
 from pet import PetAnimState, PetState
 from system import System
@@ -76,7 +76,7 @@ class MoveWindow(System):
         self.targetWindow = getRandomWindow()
         self.distanceTravelled = 0
         rect = win32gui.GetWindowRect(self.targetWindow)
-        direction = Vector2(rect[0],rect[1]).__sub__(pet.pos)
+        direction = Vector2(rect[0]-pet.window.winfo_width(),rect[1]).__sub__(pet.pos)
         if direction.x > 0:
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
         else:
@@ -85,11 +85,13 @@ class MoveWindow(System):
     def action(self,pet):
         if self.state == 0:
             rect = win32gui.GetWindowRect(self.targetWindow)
-            direction = Vector2(rect[0],rect[1]).__sub__(pet.pos)
+            direction = Vector2(rect[0]-pet.window.winfo_width(),rect[1]).__sub__(pet.pos)
 
             if direction.length() < 1:
                 self.state = 1
                 pet.set_anim_state(PetAnimState.WALK_RIGHT)
+                shell = win32com.client.Dispatch("WScript.Shell")
+                shell.SendKeys('%')
                 win32gui.SetForegroundWindow(self.targetWindow)
             else:
                 normal = direction.normalised()

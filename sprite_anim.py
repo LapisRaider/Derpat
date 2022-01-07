@@ -19,3 +19,6 @@ class SpriteAnim():
 
     def get_frame(self):
         return self.anim_frames[self.frame_index]
+
+    def get_delay(self):
+        return self.delay

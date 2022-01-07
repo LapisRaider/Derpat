@@ -3,8 +3,7 @@ from snatch_mouse import SnatchMouse
 from catch_mouse import CatchMouse
 from pet import PetState
 
-import sys
-print(sys.executable)
+import keyboard
 
 if __name__ == "__main__":
     # Pet
@@ -18,3 +17,8 @@ if __name__ == "__main__":
         catch_mouse.update(pet)
         # Pet Update
         pet.update()
+
+        #exit the application, can be changed
+        if keyboard.is_pressed("shift") and keyboard.is_pressed('a'):
+            break
+

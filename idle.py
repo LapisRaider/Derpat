@@ -53,8 +53,11 @@ class Idle(System):
         if (random.randrange(0, 10) < 3):
             pet.change_state(PetState.CATCH_MOUSE)
         # Else, 10% chance of creating window.
-        elif (random.randrange(0, 10) < 1):
+        elif (random.randrange(0, 10) < 2):
             pet.change_state(PetState.CREATE_WINDOW)
+        # Else, 10% chance of dragging a window.
+        elif (random.randrange(0, 10) < 2):
+            pet.change_state(PetState.DRAG_WINDOW)
         # Else, 10% chance of screaming.
         elif (random.randrange(0, 10) < 1):
             pet.change_state(PetState.SCREAM)

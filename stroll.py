@@ -16,7 +16,7 @@ class Stroll(System):
         maxX = active_monitor.x + active_monitor.width
         minY = active_monitor.y
         maxY = active_monitor.y + active_monitor.height
-        self.target_pos = Vector2(random.randrange(minX, maxY), random.randrange(minY, maxY))
+        self.target_pos = Vector2(random.randrange(minX, maxX), random.randrange(minY, maxY))
 
     def on_exit(self, pet):
         pass

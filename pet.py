@@ -33,6 +33,10 @@ class Pet():
     FOOT_X_RIGHT_OFFSET = -5
     FOOT_Y_OFFSET = 80
 
+    TRACK_FOOTPRINT_MAX_TIME = 8
+    TRACK_FOOTPRINT_MIN_TIME = 5
+    FOOTPRINT_CHANCE = 3 #30%
+
     def __init__(self):
         # Create a window
         self.window = tk.Tk()
@@ -53,6 +57,7 @@ class Pet():
         #for tracking footprints
         self.footPrintsStorer = []
         self.footPrintTime = time.time()
+        self.trackFootPrint = False
 
         #set default state
         self.next_state = PetState.IDLE
@@ -74,6 +79,14 @@ class Pet():
     def set_anim_state(self, anim_state):
         self.anims[self.anim_state].reset() # Reset previous animation.
         self.anim_state = anim_state # Switch to new animation.
+
+        #for footprints spawning
+        if  self.anim_state == PetAnimState.WALK_LEFT or self.anim_state == PetAnimState.WALK_RIGHT:
+            if random.randrange(0, 10) < Pet.FOOTPRINT_CHANCE and not self.trackFootPrint:
+                self.trackFootPrint = True
+                self.init_track_footprints()
+        else:
+            self.trackFootPrint = False
 
     def get_anim_state(self):
         return self.anim_state
@@ -126,6 +139,10 @@ class Pet():
     def get_height(self):
         return self.label.winfo_height()
 
+    def init_track_footprints(self):
+        self.footprintStartTime = time.time()
+        self.footprintTime = random.randrange(Pet.TRACK_FOOTPRINT_MIN_TIME, Pet.TRACK_FOOTPRINT_MAX_TIME)
+        
     def track_footprints(self):
         deleteQueue = []
 
@@ -143,16 +160,21 @@ class Pet():
             del footprint
 
         deleteQueue.clear()
-
-        if self.anim_state == PetAnimState.IDLE:
+        
+        if not self.trackFootPrint:
             return
 
-        #check to see if should spawn footprints
+        #intervals between footprints
         if time.time() < self.footPrintTime + Pet.FOOT_PRINT_SPAWN:
             return
+
         self.footPrintTime = time.time()
 
         walkingLeft = self.anim_state == PetAnimState.WALK_LEFT
         footPrintOffset = Vector2(Pet.FOOT_X_LEFT_OFFSET, Pet.FOOT_Y_OFFSET) if self.anim_state == PetAnimState.WALK_LEFT else Vector2(Pet.FOOT_X_RIGHT_OFFSET, Pet.FOOT_Y_OFFSET)
 
         self.footPrintsStorer.append(Footprints(self.pos.__add__(footPrintOffset), walkingLeft))
+
+        #how long the foot prints would keep spawning for
+        if time.time() > self.footprintStartTime + self.footprintTime:
+            self.trackFootPrint = False

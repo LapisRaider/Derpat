@@ -7,7 +7,7 @@ from pet import PetState
 from pet import PetAnimState
 
 class CatchMouse(System):
-    FOLLOW_SPEED = 1
+    FOLLOW_SPEED = 300
     MOUSE_CATCH_OFFSET = 5
 
     MAX_FOLLOW_TIME_AMT = 5 # after a certain amt of time give up
@@ -21,11 +21,11 @@ class CatchMouse(System):
         pet.followAmt = random.randrange(CatchMouse.MIN_FOLLOW_TIME_AMT, CatchMouse.MAX_FOLLOW_TIME_AMT)
 
     #pet follows the mouse ard
-    def follow_mouse(self, pet):
+    def follow_mouse(self, pet, delta_time):
         mousePos = getMousePos()
         dir = mousePos.__sub__(pet.pos.__add__(CatchMouse.CATCH_OFFSET))
         dir = dir.normalised()
-        pet.translate(round(dir.x) * CatchMouse.FOLLOW_SPEED, round(dir.y) * CatchMouse.FOLLOW_SPEED)
+        pet.translate(round(dir.x) * CatchMouse.FOLLOW_SPEED * delta_time, round(dir.y) * CatchMouse.FOLLOW_SPEED * delta_time)
 
         if (dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
@@ -41,11 +41,11 @@ class CatchMouse(System):
     def action(self, pet, delta_time):
         #give up chasing
         if time.time() > pet.followStartTime + pet.followAmt:
-            pet.next_state = PetState.IDLE
+            pet.change_state(PetState.IDLE)
             return
 
-        self.follow_mouse(pet) #follow the mouse
+        self.follow_mouse(pet, delta_time) #follow the mouse
 
         #caught the mouse
         if self.check_get_mouse(pet):
-            pet.next_state = PetState.GOT_MOUSE
+            pet.change_state(PetState.GOT_MOUSE)

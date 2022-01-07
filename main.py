@@ -9,6 +9,7 @@ from stroll import Stroll
 from headpat import Headpat
 from snatch_mouse import SnatchMouse
 from catch_mouse import CatchMouse
+from scream import Scream
 
 # Others
 from openWindow import *
@@ -32,8 +33,9 @@ if __name__ == "__main__":
     snatch_mouse = SnatchMouse(0, PetState.GOT_MOUSE)
     open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     move_window = MoveWindow(0,PetState.DRAG_WINDOW)
+    scream = Scream(0,PetState.SCREAM)
     # notepad = Notepad(width=400, height=200)
-    pet.change_state(PetState.CREATE_WINDOW)
+    #pet.change_state(PetState.SCREAM)
     
     # Main Loop
     prev_time = time.time()
@@ -51,9 +53,11 @@ if __name__ == "__main__":
         snatch_mouse.update(pet, delta_time)
         open_window.update(pet, delta_time)
         move_window.update(pet, delta_time)
+        scream.update(pet, delta_time)
 
         # Pet Update
         pet.update(delta_time)
+        pet.track_footprints()
 
         # Updating all windows
         for x in windows:

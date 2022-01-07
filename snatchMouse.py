@@ -10,7 +10,7 @@ def followMouse(pet):
     mousePos = getMousePos()
 
     dir = Vector2()
-    dir = mousePos - pet.pos
+    dir = mousePos.__sub__(pet.pos)
     dir = dir.normalised()
     
     pet.translate(round(dir.x) * FOLLOW_SPEED, round(dir.y) * FOLLOW_SPEED)

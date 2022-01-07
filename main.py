@@ -1,15 +1,20 @@
-from pet import *
-from snatchMouse import *
+from pet import Pet
+from snatch_mouse import SnatchMouse
+from catch_mouse import CatchMouse
+from pet_states import PetState
 
 import sys
 print(sys.executable)
 
 if __name__ == "__main__":
-    mainPet = pet()
+    # Pet
+    pet = Pet()
+    # Systems
+    pet.curr_state = PetState.CATCH_MOUSE #temp for testing
+    catch_mouse = CatchMouse(0, PetState.CATCH_MOUSE)
 
     while True:
-        snatchMouseUpdate(mainPet)
-        mainPet.updateRender()
-
-        
-    
+        # System Update
+        catch_mouse.update(pet)
+        # Pet Update
+        pet.update()

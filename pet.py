@@ -2,6 +2,8 @@ import tkinter as tk
 import time
 import random
 
+from vector2 import Vector2
+
 class pet():
     def __init__(self):
         # Create a window
@@ -15,8 +17,7 @@ class pet():
         self.timestamp = time.time()
 
         # X & Y Coordinates of our window.
-        self.x = 0
-        self.y = 0
+        self.pos = Vector2(0, 0)
 
         # Placeholder image.
         self.img = tk.PhotoImage(file='images/placeholder.png')
@@ -28,15 +29,14 @@ class pet():
 
         # Run self.update() after 0ms when mainloop starts.
         self.window.after(0, self.update)
-        #self.window.mainloop()
 
     def set_position(self, x_pos, y_pos):
-        self.x = x_pos
-        self.y = y_pos
+        self.pos.x = x_pos
+        self.pos.y = y_pos
 
     def translate(self, x_offset, y_offset):
-        self.x += x_offset
-        self.y += y_offset
+        self.pos.x += x_offset
+        self.pos.y += y_offset
 
     def update(self):
         # Update if 50ms have passed.
@@ -47,6 +47,6 @@ class pet():
         # Update goes here.
 
     def updateRender(self):
-        self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))
+        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
         self.window.update()
         

@@ -28,7 +28,7 @@ class window():
        
 
     def update(self):
-        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
+        self.window.geometry('+{x}+{y}'.format(x=str(round(self.pos.x)),y=str(round(self.pos.y))))
         #self.window.update()
 
     def close(self):
@@ -36,6 +36,8 @@ class window():
 
 
 class OpenWindow(System):
+    MOVEMENT_SPEED = 5
+
     def __init__(self, delay=0, action_state=PetState.DEFAULT, windows=[]):
         self.windows = windows
         # State 0 = GOING TO CORNER
@@ -68,8 +70,8 @@ class OpenWindow(System):
         if self.state == 0:
             #print("IT'S RUNNING in state 0")
             direction = self.corner.__sub__(pet.pos)
-            normal = direction.normalised()
-            pet.translate(round(normal.x),round(normal.y))
+            normal = direction.normalised() * OpenWindow.MOVEMENT_SPEED
+            pet.translate(normal.x,normal.y)
             # Has reached destination
             
             if direction.length() < 1:
@@ -104,6 +106,7 @@ class OpenWindow(System):
             else:
                 direction.x = -1
             #print("IT'S RUNNING in state 1")
+            direction = direction * OpenWindow.MOVEMENT_SPEED
             pet.translate(direction.x,direction.y)
             self.targetWindow.pos = self.targetWindow.pos.__add__(direction)
             #print("Monitor width = ", self.tempMonitor.width)

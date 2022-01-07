@@ -77,7 +77,7 @@ class Notepad():
         self.window.protocol("WM_DELETE_WINDOW",self.close)
 
     def update(self):
-        self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
+        self.window.geometry('+{x}+{y}'.format(x=str(round(self.pos.x)),y=str(round(self.pos.y))))
         self.window.update()
 
     def close(self):

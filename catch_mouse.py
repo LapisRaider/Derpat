@@ -38,7 +38,7 @@ class CatchMouse(System):
         return dir.length() < CatchMouse.MOUSE_CATCH_OFFSET
 
     # update snatching the mouse
-    def action(self, pet):
+    def action(self, pet, delta_time):
         #give up chasing
         if time.time() > pet.followStartTime + pet.followAmt:
             pet.next_state = PetState.IDLE

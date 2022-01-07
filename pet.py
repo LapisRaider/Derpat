@@ -28,17 +28,15 @@ class pet():
 
         # Run self.update() after 0ms when mainloop starts.
         self.window.after(0, self.update)
-        self.window.mainloop()
+        #self.window.mainloop()
 
     def set_position(self, x_pos, y_pos):
         self.x = x_pos
         self.y = y_pos
-        self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))
 
     def translate(self, x_offset, y_offset):
         self.x += x_offset
         self.y += y_offset
-        self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))
 
     def update(self):
         # Update if 50ms have passed.
@@ -48,5 +46,7 @@ class pet():
 
         # Update goes here.
 
-        # Call update after 10ms.
-        self.window.after(10, self.update)
+    def updateRender(self):
+        self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))
+        self.window.update()
+        

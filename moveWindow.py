@@ -74,6 +74,9 @@ class MoveWindow(System):
     def on_enter(self, pet):
         self.state = 0
         self.targetWindow = getRandomWindow()
+        if self.targetWindow == None:
+            pet.change_state(PetState.IDLE)
+            return
         self.distanceTravelled = 0
         rect = win32gui.GetWindowRect(self.targetWindow)
         direction = Vector2(rect[0]-pet.window.winfo_width(),rect[1]).__sub__(pet.pos)
@@ -83,6 +86,9 @@ class MoveWindow(System):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
 
     def action(self,pet):
+        if self.targetWindow == None:
+            pet.change_state(PetState.IDLE)
+            return
         if self.state == 0:
             rect = win32gui.GetWindowRect(self.targetWindow)
             direction = Vector2(rect[0]-pet.window.winfo_width(),rect[1]).__sub__(pet.pos)

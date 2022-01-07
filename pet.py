@@ -64,5 +64,3 @@ class pet():
 
         # call update after 10ms
         self.window.after(10, self.update)
-
-pet()

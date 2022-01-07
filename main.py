@@ -1,0 +1,3 @@
+from pet import *
+
+pet()

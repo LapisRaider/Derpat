@@ -23,6 +23,9 @@ class pet():
         #set default state
         self.state = PetState.IDLE
 
+        #variables for snatching the mouse
+        self.snatchStartTime = 0
+
         # Placeholder image.
         self.img = tk.PhotoImage(file='images/placeholder.png')
         self.frame_index = 0

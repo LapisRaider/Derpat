@@ -18,10 +18,13 @@ class Pet():
         self.window.wm_attributes('-transparentcolor', 'black')
 
         # X & Y Coordinates of our window.
-        self.x = 0
-        self.y = 0
+        self.pos = Vector2(0, 0)
 
-        # self.state = 
+        #set default state
+        self.state = PetState.IDLE
+
+        #variables for snatching the mouse
+        self.snatchStartTime = 0
 
         # Placeholder image.
         self.img = tk.PhotoImage(file='images/placeholder.png')
@@ -32,12 +35,12 @@ class Pet():
         self.label = tk.Label(self.window, image=self.img, bd=0, bg='black').pack()
 
     def set_position(self, x_pos, y_pos):
-        self.x = x_pos
-        self.y = y_pos
+        self.pos.x = x_pos
+        self.pos.y = y_pos
 
     def translate(self, x_offset, y_offset):
-        self.x += x_offset
-        self.y += y_offset
+        self.pos.x += x_offset
+        self.pos.y += y_offset
 
     def update(self):
         self.window.geometry('+{x}+{y}'.format(x=str(self.x), y=str(self.y)))

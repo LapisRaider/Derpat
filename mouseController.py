@@ -1,4 +1,5 @@
 from pynput.mouse import Button, Controller
+from vector2 import Vector2 
 
 mouse = Controller()
 
@@ -12,7 +13,7 @@ def setMousePosRelative(xOffset, yOffset):
 
 #get pos
 def getMousePos():
-    return mouse.position
+    return Vector2(mouse.position[0], mouse.position[1])
 
 #press mouse
 def mousePress(left):

@@ -25,9 +25,10 @@ class Vector2():
 
     def normalised(self):
         length = self.length()
-        if (length == 0):
-            return Vector2(0, 0)
-        return Vector2(self.x/length, self.y/length)
+        try:
+            return Vector2(self.x/length, self.y/length)
+        except ZeroDivisionError:
+            return Vector2()
 
     def __str__(self) -> str:
         return "(" + str(self.x) + ", " + str(self.y) + ")"

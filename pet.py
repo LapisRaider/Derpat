@@ -81,7 +81,7 @@ class Pet():
         self.anim_state = anim_state # Switch to new animation.
 
         #for footprints spawning
-        if not (self.anim_state == PetAnimState.IDLE or self.anim_state == PetAnimState.HEADPAT):
+        if  self.anim_state == PetAnimState.WALK_LEFT or self.anim_state == PetAnimState.WALK_RIGHT:
             if random.randrange(0, 10) < Pet.FOOTPRINT_CHANCE and not self.trackFootPrint:
                 self.trackFootPrint = True
                 self.init_track_footprints()
@@ -159,11 +159,7 @@ class Pet():
             del footprint
 
         deleteQueue.clear()
-
-        #check whether to spawn the footprints
-        if self.anim_state == PetAnimState.IDLE or self.anim_state == PetAnimState.HEADPAT:
-            return
-
+        
         if not self.trackFootPrint:
             return
 

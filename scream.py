@@ -19,8 +19,8 @@ class Scream(System):
         pet.screamTime = random.randrange(Scream.MIN_SCREAM_TIME, Scream.MAX_SCREAM_TIME)
         
         pet.screamIntervalStart = time.time()
-
-        pet.set_anim_state(PetAnimState.ATTACK_LEFT)
+        
+        pet.set_anim_state(random.randint(PetAnimState.ATTACK_LEFT, PetAnimState.ATTACK_RIGHT))
         playsound("sfx/cat_meow.mp3", block=False)
 
     def action(self, pet, delta_time):

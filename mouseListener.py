@@ -1,5 +1,6 @@
 from pynput.mouse import Listener
 from mouseController import *
+from monitor import *
 
 def on_move(x, y):
     print('Pointer moved to {0}'.format((x, y)))

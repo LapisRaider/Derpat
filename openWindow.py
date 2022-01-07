@@ -5,6 +5,7 @@ from tkinter.constants import CURRENT
 from system import System
 from pet import PetAnimState, PetState
 from vector2 import Vector2
+import monitor
 
 class window():
 
@@ -37,33 +38,56 @@ class OpenWindow(System):
         # State 0 = GOING TO CORNER
         # State 1 = MOVING WINDOW
         self.state = 0
+
+        self.tempMonitor = monitor.getMonitorOnScrPos(Vector2(0,0))
+        self.screenDir = random.randint(0,1) # 0 for left side, 1 for right side
+        screenXPos = -100
+        if self.screenDir == 1:
+            screenXPos = self.tempMonitor.width + 100
+        self.corner = Vector2(screenXPos,random.randint(0,self.tempMonitor.height))
         super().__init__(delay=delay, action_state=action_state)
 
     def on_enter(self, pet):
-        pet.set_anim_state(PetAnimState.WALK_LEFT)
-        print("I HAVE ENTERED")
+        if self.screenDir == 0:
+            pet.set_anim_state(PetAnimState.WALK_LEFT)
+        else:
+            pet.set_anim_state(PetAnimState.WALK_RIGHT)
+            pet.window.update()
+            self.corner.x = self.corner.x - pet.window.winfo_width()
         return
 
     def action(self,pet):
-        corner = Vector2(0,0)
+        #print("Monitor height = ",monitor.getMonitorOnScrPos(Vector2(0,0)).height)
+        
         # Going towards the corner
         if self.state == 0:
             #print("IT'S RUNNING in state 0")
-            direction = corner.__sub__(pet.pos)
+            direction = self.corner.__sub__(pet.pos)
             normal = direction.normalised()
             pet.translate(round(normal.x),round(normal.y))
-            if direction.length() < 2:
-                pet.pos = corner
+            # Has reached destination
+            
+            if direction.length() < 1:
+                pet.pos = self.corner
                 self.state = 1
                 self.targetWindow = window('images/panik.png',0,0)
-                print("width=",self.targetWindow.window.winfo_width())
-                self.targetWindow.pos = corner.__sub__(Vector2(300,0))
+                # update() is required to update the window width, otherwise it returns 1
+                self.targetWindow.window.update()
                 self.windows.append(self.targetWindow)
-                pet.set_anim_state(PetAnimState.WALK_RIGHT)
+                # Spawning the window
+                if self.screenDir == 0:
+                    self.targetWindow.pos = self.corner.__sub__(Vector2(self.targetWindow.window.winfo_width(),0))
+                    pet.set_anim_state(PetAnimState.WALK_RIGHT)
+                else:
+                    self.targetWindow.pos = self.corner.__add__(Vector2(pet.window.winfo_width(),0))
+                    pet.set_anim_state(PetAnimState.WALK_LEFT)
         # Pushing/Pulling the window
         elif self.state == 1:
-            # For now, let it move right
-            direction = Vector2(1,0)
+            direction = Vector2(0,0)
+            if (self.screenDir == 0):
+                direction.x = 1
+            else:
+                direction.x = -1
             #print("IT'S RUNNING in state 1")
             pet.translate(direction.x,direction.y)
             self.targetWindow.pos = self.targetWindow.pos.__add__(direction)

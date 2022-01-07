@@ -6,6 +6,7 @@ from system import System
 from pet import PetAnimState, PetState
 from vector2 import Vector2
 import monitor
+import os
 
 class window():
 
@@ -19,6 +20,7 @@ class window():
         self.pos = Vector2(x,y)
         self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
         self.label = tk.Label(self.window, image=self.img, bd=0, bg='black').pack()
+        self.window.title('Meme')
         #self.window.mainloop()
         #self.window.after(0,self.update)
         self.window.protocol("WM_DELETE_WINDOW",self.close) # The X button now calls self.close
@@ -26,7 +28,7 @@ class window():
 
     def update(self):
         self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x),y=str(self.pos.y)))
-        self.window.update()
+        #self.window.update()
 
     def close(self):
         self.closing = True
@@ -40,14 +42,16 @@ class OpenWindow(System):
         self.state = 0
 
         self.tempMonitor = monitor.getMonitorOnScrPos(Vector2(0,0))
+        super().__init__(delay=delay, action_state=action_state)
+
+    def on_enter(self, pet):
+        self.state = 0
         self.screenDir = random.randint(0,1) # 0 for left side, 1 for right side
         screenXPos = -100
         if self.screenDir == 1:
             screenXPos = self.tempMonitor.width + 100
-        self.corner = Vector2(screenXPos,random.randint(0,self.tempMonitor.height))
-        super().__init__(delay=delay, action_state=action_state)
-
-    def on_enter(self, pet):
+        # Corner is where the dog runs to and where the window spawns
+        self.corner = Vector2(screenXPos,random.randint(200,self.tempMonitor.height-200))
         if self.screenDir == 0:
             pet.set_anim_state(PetAnimState.WALK_LEFT)
         else:
@@ -70,7 +74,9 @@ class OpenWindow(System):
             if direction.length() < 1:
                 pet.pos = self.corner
                 self.state = 1
-                self.targetWindow = window('images/panik.png',0,0)
+                filePaths = os.listdir('images')
+                randomPath = filePaths[random.randint(0,len(filePaths)-1)]
+                self.targetWindow = window('images/' + randomPath,0,0)
                 # update() is required to update the window width, otherwise it returns 1
                 self.targetWindow.window.update()
                 self.windows.append(self.targetWindow)
@@ -84,13 +90,22 @@ class OpenWindow(System):
         # Pushing/Pulling the window
         elif self.state == 1:
             direction = Vector2(0,0)
-            if (self.screenDir == 0):
+            if self.screenDir == 0:
                 direction.x = 1
             else:
                 direction.x = -1
             #print("IT'S RUNNING in state 1")
             pet.translate(direction.x,direction.y)
             self.targetWindow.pos = self.targetWindow.pos.__add__(direction)
+            #print("Monitor width = ", self.tempMonitor.width)
+            if self.screenDir == 0:
+                if pet.pos.x >= self.tempMonitor.width/2:
+                    #pet.set_anim_state(PetAnimState.IDLE)
+                    pet.change_state(PetState.IDLE)
+            else:
+                if pet.pos.x <= self.tempMonitor.width/2:
+                    #pet.set_anim_state(PetAnimState.IDLE)
+                    pet.change_state(PetState.IDLE)
 
 
     

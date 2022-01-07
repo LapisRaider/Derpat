@@ -13,5 +13,3 @@ class Headpat(System):
 
     def action(self, pet):
         pet.change_state(PetState.IDLE)
-
-        

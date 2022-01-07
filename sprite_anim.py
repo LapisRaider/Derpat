@@ -19,6 +19,7 @@ class SpriteAnim():
             self.frame_index = self.frame_index + 1
             
             if not self.loop and self.frame_index == self.num_frames:
+                self.frame_index = max(0, self.num_frames - 1)
                 self.is_finished = True
                 return
 

@@ -8,7 +8,7 @@ from pet import PetState
 from pet import PetAnimState
 
 class Stroll(System):
-    STROLL_SPEED = 1
+    STROLL_SPEED = 10
 
     def on_enter(self, pet):
         active_monitor = monitor.getMonitorOnScrPos(pet.get_position())
@@ -29,6 +29,6 @@ class Stroll(System):
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
 
         if (dir.length_squared() > 3):
-            pet.translate_vec2(dir.normalised() * Stroll.STROLL_SPEED)
+            pet.translate_vec2(dir.normalised() * Stroll.STROLL_SPEED * delta_time)
         else:
             pet.change_state(PetState.IDLE)

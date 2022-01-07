@@ -1,17 +1,18 @@
 import tkinter as tk
 import time
 import random
+import enum
 
 from vector2 import *
 from sprite_anim import SpriteAnim
 
-class PetState(enum.Enum):
+class PetState(enum.IntEnum):
     DEFAULT = 0
     IDLE = 1
     CATCH_MOUSE = 2
     GOT_MOUSE = 3
 
-class PetAnimState(enum.Enum):
+class PetAnimState(enum.IntEnum):
     IDLE = 0
     WALK_LEFT = 1
     WALK_RIGHT = 2
@@ -41,7 +42,8 @@ class Pet():
         # Create animations.
         self.anims = [SpriteAnim('animations/derpat/idle.gif', 6), SpriteAnim('animations/derpat/walk_left.gif', 4), SpriteAnim('animations/derpat/walk_right.gif', 4)]
         self.anim_state = PetAnimState.IDLE
-        self.label = tk.Label(self.window, self.anims[self.anim_state].curr_frame, bd=0, bg='black').pack()
+        self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
+        self.label.pack()
 
     def set_anim_state(self, anim_state):
         self.anims[self.anim_state].reset() # Reset previous animation.
@@ -57,7 +59,9 @@ class Pet():
 
     def update(self):
         self.anims[self.anim_state].update()
-        self.label.configure(image=self.anims[self.anim_state].curr_frame) # Update animation frame.
+        self.label.configure(image=self.anims[self.anim_state].get_frame()) # Update animation frame.
+
+        # Update Window
         self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
         self.window.update()
 

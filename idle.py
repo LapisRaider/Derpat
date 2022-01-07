@@ -3,11 +3,12 @@ import random
 
 from system import System
 from pet import PetState
+from pet import PetAnimState
 
 class Idle(System):
     def on_enter(self, pet):
         pet.set_anim_state(PetAnimState.IDLE)
-        self.duration = randrange(15, 30)
+        self.duration = random.randrange(5, 10)
         self.start = time.time()
 
     def action(self, pet):
@@ -15,13 +16,13 @@ class Idle(System):
             return
 
         # 30% chance of strolling.
-        if (randrange(0, 10) < 3):
+        if (random.randrange(0, 10) < 9):
             pet.change_state(PetState.STROLL)
 
         # 20% chance of catching mouse.
-        if (randrange(0, 10) < 2):
+        elif (random.randrange(0, 10) < 9):
             pet.change_state(PetState.CATCH_MOUSE)
 
-        # 20% chance of catching mouse.
-        if (randrange(0, 10) < 2):
+        # 20% chance of creating window.
+        elif (random.randrange(0, 10) < 9):
             pet.change_state(PetState.CREATE_WINDOW)

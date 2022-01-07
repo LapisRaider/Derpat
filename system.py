@@ -20,9 +20,6 @@ class System():
             self.action(pet)
             self.last_update = time.time()
 
-        # Update previous state.
-        pet.prev_state = pet.curr_state
-
     def on_enter(self, pet):
         pass
 

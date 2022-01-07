@@ -9,10 +9,11 @@ from sprite_anim import SpriteAnim
 class PetState(enum.IntEnum):
     DEFAULT = 0
     IDLE = 1
-    CATCH_MOUSE = 2
-    GOT_MOUSE = 3
-    DRAG_WINDOW = 4
-    CREATE_WINDOW = 5
+    STROLL = 2
+    CATCH_MOUSE = 3
+    GOT_MOUSE = 4
+    DRAG_WINDOW = 5
+    CREATE_WINDOW = 6
 
 class PetAnimState(enum.IntEnum):
     IDLE = 0
@@ -57,16 +58,24 @@ class Pet():
     def set_position(self, x_pos, y_pos):
         self.pos.x = x_pos
         self.pos.y = y_pos
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
-    def set_position(self, pos):
+    def set_position_vec2(self, pos):
         self.pos = pos
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
     def translate(self, x_offset, y_offset):
         self.pos.x += x_offset
         self.pos.y += y_offset
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
-    def translate(self, offset):
+    def translate_vec2(self, offset):
         self.pos = self.pos + offset
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
     def get_position(self):
         return self.pos
@@ -79,6 +88,8 @@ class Pet():
         self.window.geometry('+{x}+{y}'.format(x=str(self.pos.x), y=str(self.pos.y)))
         self.window.update()
 
-    def change_state(self, state):
+        # Update Previous
         self.prev_state = self.curr_state
+
+    def change_state(self, state):
         self.curr_state = state

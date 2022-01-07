@@ -54,6 +54,7 @@ if __name__ == "__main__":
 
         # Pet Update
         pet.update(delta_time)
+        pet.track_footprints()
 
         # Updating all windows
         for x in windows:

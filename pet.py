@@ -143,7 +143,7 @@ class Pet():
 
         deleteQueue.clear()
 
-        if self.anim_state == PetAnimState.IDLE:
+        if self.anim_state == PetAnimState.IDLE or self.anim_state == PetAnimState.HEADPAT:
             return
 
         #check to see if should spawn footprints

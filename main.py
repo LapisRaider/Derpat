@@ -71,3 +71,5 @@ if __name__ == "__main__":
             pet.change_state(PetState.CREATE_WINDOW)
         if keyboard.is_pressed("5"):
             pet.change_state(PetState.DRAG_WINDOW)
+        if keyboard.is_pressed("6"):
+            pet.change_state(PetState.SCREAM)

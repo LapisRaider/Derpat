@@ -7,7 +7,6 @@ from pet import PetState
 from pet import PetAnimState
 from pynput import mouse
 from pynput.mouse import Button
-from pynput.mouse import Listener
 
 # Work around due to Python's shitty lambda functions.
 class _OnClick():

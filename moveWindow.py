@@ -1,21 +1,18 @@
-import tkinter as tk
-import time
 import random
 import win32gui, win32com.client
+import ctypes
+import ctypes.wintypes
+import monitor
 
+from ctypes.wintypes import HWND, DWORD
 from pet import PetAnimState, PetState
 from system import System
 from vector2 import Vector2
-
-import ctypes
 from ctypes import c_int
-import ctypes.wintypes
-from ctypes.wintypes import HWND, DWORD
+
 dwmapi = ctypes.WinDLL("dwmapi")
 DWMWA_CLOAKED = 14 
 isCloaked = c_int(0)
-
-import monitor
 
 ## For moving non-tkInter windows
 
@@ -41,7 +38,6 @@ def translateWindow(window,x,y):
 def setWindowPosition(window,x,y):
     rect = win32gui.GetWindowRect(window)
     win32gui.MoveWindow(window,round(x),round(y),rect[2]-rect[0],rect[3]-rect[1],True)
-
 
 # Callback function for EnumWindows
 def windowEnumHandler(hwnd, list):

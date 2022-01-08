@@ -1,16 +1,15 @@
 import tkinter as tk
-import time
 import random
+import monitor
+import os
+
 from tkinter.constants import CURRENT
 from system import System
 from pet import PetAnimState, PetState
 from vector2 import Vector2
-import monitor
-import os
 from makeNotes import Notepad
 
 class window():
-
     def __init__(self, imagePath,x,y):
         self.window = tk.Toplevel()
         # Boolean to prevent the program from closing immediately
@@ -25,7 +24,6 @@ class window():
         #self.window.mainloop()
         #self.window.after(0,self.update)
         self.window.protocol("WM_DELETE_WINDOW",self.close) # The X button now calls self.close
-       
 
     def update(self):
         self.window.geometry('+{x}+{y}'.format(x=str(round(self.pos.x)),y=str(round(self.pos.y))))
@@ -80,9 +78,9 @@ class OpenWindow(System):
                 
                 self.isNotepad = random.randint(0,1) # 0 for False, 1 for True
                 if self.isNotepad == 0:
-                    filePaths = os.listdir('images')
+                    filePaths = os.listdir('src/assets/images')
                     randomPath = filePaths[random.randint(0,len(filePaths)-1)]
-                    self.targetWindow = window('images/' + randomPath,0,0)
+                    self.targetWindow = window('src/assets/images/' + randomPath,0,0)
                     # update() is required to update the window width, otherwise it returns 1
                     self.targetWindow.window.update()
                 else:
@@ -100,6 +98,7 @@ class OpenWindow(System):
                 else:
                     self.targetWindow.pos = self.corner.__add__(Vector2(pet.window.winfo_width(),0))
                     pet.set_anim_state(PetAnimState.WALK_LEFT)
+
         # Pushing/Pulling the window
         elif self.state == 1:
             direction = Vector2(0,0)
@@ -107,11 +106,13 @@ class OpenWindow(System):
                 direction.x = 1
             else:
                 direction.x = -1
+
             #print("IT'S RUNNING in state 1")
             direction = direction * OpenWindow.MOVEMENT_SPEED * delta_time
             pet.translate(direction.x,direction.y)
             self.targetWindow.pos = self.targetWindow.pos.__add__(direction)
             #print("Monitor width = ", self.tempMonitor.width)
+
             if self.screenDir == 0:
                 if pet.pos.x >= self.tempMonitor.width/2:
                     #pet.set_anim_state(PetAnimState.IDLE)

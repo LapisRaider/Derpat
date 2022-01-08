@@ -1,4 +1,3 @@
-import time
 import random
 import monitor
 
@@ -23,6 +22,7 @@ class Stroll(System):
 
     def action(self, pet, delta_time):
         dir = self.target_pos - pet.get_position()
+        
         if (dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
         elif (dir.x >= 0 and pet.get_anim_state() != PetAnimState.WALK_RIGHT):

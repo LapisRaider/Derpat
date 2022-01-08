@@ -4,6 +4,8 @@ from pet import Pet
 from pet import PetState
 
 # Systems
+import time
+
 from idle import Idle
 from stroll import Stroll
 from headpat import Headpat
@@ -12,10 +14,10 @@ from catch_mouse import CatchMouse
 from scream import Scream
 
 # Others
+import keyboard
+
 from openWindow import *
 from moveWindow import *
-# from makeNotes import *
-import keyboard
 
 if __name__ == "__main__":
     monitor.initMonitors()

@@ -1,4 +1,5 @@
 import time
+
 from pet import PetState
 
 class System():
@@ -15,7 +16,7 @@ class System():
             elif (self.action_state == pet.get_prev_state()):
                 self.on_exit(pet)
 
-        self.always_action(self, pet, delta_time)
+        # self.always_action(self, pet, delta_time)
 
         # Check if we should run this system.
         if (pet.get_curr_state() == self.action_state) and (time.time() > self.last_update + self.delay):

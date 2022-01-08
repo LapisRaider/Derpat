@@ -12,10 +12,13 @@ Keyboard: pip install keyboard
 Window Movement: pip install pywin32  
 Audio: pip install playsound==1.2.2
 
-# Solving pynput dependency issue:
+# Solving pynput Dependency Issue
 Print out Python's PATH using Python.  
 ```
 import sys
 print(sys.executable)
 ```
 Copy the path printed onto the terminal type `<path> -m pip install pynput`  
+
+# Support Platforms
+Currently, Derpat only works on Microsoft Windows.

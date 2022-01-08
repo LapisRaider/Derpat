@@ -7,9 +7,9 @@ from tkinter.constants import CURRENT
 from system import System
 from pet import PetAnimState, PetState
 from vector2 import Vector2
-from makeNotes import Notepad
+from make_notes import Notepad
 
-class window():
+class CustomWindow():
     def __init__(self, imagePath,x,y):
         self.window = tk.Toplevel()
         # Boolean to prevent the program from closing immediately
@@ -32,7 +32,6 @@ class window():
     def close(self):
         self.closing = True
 
-
 class OpenWindow(System):
     MOVEMENT_SPEED = 200
 
@@ -41,19 +40,19 @@ class OpenWindow(System):
         # State 0 = GOING TO CORNER
         # State 1 = MOVING WINDOW
         self.state = 0
-
-        self.tempMonitor = monitor.getMonitorOnScrPos(Vector2(0,0))
+        self.active_monitor = monitor.get_active_monitor(Vector2(0,0))
         super().__init__(delay=delay, action_state=action_state)
 
     def on_enter(self, pet):
+        print("On Enter Open Window")
         self.state = 0
-        self.screenDir = random.randint(0,1) # 0 for left side, 1 for right side
+        self.screen_dir = random.randint(0,1) # 0 for left side, 1 for right side
         screenXPos = -100
-        if self.screenDir == 1:
-            screenXPos = self.tempMonitor.width + 100
+        if self.screen_dir == 1:
+            screenXPos = self.active_monitor.width + 100
         # Corner is where the dog runs to and where the window spawns
-        self.corner = Vector2(screenXPos,random.randint(200,self.tempMonitor.height-200))
-        if self.screenDir == 0:
+        self.corner = Vector2(screenXPos,random.randint(200,self.active_monitor.height-200))
+        if self.screen_dir == 0:
             pet.set_anim_state(PetAnimState.WALK_LEFT)
         else:
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
@@ -62,64 +61,58 @@ class OpenWindow(System):
         return
 
     def action(self,pet,delta_time):
-        #print("Monitor height = ",monitor.getMonitorOnScrPos(Vector2(0,0)).height)
-
-        # Going towards the corner
+        # Going towards the corner.
         if self.state == 0:
-            #print("IT'S RUNNING in state 0")
-            direction = self.corner.__sub__(pet.pos)
+            direction = self.corner - pet.pos
             normal = direction.normalised() * OpenWindow.MOVEMENT_SPEED * delta_time
             pet.translate(normal.x,normal.y)
-            # Has reached destination
-            
+
+            # Has reached destination.
             if direction.length() < 2:
                 pet.pos = self.corner
                 self.state = 1
                 
-                self.isNotepad = random.randint(0,1) # 0 for False, 1 for True
-                if self.isNotepad == 0:
-                    filePaths = os.listdir('src/assets/images')
-                    randomPath = filePaths[random.randint(0,len(filePaths)-1)]
-                    self.targetWindow = window('src/assets/images/' + randomPath,0,0)
+                self.spawn_notepad = random.randint(0,1) # 0 for False, 1 for True
+                if self.spawn_notepad == 0:
+                    file_paths = os.listdir('assets/images')
+                    randomPath = file_paths[random.randint(0,len(file_paths)-1)]
+                    self.target_window = CustomWindow('assets/images/' + randomPath,0,0)
                     # update() is required to update the window width, otherwise it returns 1
-                    self.targetWindow.window.update()
+                    self.target_window.window.update()
                 else:
-                    self.targetWindow = Notepad(width=300,height = 300)
+                    self.target_window = Notepad(width=300,height = 300)
 
                 pet.window.lift()
-                self.windows.append(self.targetWindow)
-                # Spawning the window
-                if self.screenDir == 0:
-                    if self.isNotepad == 0:
-                        self.targetWindow.pos = self.corner.__sub__(Vector2(self.targetWindow.window.winfo_width(),0))
+                self.windows.append(self.target_window)
+                
+                # Spawning the window.
+                if self.screen_dir == 0:
+                    if self.spawn_notepad == 0:
+                        self.target_window.pos = self.corner.__sub__(Vector2(self.target_window.window.winfo_width(),0))
                     else:
-                        self.targetWindow.pos = self.corner.__sub__(Vector2(self.targetWindow.thisWidth,0))
+                        self.target_window.pos = self.corner.__sub__(Vector2(self.target_window.width,0))
                     pet.set_anim_state(PetAnimState.WALK_RIGHT)
                 else:
-                    self.targetWindow.pos = self.corner.__add__(Vector2(pet.window.winfo_width(),0))
+                    self.target_window.pos = self.corner.__add__(Vector2(pet.window.winfo_width(),0))
                     pet.set_anim_state(PetAnimState.WALK_LEFT)
 
-        # Pushing/Pulling the window
+        # Pushing/Pulling the window.
         elif self.state == 1:
             direction = Vector2(0,0)
-            if self.screenDir == 0:
+            if self.screen_dir == 0:
                 direction.x = 1
             else:
                 direction.x = -1
 
-            #print("IT'S RUNNING in state 1")
             direction = direction * OpenWindow.MOVEMENT_SPEED * delta_time
             pet.translate(direction.x,direction.y)
-            self.targetWindow.pos = self.targetWindow.pos.__add__(direction)
-            #print("Monitor width = ", self.tempMonitor.width)
+            self.target_window.pos = self.target_window.pos.__add__(direction)
 
-            if self.screenDir == 0:
-                if pet.pos.x >= self.tempMonitor.width/2:
-                    #pet.set_anim_state(PetAnimState.IDLE)
+            if self.screen_dir == 0:
+                if pet.pos.x >= self.active_monitor.width/2:
                     pet.change_state(PetState.IDLE)
             else:
-                if pet.pos.x <= self.tempMonitor.width/2:
-                    #pet.set_anim_state(PetAnimState.IDLE)
+                if pet.pos.x <= self.active_monitor.width/2:
                     pet.change_state(PetState.IDLE)
 
 

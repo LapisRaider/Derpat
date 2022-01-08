@@ -1,29 +1,29 @@
+# Others
+import time
+import keyboard
+
 # Pet
-from monitor import initMonitors
+from monitor import init_monitors
 from pet import Pet
 from pet import PetState
 
 # Systems
-import time
-
 from idle import Idle
 from stroll import Stroll
 from headpat import Headpat
 from snatch_mouse import SnatchMouse
 from catch_mouse import CatchMouse
 from scream import Scream
-
-# Others
-import keyboard
-
-from openWindow import *
-from moveWindow import *
+from open_window import *
+from move_window import *
 
 if __name__ == "__main__":
-    monitor.initMonitors()
+    monitor.init_monitors()
     windows = []
+
     # Pet
     pet = Pet()
+    
     # Systems
     idle = Idle(0, PetState.IDLE)
     stroll = Stroll(0, PetState.STROLL)
@@ -33,8 +33,6 @@ if __name__ == "__main__":
     open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     move_window = MoveWindow(0,PetState.DRAG_WINDOW)
     scream = Scream(0,PetState.SCREAM)
-    # notepad = Notepad(width=400, height=200)5
-    # pet.change_state(PetState.CREATE_WINDOW)
     
     # Main Loop
     prev_time = time.time()

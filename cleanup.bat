@@ -1,0 +1,5 @@
+@RD /S /Q "src/__pycache__"
+@RD /S /Q "build"
+@RD /S /Q "dist"
+@RD /S /Q "bin"
+del "main.spec"

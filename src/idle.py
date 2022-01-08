@@ -19,9 +19,13 @@ class _OnClick():
         return True
 
 class Idle(System):
+    MIN_DURATION = 10
+    MAX_DURATION = 20
+
     def on_enter(self, pet):
+        print("On Enter Idle")
         pet.set_anim_state(PetAnimState.IDLE)
-        self.duration = random.randrange(5, 10)
+        self.duration = random.randrange(Idle.MIN_DURATION, Idle.MAX_DURATION)
         self.start = time.time()
 
         # Non-blocking mouse listener.
@@ -55,7 +59,7 @@ class Idle(System):
         elif (random.randrange(0, 10) < 2):
             pet.change_state(PetState.CREATE_WINDOW)
         # Else, 10% chance of dragging a window.
-        elif (random.randrange(0, 10) < 2):
+        elif (random.randrange(0, 10) < 3):
             pet.change_state(PetState.DRAG_WINDOW)
         # Else, 10% chance of screaming.
         elif (random.randrange(0, 10) < 1):

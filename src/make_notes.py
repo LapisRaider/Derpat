@@ -15,22 +15,21 @@ class Notepad():
             "Your mouse looking real good right now",
             "Doing work? Not when I'm here."
         ]
-        noteLen = len(notes)    
-        note = notes[random.randint(0, noteLen - 1)]
+        note = notes[random.randint(0, len(notes) - 1)]
 
         self.window = tk.Toplevel()
         self.closing = False
 
         # default window width and height
-        self.thisWidth = 300
+        self.width = 300
         self.hisHeight = 300
-        self.thisTextArea = tk.Text(self.window)
-        self.thisMenuBar = tk.Menu(self.window)
+        self.text_area = tk.Text(self.window)
+        self.menu_bar = tk.Menu(self.window)
 
         # To add scrollbar
-        self.thisScrollBar = tk.Scrollbar(self.thisTextArea)
+        self.scroll_bar = tk.Scrollbar(self.text_area)
         
-        self.thisTextArea.insert(tk.END, note)
+        self.text_area.insert(tk.END, note)
 
         # Set icon
         try:
@@ -40,12 +39,12 @@ class Notepad():
 
         # Set window size (the default is 300x300)
         try:
-            self.thisWidth = kwargs['width']
+            self.width = kwargs['width']
         except KeyError:
             pass
 
         try:
-            self.thisHeight = kwargs['height']
+            self.height = kwargs['height']
         except KeyError:
             pass
 
@@ -53,20 +52,20 @@ class Notepad():
         self.window.title("You have a note!")
 
         # Center the window
-        screenWidth = self.window.winfo_screenwidth()
-        screenHeight = self.window.winfo_screenheight()
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
 
         # For left-alling
-        left = (screenWidth / 2) - (self.thisWidth / 2)
+        left = (screen_width / 2) - (self.width / 2)
 
         # For right-allign
-        top = (screenHeight / 2) - (self.thisHeight / 2)
+        top = (screen_height / 2) - (self.height / 2)
 
         self.pos = Vector2(left,top)
 
         # For top and bottom
-        self.window.geometry('%dx%d+%d+%d' % (self.thisWidth,
-                                              self.thisHeight,
+        self.window.geometry('%dx%d+%d+%d' % (self.width,
+                                              self.height,
                                               left, top))
 
         # To make the textarea auto resizable
@@ -74,15 +73,15 @@ class Notepad():
         self.window.grid_columnconfigure(0, weight=1)
 
         # Add controls (widget)
-        self.thisTextArea.grid(sticky=tk.N + tk.E + tk.S + tk.W)
+        self.text_area.grid(sticky=tk.N + tk.E + tk.S + tk.W)
 
-        self.window.config(menu=self.thisMenuBar)
+        self.window.config(menu=self.menu_bar)
 
-        self.thisScrollBar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.scroll_bar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Scrollbar will adjust automatically according to the content
-        self.thisScrollBar.config(command=self.thisTextArea.yview)
-        self.thisTextArea.config(yscrollcommand=self.thisScrollBar.set)
+        self.scroll_bar.config(command=self.text_area.yview)
+        self.text_area.config(yscrollcommand=self.scroll_bar.set)
         self.window.protocol("WM_DELETE_WINDOW",self.close)
 
     def update(self):

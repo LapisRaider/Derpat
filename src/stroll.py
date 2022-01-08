@@ -10,7 +10,8 @@ class Stroll(System):
     STROLL_SPEED = 150
 
     def on_enter(self, pet):
-        active_monitor = monitor.getMonitorOnScrPos(pet.get_position())
+        print("On Enter Stroll")
+        active_monitor = monitor.get_active_monitor(pet.get_position())
         minX = active_monitor.x
         maxX = active_monitor.x + active_monitor.width
         minY = active_monitor.y

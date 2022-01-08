@@ -38,8 +38,8 @@ class window():
 class OpenWindow(System):
     MOVEMENT_SPEED = 200
 
-    def __init__(self, delay=0, action_state=PetState.DEFAULT):
-        self.windows = []
+    def __init__(self, delay=0, action_state=PetState.DEFAULT, windows = []):
+        self.windows = windows
         # State 0 = GOING TO CORNER
         # State 1 = MOVING WINDOW
         self.state = 0
@@ -65,14 +65,6 @@ class OpenWindow(System):
 
     def action(self,pet,delta_time):
         #print("Monitor height = ",monitor.getMonitorOnScrPos(Vector2(0,0)).height)
-        
-        # Updating all windows
-        for x in self.windows:
-            if x.closing: # To prevent program from crashing when closed.
-                x.window.destroy()
-                self.windows.remove(x)
-            else:
-                x.update()
 
         # Going towards the corner
         if self.state == 0:

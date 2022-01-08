@@ -19,7 +19,7 @@ import keyboard
 
 if __name__ == "__main__":
     monitor.initMonitors()
-
+    windows = []
     # Pet
     pet = Pet()
     # Systems
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     headpat = Headpat(6, PetState.HEADPAT)
     catch_mouse = CatchMouse(0, PetState.CATCH_MOUSE)
     snatch_mouse = SnatchMouse(0, PetState.GOT_MOUSE)
-    open_window = OpenWindow(0, PetState.CREATE_WINDOW)
+    open_window = OpenWindow(0, PetState.CREATE_WINDOW, windows)
     move_window = MoveWindow(0,PetState.DRAG_WINDOW)
     scream = Scream(0,PetState.SCREAM)
     # notepad = Notepad(width=400, height=200)5
@@ -56,6 +56,14 @@ if __name__ == "__main__":
         pet.update(delta_time)
         pet.track_footprints()
 
+        # Updating all windows
+        for x in windows:
+            if x.closing: # To prevent program from crashing when closed.
+                x.window.destroy()
+                windows.remove(x)
+            else:
+                x.update()
+
         # Exit the application, can be changed.
         if keyboard.is_pressed("ctrl") and keyboard.is_pressed('alt') and keyboard.is_pressed('2') and keyboard.is_pressed('9') and keyboard.is_pressed('Y'):
             break
@@ -71,3 +79,5 @@ if __name__ == "__main__":
             pet.change_state(PetState.CREATE_WINDOW)
         if keyboard.is_pressed("5"):
             pet.change_state(PetState.DRAG_WINDOW)
+        if keyboard.is_pressed("6"):
+            pet.change_state(PetState.SCREAM)

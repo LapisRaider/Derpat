@@ -74,7 +74,7 @@ class OpenWindow(System):
             pet.translate(normal.x,normal.y)
             # Has reached destination
             
-            if direction.length() < 1:
+            if direction.length() < 2:
                 pet.pos = self.corner
                 self.state = 1
                 

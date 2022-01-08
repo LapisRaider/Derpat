@@ -1,4 +1,4 @@
-# AnnoyingPet
+# Derpat (Derpy Cat) the Annoying Desktop Pet
 Basic Tutorial: https://seebass22.github.io/python-desktop-pet-tutorial/  
 Handling Mouse Input: https://pythonhosted.org/pynput/mouse.html  
 

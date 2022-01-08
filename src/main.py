@@ -67,17 +67,3 @@ if __name__ == "__main__":
         # Exit the application, can be changed.
         if keyboard.is_pressed("ctrl") and keyboard.is_pressed('alt') and keyboard.is_pressed('2') and keyboard.is_pressed('9') and keyboard.is_pressed('Y'):
             break
-
-        #For debug purposes
-        if keyboard.is_pressed("1"):
-            pet.change_state(PetState.STROLL)
-        if keyboard.is_pressed("2"):
-            pet.change_state(PetState.HEADPAT)
-        if keyboard.is_pressed("3"):
-            pet.change_state(PetState.CATCH_MOUSE)
-        if keyboard.is_pressed("4"):
-            pet.change_state(PetState.CREATE_WINDOW)
-        if keyboard.is_pressed("5"):
-            pet.change_state(PetState.DRAG_WINDOW)
-        if keyboard.is_pressed("6"):
-            pet.change_state(PetState.SCREAM)

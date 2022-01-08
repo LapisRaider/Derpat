@@ -19,8 +19,8 @@ class _OnClick():
         return True
 
 class Idle(System):
-    MIN_DURATION = 10
-    MAX_DURATION = 20
+    MIN_DURATION = 5
+    MAX_DURATION = 10
 
     def on_enter(self, pet):
         print("On Enter Idle")
@@ -55,14 +55,14 @@ class Idle(System):
         # Else, 30% chance of catching mouse.
         if (random.randrange(0, 10) < 3):
             pet.change_state(PetState.CATCH_MOUSE)
-        # Else, 10% chance of creating window.
-        elif (random.randrange(0, 10) < 2):
+        # Else, 40% chance of creating window.
+        elif (random.randrange(0, 10) < 4):
             pet.change_state(PetState.CREATE_WINDOW)
-        # Else, 10% chance of dragging a window.
-        elif (random.randrange(0, 10) < 3):
+        # Else, 50% chance of dragging a window.
+        elif (random.randrange(0, 10) < 5):
             pet.change_state(PetState.DRAG_WINDOW)
-        # Else, 10% chance of screaming.
-        elif (random.randrange(0, 10) < 1):
+        # Else, 60% chance of screaming.
+        elif (random.randrange(0, 10) < 6):
             pet.change_state(PetState.SCREAM)
         # Else, stroll.
         else:

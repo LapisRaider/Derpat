@@ -61,9 +61,11 @@ if __name__ == "__main__":
             if x.closing: # To prevent program from crashing when closed.
                 x.window.destroy()
                 windows.remove(x)
-            else:
-                x.update()
+
 
         # Exit the application, can be changed.
         if keyboard.is_pressed("ctrl") and keyboard.is_pressed('alt') and keyboard.is_pressed('2') and keyboard.is_pressed('9') and keyboard.is_pressed('Y'):
             break
+
+        # if keyboard.is_pressed("4"):
+        #     pet.change_state(PetState.CREATE_WINDOW)

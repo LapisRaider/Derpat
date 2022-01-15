@@ -107,6 +107,7 @@ class OpenWindow(System):
             direction = direction * OpenWindow.MOVEMENT_SPEED * delta_time
             pet.translate(direction.x,direction.y)
             self.target_window.pos = self.target_window.pos.__add__(direction)
+            self.target_window.update()
 
             if self.screen_dir == 0:
                 if pet.pos.x >= self.active_monitor.width/2:

@@ -62,17 +62,17 @@ if __name__ == "__main__":
         if quit_combination():
             break
 
-        if keyboard.is_pressed("1"):
-            pet.change_state(PetState.IDLE)
-        elif keyboard.is_pressed("2"):
-            pet.change_state(PetState.STROLL)
-        elif keyboard.is_pressed("3"):
-            pet.change_state(PetState.CATCH_MOUSE)
-        elif keyboard.is_pressed("4"):
-            pet.change_state(PetState.OPEN_WINDOW)
-        elif keyboard.is_pressed("5"):
-            pet.change_state(PetState.MOVE_WINDOW)
-        elif keyboard.is_pressed("6"):
-            pet.change_state(PetState.HEADPAT)
-        elif keyboard.is_pressed("7"):
-            pet.change_state(PetState.SCREAM)
+        # if keyboard.is_pressed("1"):
+        #     pet.change_state(PetState.IDLE)
+        # elif keyboard.is_pressed("2"):
+        #     pet.change_state(PetState.STROLL)
+        # elif keyboard.is_pressed("3"):
+        #     pet.change_state(PetState.CATCH_MOUSE)
+        # elif keyboard.is_pressed("4"):
+        #     pet.change_state(PetState.OPEN_WINDOW)
+        # elif keyboard.is_pressed("5"):
+        #     pet.change_state(PetState.MOVE_WINDOW)
+        # elif keyboard.is_pressed("6"):
+        #     pet.change_state(PetState.HEADPAT)
+        # elif keyboard.is_pressed("7"):
+        #     pet.change_state(PetState.SCREAM)

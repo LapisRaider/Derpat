@@ -28,14 +28,14 @@ class PetAnimState(enum.IntEnum):
     ATTACK_RIGHT = 5
 
 class Pet():
-    FOOT_PRINT_SPAWN = 0.4
+    FOOT_PRINT_SPAWN_INTERVAL = 0.4
     FOOT_X_LEFT_OFFSET = 64
     FOOT_X_RIGHT_OFFSET = -5
     FOOT_Y_OFFSET = 80
 
-    TRACK_FOOTPRINT_MAX_TIME = 8
-    TRACK_FOOTPRINT_MIN_TIME = 5
-    FOOTPRINT_CHANCE = 3 #30%
+    TRACK_FOOTPRINT_MAX_DURATION = 8
+    TRACK_FOOTPRINT_MIN_DURATION = 5
+    FOOTPRINT_CHANCE = 40 # 40%
 
     def __init__(self):
         # Create a window
@@ -54,12 +54,11 @@ class Pet():
         # X & Y Coordinates of our window.
         self.pos = Vector2(500, 0)
 
-        #for tracking footprints
-        self.footPrintsStorer = []
-        self.footPrintTime = time.time()
-        self.trackFootPrint = False
+        # For tracking footprints.
+        self.active_footprints = []
+        self.track_foot_print = False
 
-        #set default state
+        # Set default state.
         self.next_state = PetState.IDLE
         self.curr_state = PetState.DEFAULT
         self.prev_state = PetState.DEFAULT
@@ -80,13 +79,13 @@ class Pet():
         self.anims[self.anim_state].reset() # Reset previous animation.
         self.anim_state = anim_state # Switch to new animation.
 
-        #for footprints spawning
+        # Spawn footprints.
         if self.anim_state == PetAnimState.WALK_LEFT or self.anim_state == PetAnimState.WALK_RIGHT:
-            if random.randrange(0, 10) < Pet.FOOTPRINT_CHANCE and not self.trackFootPrint:
-                self.trackFootPrint = True
+            if random.randrange(0, 100) < Pet.FOOTPRINT_CHANCE and not self.track_foot_print:
+                self.track_foot_print = True
                 self.init_track_footprints()
         else:
-            self.trackFootPrint = False
+            self.track_foot_print = False
 
     def get_anim_state(self):
         return self.anim_state
@@ -109,15 +108,15 @@ class Pet():
         return self.pos
 
     def update(self, delta_time):
+        # Update animation.
         self.anims[self.anim_state].update()
         self.label.configure(image=self.anims[self.anim_state].get_frame()) # Update animation frame.
 
-        # Update Window
-        self.window.geometry('+{x}+{y}'.format(x=str(round(self.pos.x)), y=str(round(self.pos.y))))
-        #self.window.lift()
+        # Update window.
+        self.window.geometry('+%d+%d' % (round(self.pos.x), round(self.pos.y)))
         self.window.update()
 
-        # Update Previous
+        # Update state.
         self.prev_state = self.curr_state
         self.curr_state = self.next_state
 
@@ -143,41 +142,36 @@ class Pet():
         self.window.lift()
 
     def init_track_footprints(self):
-        self.footprintStartTime = time.time()
-        self.footprintTime = random.randrange(Pet.TRACK_FOOTPRINT_MIN_TIME, Pet.TRACK_FOOTPRINT_MAX_TIME)
+        self.footprint_end_time = time.time() + random.randrange(Pet.TRACK_FOOTPRINT_MIN_DURATION, Pet.TRACK_FOOTPRINT_MAX_DURATION)
+        self.footprint_prev_spawn_time = 0
         
     def track_footprints(self):
-        deleteQueue = []
+        # Update and check those who are inactive.
+        inactive_footprints = []
+        for footprint in self.active_footprints:
+            if footprint.is_active():
+                footprint.update()
+            else:
+                inactive_footprints.append(footprint)
 
-        #update and check those who are inactive
-        for footprint in self.footPrintsStorer:
-            if not footprint.active:
-                deleteQueue.append(footprint)
-                continue
-
-            footprint.update()
-
-        #remove inactive
-        for footprint in deleteQueue:
-            self.footPrintsStorer.remove(footprint)
+        # Remove inactive footprints.
+        for footprint in inactive_footprints:
+            self.active_footprints.remove(footprint)
             del footprint
-
-        deleteQueue.clear()
+        inactive_footprints.clear()
         
-        if not self.trackFootPrint:
+        if not self.track_foot_print:
             return
 
-        #intervals between footprints
-        if time.time() < self.footPrintTime + Pet.FOOT_PRINT_SPAWN:
+        # Intervals between footprints.
+        time_now = time.time()
+        if time_now < self.footprint_prev_spawn_time + Pet.FOOT_PRINT_SPAWN_INTERVAL:
             return
+        self.footprint_prev_spawn_time = time_now
 
-        self.footPrintTime = time.time()
+        foot_print_offset = Vector2(Pet.FOOT_X_LEFT_OFFSET, Pet.FOOT_Y_OFFSET) if self.anim_state == PetAnimState.WALK_LEFT else Vector2(Pet.FOOT_X_RIGHT_OFFSET, Pet.FOOT_Y_OFFSET)
+        self.active_footprints.append(Footprints(self.pos + foot_print_offset, self.anim_state == PetAnimState.WALK_LEFT))
 
-        walkingLeft = self.anim_state == PetAnimState.WALK_LEFT
-        footPrintOffset = Vector2(Pet.FOOT_X_LEFT_OFFSET, Pet.FOOT_Y_OFFSET) if self.anim_state == PetAnimState.WALK_LEFT else Vector2(Pet.FOOT_X_RIGHT_OFFSET, Pet.FOOT_Y_OFFSET)
-
-        self.footPrintsStorer.append(Footprints(self.pos.__add__(footPrintOffset), walkingLeft))
-
-        #how long the foot prints would keep spawning for
-        if time.time() > self.footprintStartTime + self.footprintTime:
-            self.trackFootPrint = False
+        # How long the foot prints would keep spawning for.
+        if time_now > self.footprint_end_time:
+            self.track_foot_print = False

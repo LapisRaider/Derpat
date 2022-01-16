@@ -13,8 +13,8 @@ class PetState(enum.IntEnum):
     STROLL = 2
     CATCH_MOUSE = 3
     GOT_MOUSE = 4
-    DRAG_WINDOW = 5
-    CREATE_WINDOW = 6
+    MOVE_WINDOW = 5
+    OPEN_WINDOW = 6
     MAKE_NOTE = 7
     HEADPAT = 8
     SCREAM = 9
@@ -81,7 +81,7 @@ class Pet():
         self.anim_state = anim_state # Switch to new animation.
 
         #for footprints spawning
-        if  self.anim_state == PetAnimState.WALK_LEFT or self.anim_state == PetAnimState.WALK_RIGHT:
+        if self.anim_state == PetAnimState.WALK_LEFT or self.anim_state == PetAnimState.WALK_RIGHT:
             if random.randrange(0, 10) < Pet.FOOTPRINT_CHANCE and not self.trackFootPrint:
                 self.trackFootPrint = True
                 self.init_track_footprints()
@@ -134,10 +134,13 @@ class Pet():
         return self.next_state
 
     def get_width(self):
-        return self.label.winfo_width()
+        return self.window.winfo_width()
 
     def get_height(self):
-        return self.label.winfo_height()
+        return self.window.winfo_height()
+
+    def lift_window(self):
+        self.window.lift()
 
     def init_track_footprints(self):
         self.footprintStartTime = time.time()

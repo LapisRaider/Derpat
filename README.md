@@ -21,4 +21,8 @@ print(sys.executable)
 Copy the path printed onto the terminal type `<path> -m pip install pynput`  
 
 # Support Platforms
-Currently, Derpat only works on Microsoft Windows.
+Currently, Derpat only works on Microsoft Windows.  
+
+# Assets
+Free icons from https://icon-icons.com/.  
+Memes from Google Images.  

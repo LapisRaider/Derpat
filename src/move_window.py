@@ -3,6 +3,7 @@ import win32gui, win32com.client
 import ctypes
 import ctypes.wintypes
 import monitor
+import custom_windows
 
 from ctypes.wintypes import HWND, DWORD
 from pet import PetAnimState, PetState
@@ -28,8 +29,8 @@ def window_enum_handler(hwnd, list):
     is_cloaked = c_int(0)
     active_monitor = monitor.get_active_monitor(Vector2(0,0)) # Used to get screen width/height
 
-    # Just tons of checks to make sure I don't get any invalid windows
-    invalid_windows = ['', 'tk', 'Task Manager', 'Meme', 'You have a note!']
+    # Just tons of hard-coded checks to make sure I don't get any invalid windows.
+    invalid_windows = ['', 'tk', 'Task Manager', custom_windows.NoteWindow.TITLE, custom_windows.ImageWindow.TITLE]
     if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd) not in invalid_windows:
         dwmapi.DwmGetWindowAttribute(HWND(hwnd), DWORD(dwmwa_cloaked), ctypes.byref(is_cloaked), ctypes.sizeof(is_cloaked))
         if(is_cloaked.value == 0): # Checking if window is suspended.

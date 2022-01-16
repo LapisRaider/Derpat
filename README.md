@@ -10,7 +10,8 @@ Screen Information: pip install screeninfo
 Mouse: pip install pynput  
 Keyboard: pip install keyboard  
 Window Movement: pip install pywin32  
-Audio: pip install playsound==1.2.2
+Audio: pip install playsound==1.2.2  
+Packaging Tool: pip install pyinstaller  
 
 # Solving pynput Dependency Issue
 Print out Python's PATH using Python.  

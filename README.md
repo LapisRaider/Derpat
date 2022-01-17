@@ -13,7 +13,7 @@ Window Movement: pip install pywin32
 Audio: pip install playsound==1.2.2  
 Packaging Tool: pip install pyinstaller  
 
-# Support Platforms
+# Supported Platforms
 Currently, Derpat only works on Microsoft Windows.  
 
 # Assets

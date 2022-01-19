@@ -73,9 +73,9 @@ class OpenWindow(System):
 
             # Spawn image.
             else:
-                file_paths = os.listdir('src/assets/images')
+                file_paths = os.listdir('assets/images')
                 randomPath = file_paths[random.randint(0, len(file_paths) - 1)]
-                self.target_window = ImageWindow('src/assets/images/' + randomPath)
+                self.target_window = ImageWindow('assets/images/' + randomPath)
 
             # Lift the pet window to ensure that it is not covered by our newly spawned window.
             pet.lift_window()

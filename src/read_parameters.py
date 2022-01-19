@@ -25,6 +25,6 @@ def init_text_parameters(fileName):
         text_param.append(modifiedLine)
        
 
-init_parameters("src/assets/data/parameters.txt", param_dict)
-init_parameters("src/assets/data/asset_params.txt", asset_param_dist)
-init_text_parameters("src/assets/data/text_window_params.txt")
+init_parameters("assets/data/parameters.txt", param_dict)
+init_parameters("assets/data/asset_params.txt", asset_param_dist)
+init_text_parameters("assets/data/text_window_params.txt")

@@ -1,38 +1,38 @@
 #for assets
 
 #Custom Window
-IMAGE_ICON = src/assets/ico/image.ico
-NOTE_ICON = src/assets/ico/note.ico
+IMAGE_ICON = assets/ico/image.ico
+NOTE_ICON = assets/ico/note.ico
 
 #Headpat
-HEADPAT_SOUND = src/assets/sfx/cat_meow.mp3
+HEADPAT_SOUND = assets/sfx/cat_meow.mp3
 
 #footprints
-FOOTPRINTS_LEFT = src/assets/animations/footprints_Left.gif
-FOOTPRINTS_RIGHT = src/assets/animations/footprints_right.gif
+FOOTPRINTS_LEFT = assets/animations/footprints_Left.gif
+FOOTPRINTS_RIGHT = assets/animations/footprints_right.gif
 
 FOOTPRINT_NUM_FRAME = 4
 FOOTPRINT_ANIM_DELAY = 0.5
 FOOTPRINT_STAY_TIME = 3
 
 #Scream 
-SCREAM_SOUND = src/assets/sfx/cat_scream.wav
+SCREAM_SOUND = assets/sfx/cat_scream.wav
 
 #pet sprite anim
-PET_IDLE_ANIM = src/assets/animations/derpat/idle.gif
+PET_IDLE_ANIM = assets/animations/derpat/idle.gif
 PET_IDLE_ANIM_FRAME = 6
 
-PET_HEADPAT_ANIM = src/assets/animations/derpat/headpat.gif
+PET_HEADPAT_ANIM = assets/animations/derpat/headpat.gif
 PET_HEADPAT_ANIM_FRAME = 6
 
-PET_WALK_LEFT_ANIM = src/assets/animations/derpat/walk_left.gif
+PET_WALK_LEFT_ANIM = assets/animations/derpat/walk_left.gif
 PET_WALK_LEFT_ANIM_FRAME = 4
 
-PET_WALK_RIGHT_ANIM = src/assets/animations/derpat/walk_right.gif
+PET_WALK_RIGHT_ANIM = assets/animations/derpat/walk_right.gif
 PET_WALK_RIGHT_ANIM_FRAME = 4
 
-PET_ATTACK_LEFT_ANIM = src/assets/animations/derpat/attack_left.gif
+PET_ATTACK_LEFT_ANIM = assets/animations/derpat/attack_left.gif
 PET_ATTACK_LEFT_ANIM_FRAME = 5
 
-PET_ATTACK_RIGHT_ANIM = src/assets/animations/derpat/attack_right.gif
+PET_ATTACK_RIGHT_ANIM = assets/animations/derpat/attack_right.gif
 PET_ATTACK_RIGHT_ANIM_FRAME = 5

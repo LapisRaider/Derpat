@@ -12,7 +12,7 @@ from idle import Idle
 from stroll import Stroll
 from headpat import Headpat
 from snatch_mouse import SnatchMouse
-from catch_mouse import CatchMouse
+from chase_mouse import ChaseMouse
 from scream import Scream
 from open_window import *
 from move_window import *
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     idle = Idle(0, PetState.IDLE)
     stroll = Stroll(0, PetState.STROLL)
     headpat = Headpat(6, PetState.HEADPAT)
-    catch_mouse = CatchMouse(0, PetState.CATCH_MOUSE)
+    chase_mouse = ChaseMouse(0, PetState.CATCH_MOUSE)
     snatch_mouse = SnatchMouse(0, PetState.GOT_MOUSE)
     open_window = OpenWindow(0, PetState.OPEN_WINDOW)
     move_window = MoveWindow(0, PetState.MOVE_WINDOW)
@@ -48,7 +48,7 @@ if __name__ == "__main__":
         idle.update(pet, delta_time)
         stroll.update(pet, delta_time)
         headpat.update(pet, delta_time)
-        catch_mouse.update(pet, delta_time)
+        chase_mouse.update(pet, delta_time)
         snatch_mouse.update(pet, delta_time)
         open_window.update(pet, delta_time)
         move_window.update(pet, delta_time)
@@ -62,17 +62,17 @@ if __name__ == "__main__":
         if quit_combination():
             break
 
-        # if keyboard.is_pressed("1"):
-        #     pet.change_state(PetState.IDLE)
-        # elif keyboard.is_pressed("2"):
-        #     pet.change_state(PetState.STROLL)
-        # elif keyboard.is_pressed("3"):
-        #     pet.change_state(PetState.CATCH_MOUSE)
-        # elif keyboard.is_pressed("4"):
-        #     pet.change_state(PetState.OPEN_WINDOW)
-        # elif keyboard.is_pressed("5"):
-        #     pet.change_state(PetState.MOVE_WINDOW)
-        # elif keyboard.is_pressed("6"):
-        #     pet.change_state(PetState.HEADPAT)
-        # elif keyboard.is_pressed("7"):
-        #     pet.change_state(PetState.SCREAM)
+        #if keyboard.is_pressed("1"):
+        #    pet.change_state(PetState.IDLE)
+        #elif keyboard.is_pressed("2"):
+        #    pet.change_state(PetState.STROLL)
+        #elif keyboard.is_pressed("3"):
+        #    pet.change_state(PetState.CATCH_MOUSE)
+        #elif keyboard.is_pressed("4"):
+        #    pet.change_state(PetState.OPEN_WINDOW)
+        #elif keyboard.is_pressed("5"):
+        #    pet.change_state(PetState.MOVE_WINDOW)
+        #elif keyboard.is_pressed("6"):
+        #    pet.change_state(PetState.HEADPAT)
+        #elif keyboard.is_pressed("7"):
+        #    pet.change_state(PetState.SCREAM)

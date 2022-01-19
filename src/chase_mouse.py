@@ -6,7 +6,7 @@ from mouse_controller import *
 from pet import PetState
 from pet import PetAnimState
 
-class CatchMouse(System):
+class ChaseMouse(System):
     FOLLOW_SPEED = 300
     MOUSE_CATCH_OFFSET = 5
 
@@ -18,14 +18,14 @@ class CatchMouse(System):
     #to be init at the start
     def on_enter(self, pet):
         pet.followStartTime = time.time()
-        pet.followAmt = random.randrange(CatchMouse.MIN_FOLLOW_TIME_AMT, CatchMouse.MAX_FOLLOW_TIME_AMT)
+        pet.followAmt = random.randrange(ChaseMouse.MIN_FOLLOW_TIME_AMT, ChaseMouse.MAX_FOLLOW_TIME_AMT)
 
     #pet follows the mouse ard
     def follow_mouse(self, pet, delta_time):
         mousePos = get_mouse_pos()
-        dir = mousePos.__sub__(pet.pos.__add__(CatchMouse.CATCH_OFFSET))
+        dir = mousePos.__sub__(pet.pos.__add__(ChaseMouse.CATCH_OFFSET))
         dir = dir.normalised()
-        pet.translate(round(dir.x) * CatchMouse.FOLLOW_SPEED * delta_time, round(dir.y) * CatchMouse.FOLLOW_SPEED * delta_time)
+        pet.translate(round(dir.x) * ChaseMouse.FOLLOW_SPEED * delta_time, round(dir.y) * ChaseMouse.FOLLOW_SPEED * delta_time)
 
         if (dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
@@ -34,8 +34,8 @@ class CatchMouse(System):
 
     #check if pet close enough to grab the mouse
     def check_get_mouse(self, pet):
-        dir = get_mouse_pos().__sub__(pet.pos.__add__(CatchMouse.CATCH_OFFSET))
-        return dir.length() < CatchMouse.MOUSE_CATCH_OFFSET
+        dir = get_mouse_pos().__sub__(pet.pos.__add__(ChaseMouse.CATCH_OFFSET))
+        return dir.length() < ChaseMouse.MOUSE_CATCH_OFFSET
 
     # update snatching the mouse
     def action(self, pet, delta_time):

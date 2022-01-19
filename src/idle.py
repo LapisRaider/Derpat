@@ -28,14 +28,14 @@ class _OnClick():
         return True
 
 class Idle(System):
-    MIN_DURATION_IDLE = int(param_dict["MIN_DURATION_IDLE"])
-    MAX_DURATION_IDLE = int(param_dict["MAX_DURATION_IDLE"])
+    MIN_DURATION_IDLE = float(param_dict["MIN_DURATION_IDLE"])
+    MAX_DURATION_IDLE = float(param_dict["MAX_DURATION_IDLE"])
 
-    CHANCES = [int(param_dict["CHANCE_CHASE_MOUSE"]), \
-        int(param_dict["CHANCE_OPEN_WINDOW"]), \
-        int(param_dict["CHANCE_MOVE_WINDOW"]),  \
-        int(param_dict["CHANCE_SCREAM"]), \
-        int(param_dict["CHANCE_STROLL"])
+    CHANCES = [float(param_dict["CHANCE_CHASE_MOUSE"]), \
+        float(param_dict["CHANCE_OPEN_WINDOW"]), \
+        float(param_dict["CHANCE_MOVE_WINDOW"]),  \
+        float(param_dict["CHANCE_SCREAM"]), \
+        float(param_dict["CHANCE_STROLL"])
         ]
     TOTAL_CHANCE = 0
 

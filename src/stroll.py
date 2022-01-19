@@ -8,7 +8,7 @@ from pet import PetAnimState
 from read_parameters import param_dict
 
 class Stroll(System):
-    STROLL_SPEED = int(param_dict["STROLL_SPEED"])
+    STROLL_SPEED = float(param_dict["STROLL_SPEED"])
 
     def on_enter(self, pet):
         print("On Enter Stroll")

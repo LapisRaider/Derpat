@@ -8,13 +8,13 @@ from pet import PetAnimState
 from read_parameters import param_dict
 
 class ChaseMouse(System):
-    CHASE_FOLLOW_SPEED = int(param_dict["CHASE_FOLLOW_SPEED"])
-    MOUSE_CATCH_DIST = int(param_dict["MOUSE_CATCH_DIST"])
+    CHASE_FOLLOW_SPEED = float(param_dict["CHASE_FOLLOW_SPEED"])
+    MOUSE_CATCH_DIST = float(param_dict["MOUSE_CATCH_DIST"])
 
-    CHASE_MAX_TIME = int(param_dict["CHASE_MAX_TIME"]) # after a certain amt of time give up
-    CHASE_MIN_TIME = int(param_dict["CHASE_MIN_TIME"])
+    CHASE_MAX_TIME = float(param_dict["CHASE_MAX_TIME"]) # after a certain amt of time give up
+    CHASE_MIN_TIME = float(param_dict["CHASE_MIN_TIME"])
 
-    CATCH_OFFSET = Vector2(int(param_dict["CATCH_OFFSET_X"]),int(param_dict["CATCH_OFFSET_Y"]))
+    CATCH_OFFSET = Vector2(float(param_dict["CATCH_OFFSET_X"]),float(param_dict["CATCH_OFFSET_Y"]))
 
     #to be init at the start
     def on_enter(self, pet):

@@ -52,8 +52,8 @@ def get_random_window():
     return None
 
 class MoveWindow(System):
-    DISTANCE_TO_TRAVEL = int(param_dict["MOVE_WIN_DIST_TO_TRAVEL"])
-    MOVEMENT_SPEED = int(param_dict["MOVE_WIN_RUN_SPEED"])
+    DISTANCE_TO_TRAVEL = float(param_dict["MOVE_WIN_DIST_TO_TRAVEL"])
+    MOVEMENT_SPEED = float(param_dict["MOVE_WIN_RUN_SPEED"])
 
     def __init__(self, delay=0, action_state=PetState.DEFAULT):
         # State 0 = moving to window, State 1 = moving window

@@ -26,7 +26,7 @@ class _SpawnType(IntEnum):
     IMAGE = auto()
 
 class OpenWindow(System):
-    MOVEMENT_SPEED = int(param_dict["OPEN_RUN_SPEED"])
+    MOVEMENT_SPEED = float(param_dict["OPEN_RUN_SPEED"])
 
     def __init__(self, delay=0, action_state=PetState.DEFAULT):
         super().__init__(delay=delay, action_state=action_state)

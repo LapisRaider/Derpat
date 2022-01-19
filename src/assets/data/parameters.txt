@@ -1,5 +1,27 @@
-#Catch mouse State
-FOLLOW_SPEED = 300
-MOUSE_CATCH_OFFSET = 5
-MAX_FOLLOW_TIME_AMT = 5
-MIN_FOLLOW_TIME_AMT = 3
+#Impt note variableName = value
+#to write comments put on newline and start with #
+
+#idle State
+MIN_DURATION_IDLE = 5
+MAX_DURATION_IDLE = 10
+
+CHANCE_CATCH_MOUSE = 3
+CHANCE_OPEN_WINDOW = 4
+CHANCE_MOVE_WINDOW = 5
+CHANCE_SCREAM = 6
+CHANCE_STROLL = 10
+
+#stroll State
+
+#headpat State
+
+#chase mouse State
+
+#got mouse State
+
+#open window State
+
+#move window State
+
+#scream state
+

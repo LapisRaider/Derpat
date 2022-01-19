@@ -7,6 +7,7 @@ from pet import PetState
 from pet import PetAnimState
 from pynput import mouse
 from pynput.mouse import Button
+from read_parameters import param_dict
 
 # Work around due to Python's shitty lambda functions.
 class _OnClick():
@@ -19,13 +20,19 @@ class _OnClick():
         return True
 
 class Idle(System):
-    MIN_DURATION = 5
-    MAX_DURATION = 10
+    MIN_DURATION_IDLE = int(param_dict["MIN_DURATION_IDLE"])
+    MAX_DURATION_IDLE = int(param_dict["MAX_DURATION_IDLE"])
+
+    CHANCE_CATCH_MOUSE = int(param_dict["CHANCE_CATCH_MOUSE"])
+    CHANCE_OPEN_WINDOW = int(param_dict["CHANCE_OPEN_WINDOW"])
+    CHANCE_MOVE_WINDOW = int(param_dict["CHANCE_MOVE_WINDOW"])
+    CHANCE_SCREAM = int(param_dict["CHANCE_SCREAM"])
+    CHANCE_STROLL = int(param_dict["CHANCE_STROLL"])
 
     def on_enter(self, pet):
         print("On Enter Idle")
         pet.set_anim_state(PetAnimState.IDLE)
-        self.duration = random.randrange(Idle.MIN_DURATION, Idle.MAX_DURATION)
+        self.duration = random.randrange(Idle.MIN_DURATION_IDLE, Idle.MAX_DURATION_IDLE)
         self.start = time.time()
 
         # Non-blocking mouse listener.
@@ -54,7 +61,7 @@ class Idle(System):
 
         # Else, 30% chance of catching mouse.
         if (random.randrange(0, 10) < 3):
-            pet.change_state(PetState.CATCH_MOUSE)
+            pet.change_state(PetState.CHASE_MOUSE)
         # Else, 40% chance of creating window.
         elif (random.randrange(0, 10) < 4):
             pet.change_state(PetState.OPEN_WINDOW)

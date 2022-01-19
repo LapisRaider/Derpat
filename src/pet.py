@@ -7,6 +7,7 @@ from vector2 import *
 from sprite_anim import SpriteAnim
 from footprints import Footprints
 from read_parameters import param_dict
+from read_parameters import asset_param_dist
 
 class PetState(enum.IntEnum):
     DEFAULT = 0
@@ -64,14 +65,15 @@ class Pet():
         self.curr_state = PetState.DEFAULT
         self.prev_state = PetState.DEFAULT
 
+        #asset_param_dist["HEADPAT_SOUND"]
         # Create animations.
         self.anims = [ \
-            SpriteAnim('src/assets/animations/derpat/idle.gif', 6),
-            SpriteAnim('src/assets/animations/derpat/headpat.gif', 6), \
-            SpriteAnim('src/assets/animations/derpat/walk_left.gif', 4), \
-            SpriteAnim('src/assets/animations/derpat/walk_right.gif', 4), \
-            SpriteAnim('src/assets/animations/derpat/attack_left.gif', 5), \
-            SpriteAnim('src/assets/animations/derpat/attack_right.gif', 5)]
+            SpriteAnim(asset_param_dist["PET_IDLE_ANIM"], int(asset_param_dist["PET_IDLE_ANIM_FRAME"])),
+            SpriteAnim(asset_param_dist["PET_HEADPAT_ANIM"], int(asset_param_dist["PET_HEADPAT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dist["PET_WALK_LEFT_ANIM"], int(asset_param_dist["PET_WALK_LEFT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dist["PET_WALK_RIGHT_ANIM"], int(asset_param_dist["PET_WALK_RIGHT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dist["PET_ATTACK_LEFT_ANIM"], int(asset_param_dist["PET_ATTACK_LEFT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dist["PET_ATTACK_RIGHT_ANIM"], int(asset_param_dist["PET_ATTACK_RIGHT_ANIM_FRAME"]))]
         self.anim_state = PetAnimState.IDLE
         self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
         self.label.pack()

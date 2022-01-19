@@ -1,15 +1,15 @@
 import time
 
 from object_base import ObjectBase
-from read_parameters import param_dict
+from read_parameters import asset_param_dist
 
 class Footprints(ObjectBase):
-    NUM_FRAMES = 4
-    ANIM_DELAY = 0.5
-    STAY_TIME = float(param_dict["FOOTPRINT_STAY_TIME"])
+    NUM_FRAMES = int(asset_param_dist["FOOTPRINT_NUM_FRAME"])
+    ANIM_DELAY = float(asset_param_dist["FOOTPRINT_ANIM_DELAY"])
+    STAY_TIME = float(asset_param_dist["FOOTPRINT_STAY_TIME"])
 
-    FOOTPRINTS_LEFT = "src/assets/animations/footprints_Left.gif"
-    FOOTPRINTS_RIGHT = "src/assets/animations/footprints_right.gif"
+    FOOTPRINTS_LEFT = asset_param_dist["FOOTPRINTS_LEFT"]
+    FOOTPRINTS_RIGHT = asset_param_dist["FOOTPRINTS_RIGHT"]
 
     def __init__(self, pos, move_left = True):
         file_path = Footprints.FOOTPRINTS_LEFT if move_left else Footprints.FOOTPRINTS_RIGHT

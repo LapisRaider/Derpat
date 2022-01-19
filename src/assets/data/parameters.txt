@@ -52,7 +52,6 @@ SCREAM_MAX_TIME = 5
 SCREAM_INTERVAL = 1.5
 
 #Footprints
-FOOTPRINT_STAY_TIME = 5
 FOOT_PRINT_SPAWN_INTERVAL = 0.4
 
 # relative position to spawn the footprints

@@ -2,6 +2,7 @@ import tkinter as tk
 import random
 
 from vector2 import Vector2
+from read_parameters import asset_param_dist
 
 class CustomWindow():
     def __init__(self):
@@ -61,7 +62,7 @@ class ImageWindow(CustomWindow):
 
         # Set icon.
         try:
-            self.window.wm_iconbitmap("src/assets/ico/image.ico")
+            self.window.wm_iconbitmap(asset_param_dist["IMAGE_ICON"])
         except:
             pass
 
@@ -99,7 +100,7 @@ class NoteWindow(CustomWindow):
 
         # Set icon.
         try:
-            self.window.wm_iconbitmap("src/assets/ico/note.ico")
+            self.window.wm_iconbitmap(asset_param_dist["NOTE_ICON"])
         except:
             pass
 

@@ -61,7 +61,7 @@ class ImageWindow(CustomWindow):
 
         # Set icon.
         try:
-            self.window.wm_iconbitmap("assets/ico/image.ico")
+            self.window.wm_iconbitmap("src/assets/ico/image.ico")
         except:
             pass
 
@@ -99,7 +99,7 @@ class NoteWindow(CustomWindow):
 
         # Set icon.
         try:
-            self.window.wm_iconbitmap("assets/ico/note.ico")
+            self.window.wm_iconbitmap("src/assets/ico/note.ico")
         except:
             pass
 

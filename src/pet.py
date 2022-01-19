@@ -65,12 +65,12 @@ class Pet():
 
         # Create animations.
         self.anims = [ \
-            SpriteAnim('assets/animations/derpat/idle.gif', 6),
-            SpriteAnim('assets/animations/derpat/headpat.gif', 6), \
-            SpriteAnim('assets/animations/derpat/walk_left.gif', 4), \
-            SpriteAnim('assets/animations/derpat/walk_right.gif', 4), \
-            SpriteAnim('assets/animations/derpat/attack_left.gif', 5), \
-            SpriteAnim('assets/animations/derpat/attack_right.gif', 5)]
+            SpriteAnim('src/assets/animations/derpat/idle.gif', 6),
+            SpriteAnim('src/assets/animations/derpat/headpat.gif', 6), \
+            SpriteAnim('src/assets/animations/derpat/walk_left.gif', 4), \
+            SpriteAnim('src/assets/animations/derpat/walk_right.gif', 4), \
+            SpriteAnim('src/assets/animations/derpat/attack_left.gif', 5), \
+            SpriteAnim('src/assets/animations/derpat/attack_right.gif', 5)]
         self.anim_state = PetAnimState.IDLE
         self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
         self.label.pack()

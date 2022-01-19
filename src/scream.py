@@ -10,7 +10,7 @@ class Scream(System):
     MIN_DURATION = 2
     MAX_DURATION = 5
     SCREAM_INTERVAL = 1.5
-    AUDIO_FILE = "assets/sfx/cat_scream.wav"
+    AUDIO_FILE = "src/assets/sfx/cat_scream.wav"
 
     def on_enter(self, pet):
         print("On Enter Scream")

@@ -7,8 +7,8 @@ class Footprints(ObjectBase):
     ANIM_DELAY = 0.5
     STAY_TIME = 10
 
-    FOOTPRINTS_LEFT = "assets/animations/footprints_Left.gif"
-    FOOTPRINTS_RIGHT = "assets/animations/footprints_right.gif"
+    FOOTPRINTS_LEFT = "src/assets/animations/footprints_Left.gif"
+    FOOTPRINTS_RIGHT = "src/assets/animations/footprints_right.gif"
 
     def __init__(self, pos, move_left = True):
         file_path = Footprints.FOOTPRINTS_LEFT if move_left else Footprints.FOOTPRINTS_RIGHT

@@ -7,7 +7,7 @@ class Headpat(System):
     def on_enter(self, pet):
         print("On Enter Headpat")
         pet.set_anim_state(PetAnimState.HEADPAT)
-        playsound("assets/sfx/cat_meow.mp3", block=False)
+        playsound("src/assets/sfx/cat_meow.mp3", block=False)
 
     def on_exit(self, pet):
         pass

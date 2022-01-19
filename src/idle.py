@@ -11,7 +11,7 @@ from pynput.mouse import Button
 from read_parameters import param_dict
 
 class ChanceState(enum.IntEnum):
-    CHANCE_CATCH_MOUSE = 0
+    CHANCE_CHASE_MOUSE = 0
     CHANCE_OPEN_WINDOW = 1
     CHANCE_MOVE_WINDOW = 2
     CHANCE_SCREAM = 3
@@ -31,7 +31,7 @@ class Idle(System):
     MIN_DURATION_IDLE = int(param_dict["MIN_DURATION_IDLE"])
     MAX_DURATION_IDLE = int(param_dict["MAX_DURATION_IDLE"])
 
-    CHANCES = [int(param_dict["CHANCE_CATCH_MOUSE"]), \
+    CHANCES = [int(param_dict["CHANCE_CHASE_MOUSE"]), \
         int(param_dict["CHANCE_OPEN_WINDOW"]), \
         int(param_dict["CHANCE_MOVE_WINDOW"]),  \
         int(param_dict["CHANCE_SCREAM"]), \
@@ -79,7 +79,7 @@ class Idle(System):
             if randomChance >= currChance:
                 continue
 
-            if i == ChanceState.CHANCE_CATCH_MOUSE:
+            if i == ChanceState.CHANCE_CHASE_MOUSE:
                 pet.change_state(PetState.CHASE_MOUSE)
             elif i == ChanceState.CHANCE_OPEN_WINDOW:
                 pet.change_state(PetState.OPEN_WINDOW)

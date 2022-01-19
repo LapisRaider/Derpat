@@ -5,27 +5,28 @@ from system import System
 from mouse_controller import *
 from pet import PetState
 from pet import PetAnimState
+from read_parameters import param_dict
 
 class ChaseMouse(System):
-    FOLLOW_SPEED = 300
-    MOUSE_CATCH_OFFSET = 5
+    CHASE_FOLLOW_SPEED = int(param_dict["CHASE_FOLLOW_SPEED"])
+    MOUSE_CATCH_DIST = int(param_dict["MOUSE_CATCH_DIST"])
 
-    MAX_FOLLOW_TIME_AMT = 5 # after a certain amt of time give up
-    MIN_FOLLOW_TIME_AMT = 3
+    CHASE_MAX_TIME = int(param_dict["CHASE_MAX_TIME"]) # after a certain amt of time give up
+    CHASE_MIN_TIME = int(param_dict["CHASE_MIN_TIME"])
 
-    CATCH_OFFSET = Vector2(64,64)
+    CATCH_OFFSET = Vector2(int(param_dict["CATCH_OFFSET_X"]),int(param_dict["CATCH_OFFSET_Y"]))
 
     #to be init at the start
     def on_enter(self, pet):
         pet.followStartTime = time.time()
-        pet.followAmt = random.randrange(ChaseMouse.MIN_FOLLOW_TIME_AMT, ChaseMouse.MAX_FOLLOW_TIME_AMT)
+        pet.followAmt = random.randrange(ChaseMouse.CHASE_MIN_TIME, ChaseMouse.CHASE_MAX_TIME)
 
     #pet follows the mouse ard
     def follow_mouse(self, pet, delta_time):
         mousePos = get_mouse_pos()
         dir = mousePos.__sub__(pet.pos.__add__(ChaseMouse.CATCH_OFFSET))
         dir = dir.normalised()
-        pet.translate(round(dir.x) * ChaseMouse.FOLLOW_SPEED * delta_time, round(dir.y) * ChaseMouse.FOLLOW_SPEED * delta_time)
+        pet.translate(round(dir.x) * ChaseMouse.CHASE_FOLLOW_SPEED * delta_time, round(dir.y) * ChaseMouse.CHASE_FOLLOW_SPEED * delta_time)
 
         if (dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
@@ -35,7 +36,7 @@ class ChaseMouse(System):
     #check if pet close enough to grab the mouse
     def check_get_mouse(self, pet):
         dir = get_mouse_pos().__sub__(pet.pos.__add__(ChaseMouse.CATCH_OFFSET))
-        return dir.length() < ChaseMouse.MOUSE_CATCH_OFFSET
+        return dir.length() < ChaseMouse.MOUSE_CATCH_DIST
 
     # update snatching the mouse
     def action(self, pet, delta_time):

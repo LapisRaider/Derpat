@@ -5,19 +5,29 @@
 MIN_DURATION_IDLE = 5
 MAX_DURATION_IDLE = 10
 
-CHANCE_CATCH_MOUSE = 3
+CHANCE_CHASE_MOUSE = 10
 CHANCE_OPEN_WINDOW = 4
 CHANCE_MOVE_WINDOW = 5
 CHANCE_SCREAM = 6
-CHANCE_STROLL = 10
+CHANCE_STROLL = 4
 
 #stroll State
+STROLL_SPEED = 150
 
-#headpat State
+#headpat State got nothing
 
 #chase mouse State
+CHASE_FOLLOW_SPEED = 300
+MOUSE_CATCH_DIST = 5
+CHASE_MAX_TIME = 5
+CHASE_MIN_TIME = 3
+
+#the offset of the sprite to calculate values
+CATCH_OFFSET_X = 64
+CATCH_OFFSET_Y = 64
 
 #got mouse State
+
 
 #open window State
 

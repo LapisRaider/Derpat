@@ -3,6 +3,7 @@ import random
 
 from vector2 import Vector2
 from read_parameters import asset_param_dist
+from read_parameters import text_param
 
 class CustomWindow():
     def __init__(self):
@@ -76,17 +77,7 @@ class NoteWindow(CustomWindow):
     def __init__(self, width=400, height=300):
         super().__init__()
 
-        note = random.choice([
-            "Your GPA cannot even afford mentos.",
-            "I couldn't think of anything to write.",
-            "Your life is like poo-poo.",
-            "HEHE XD.",
-            "てへぺろ :P",
-            "Am I a Dog? A Cat? You'll never find out. ;)",
-            "Bark Bark! Meow Meow?",
-            "Your mouse looking real tasty right now.",
-            "Doing work? Not when I'm here."
-        ])
+        note = random.choice(text_param)
 
         # Set window attributes.
         self.window.title(NoteWindow.TITLE)

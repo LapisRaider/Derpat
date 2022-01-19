@@ -1,5 +1,6 @@
 import time
 import random
+import enum
 
 from vector2 import Vector2
 from system import System
@@ -8,6 +9,13 @@ from pet import PetAnimState
 from pynput import mouse
 from pynput.mouse import Button
 from read_parameters import param_dict
+
+class ChanceState(enum.IntEnum):
+    CHANCE_CATCH_MOUSE = 0
+    CHANCE_OPEN_WINDOW = 1
+    CHANCE_MOVE_WINDOW = 2
+    CHANCE_SCREAM = 3
+    CHANCE_STROLL = 4
 
 # Work around due to Python's shitty lambda functions.
 class _OnClick():
@@ -23,11 +31,13 @@ class Idle(System):
     MIN_DURATION_IDLE = int(param_dict["MIN_DURATION_IDLE"])
     MAX_DURATION_IDLE = int(param_dict["MAX_DURATION_IDLE"])
 
-    CHANCE_CATCH_MOUSE = int(param_dict["CHANCE_CATCH_MOUSE"])
-    CHANCE_OPEN_WINDOW = int(param_dict["CHANCE_OPEN_WINDOW"])
-    CHANCE_MOVE_WINDOW = int(param_dict["CHANCE_MOVE_WINDOW"])
-    CHANCE_SCREAM = int(param_dict["CHANCE_SCREAM"])
-    CHANCE_STROLL = int(param_dict["CHANCE_STROLL"])
+    CHANCES = [int(param_dict["CHANCE_CATCH_MOUSE"]), \
+        int(param_dict["CHANCE_OPEN_WINDOW"]), \
+        int(param_dict["CHANCE_MOVE_WINDOW"]),  \
+        int(param_dict["CHANCE_SCREAM"]), \
+        int(param_dict["CHANCE_STROLL"])
+        ]
+    TOTAL_CHANCE = 0
 
     def on_enter(self, pet):
         print("On Enter Idle")
@@ -39,6 +49,9 @@ class Idle(System):
         self.click_pos = None
         self.listener = mouse.Listener(on_move=None, on_click=_OnClick(self), on_scroll=None)
         self.listener.start()
+
+        for chance in Idle.CHANCES:
+            Idle.TOTAL_CHANCE += chance
 
     def on_exit(self, pet):
         # Stop mouse listener.
@@ -59,18 +72,22 @@ class Idle(System):
         if (time.time() < self.start + self.duration):
             return
 
-        # Else, 30% chance of catching mouse.
-        if (random.randrange(0, 10) < 3):
-            pet.change_state(PetState.CHASE_MOUSE)
-        # Else, 40% chance of creating window.
-        elif (random.randrange(0, 10) < 4):
-            pet.change_state(PetState.OPEN_WINDOW)
-        # Else, 50% chance of dragging a window.
-        elif (random.randrange(0, 10) < 5):
-            pet.change_state(PetState.MOVE_WINDOW)
-        # Else, 60% chance of screaming.
-        elif (random.randrange(0, 10) < 6):
-            pet.change_state(PetState.SCREAM)
-        # Else, stroll.
-        else:
-            pet.change_state(PetState.STROLL)
+        currChance = 0
+        randomChance = random.randrange(0, Idle.TOTAL_CHANCE)
+        for i in range(len(Idle.CHANCES)):
+            currChance += Idle.CHANCES[i]
+            if randomChance >= currChance:
+                continue
+
+            if i == ChanceState.CHANCE_CATCH_MOUSE:
+                pet.change_state(PetState.CHASE_MOUSE)
+            elif i == ChanceState.CHANCE_OPEN_WINDOW:
+                pet.change_state(PetState.OPEN_WINDOW)
+            elif i == ChanceState.CHANCE_MOVE_WINDOW:
+                pet.change_state(PetState.MOVE_WINDOW)
+            elif i == ChanceState.CHANCE_SCREAM:
+                pet.change_state(PetState.SCREAM)
+            else:
+                pet.change_state(PetState.STROLL)
+
+            break

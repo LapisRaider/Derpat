@@ -8,7 +8,7 @@ from mouse_controller import *
 from pet import PetState
 from pet import PetAnimState
 
-class SnatchMouse(System):
+class GotMouse(System):
     MIN_DURATION = 3 # In seconds.
     MAX_DURATION = 5
     RUN_SPEED = 300
@@ -19,8 +19,8 @@ class SnatchMouse(System):
     def on_enter(self, pet):
         print("On Enter Snatch Mouse")
         self.start_time = time.time()
-        self.duration = random.randrange(SnatchMouse.MIN_DURATION, SnatchMouse.MAX_DURATION)
-        self.mouse_offset = SnatchMouse.MOUSE_OFFSET_RUN_LEFT if pet.anim_state == PetAnimState.WALK_LEFT else SnatchMouse.MOUSE_OFFSET_RUN_RIGHT
+        self.duration = random.randrange(GotMouse.MIN_DURATION, GotMouse.MAX_DURATION)
+        self.mouse_offset = GotMouse.MOUSE_OFFSET_RUN_LEFT if pet.anim_state == PetAnimState.WALK_LEFT else GotMouse.MOUSE_OFFSET_RUN_RIGHT
         self.randomise_dir(pet)
 
     # update snatching the mouse
@@ -34,15 +34,15 @@ class SnatchMouse(System):
         if monitor.outside_bounds_x(pet.pos) or monitor.outside_bounds_y(pet.pos):
             self.randomise_dir(pet)
 
-        pet.translate(round(self.run_dir.x) * SnatchMouse.RUN_SPEED * delta_time, round(self.run_dir.y) * SnatchMouse.RUN_SPEED * delta_time)
+        pet.translate(round(self.run_dir.x) * GotMouse.RUN_SPEED * delta_time, round(self.run_dir.y) * GotMouse.RUN_SPEED * delta_time)
 
         # update animation
         if (self.run_dir.x < 0 and pet.get_anim_state() != PetAnimState.WALK_LEFT):
             pet.set_anim_state(PetAnimState.WALK_LEFT)
-            self.mouse_offset = SnatchMouse.MOUSE_OFFSET_RUN_LEFT
+            self.mouse_offset = GotMouse.MOUSE_OFFSET_RUN_LEFT
         elif (self.run_dir.x >= 0 and pet.get_anim_state() != PetAnimState.WALK_RIGHT):
             pet.set_anim_state(PetAnimState.WALK_RIGHT)
-            self.mouse_offset = SnatchMouse.MOUSE_OFFSET_RUN_RIGHT
+            self.mouse_offset = GotMouse.MOUSE_OFFSET_RUN_RIGHT
 
         # update mouse pos
         newMousePos = self.mouse_offset.__add__(pet.pos)

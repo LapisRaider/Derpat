@@ -11,7 +11,7 @@ class PetState(enum.IntEnum):
     DEFAULT = 0
     IDLE = 1
     STROLL = 2
-    CATCH_MOUSE = 3
+    CHASE_MOUSE = 3
     GOT_MOUSE = 4
     MOVE_WINDOW = 5
     OPEN_WINDOW = 6

@@ -11,7 +11,7 @@ from pet import PetState
 from idle import Idle
 from stroll import Stroll
 from headpat import Headpat
-from snatch_mouse import SnatchMouse
+from got_mouse import GotMouse
 from chase_mouse import ChaseMouse
 from scream import Scream
 from open_window import *
@@ -30,8 +30,8 @@ if __name__ == "__main__":
     idle = Idle(0, PetState.IDLE)
     stroll = Stroll(0, PetState.STROLL)
     headpat = Headpat(6, PetState.HEADPAT)
-    chase_mouse = ChaseMouse(0, PetState.CATCH_MOUSE)
-    snatch_mouse = SnatchMouse(0, PetState.GOT_MOUSE)
+    chase_mouse = ChaseMouse(0, PetState.CHASE_MOUSE)
+    got_mouse = GotMouse(0, PetState.GOT_MOUSE)
     open_window = OpenWindow(0, PetState.OPEN_WINDOW)
     move_window = MoveWindow(0, PetState.MOVE_WINDOW)
     scream = Scream(0, PetState.SCREAM)
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         stroll.update(pet, delta_time)
         headpat.update(pet, delta_time)
         chase_mouse.update(pet, delta_time)
-        snatch_mouse.update(pet, delta_time)
+        got_mouse.update(pet, delta_time)
         open_window.update(pet, delta_time)
         move_window.update(pet, delta_time)
         scream.update(pet, delta_time)

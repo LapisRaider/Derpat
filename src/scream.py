@@ -5,17 +5,18 @@ from system import System
 from pet import PetState
 from pet import PetAnimState
 from playsound import playsound
+from read_parameters import param_dict
 
 class Scream(System):
-    MIN_DURATION = 2
-    MAX_DURATION = 5
-    SCREAM_INTERVAL = 1.5
+    SCREAM_MIN_TIME = float(param_dict["SCREAM_MIN_TIME"])
+    SCREAM_MAX_TIME = float(param_dict["SCREAM_MAX_TIME"])
+    SCREAM_INTERVAL = float(param_dict["SCREAM_INTERVAL"])
     AUDIO_FILE = "src/assets/sfx/cat_scream.wav"
 
     def on_enter(self, pet):
         print("On Enter Scream")
         self.start_time = time.time()
-        self.duration = random.randrange(Scream.MIN_DURATION, Scream.MAX_DURATION)
+        self.duration = random.randrange(Scream.SCREAM_MIN_TIME, Scream.SCREAM_MAX_TIME)
         self.interval_start = time.time()
         pet.set_anim_state(random.randint(PetAnimState.ATTACK_LEFT, PetAnimState.ATTACK_RIGHT))
         playsound(Scream.AUDIO_FILE, block=False)

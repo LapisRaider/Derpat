@@ -27,11 +27,24 @@ CATCH_OFFSET_X = 64
 CATCH_OFFSET_Y = 64
 
 #got mouse State
+GOT_MIN_DURATION = 3
+GOT_MAX_DURATION = 5
+GOT_RUN_SPEED = 300
 
+# offset of the sprite to attach the mouse for left
+MOUSE_OFFSET_RUN_LEFT_X = 10
+MOUSE_OFFSET_RUN_LEFT_Y = 70
+
+# offset of the sprite to attach the mouse for right
+MOUSE_OFFSET_RUN_RIGHT_X = 110
+MOUSE_OFFSET_RUN_RIGHT_Y = 70
 
 #open window State
+OPEN_RUN_SPEED = 200
 
 #move window State
+MOVE_WIN_DIST_TO_TRAVEL = 500
+MOVE_WIN_RUN_SPEED = 300
 
 #scream state
 

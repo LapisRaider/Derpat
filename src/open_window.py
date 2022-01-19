@@ -10,6 +10,7 @@ from pet import PetAnimState, PetState
 from vector2 import Vector2
 from custom_windows import NoteWindow, ImageWindow
 from enum import auto, IntEnum
+from read_parameters import param_dict
 
 class _PullDirection(IntEnum):
     LEFT_TO_RIGHT = auto()
@@ -25,7 +26,7 @@ class _SpawnType(IntEnum):
     IMAGE = auto()
 
 class OpenWindow(System):
-    MOVEMENT_SPEED = 200
+    MOVEMENT_SPEED = int(param_dict["OPEN_RUN_SPEED"])
 
     def __init__(self, delay=0, action_state=PetState.DEFAULT):
         super().__init__(delay=delay, action_state=action_state)

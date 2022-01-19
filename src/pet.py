@@ -6,6 +6,7 @@ import enum
 from vector2 import *
 from sprite_anim import SpriteAnim
 from footprints import Footprints
+from read_parameters import param_dict
 
 class PetState(enum.IntEnum):
     DEFAULT = 0
@@ -28,14 +29,14 @@ class PetAnimState(enum.IntEnum):
     ATTACK_RIGHT = 5
 
 class Pet():
-    FOOT_PRINT_SPAWN_INTERVAL = 0.4
-    FOOT_X_LEFT_OFFSET = 64
-    FOOT_X_RIGHT_OFFSET = -5
-    FOOT_Y_OFFSET = 80
+    FOOT_PRINT_SPAWN_INTERVAL = float(param_dict["FOOT_PRINT_SPAWN_INTERVAL"])
+    FOOT_X_LEFT_OFFSET = float(param_dict["FOOT_X_LEFT_OFFSET"])
+    FOOT_X_RIGHT_OFFSET = float(param_dict["FOOT_X_RIGHT_OFFSET"])
+    FOOT_Y_OFFSET = float(param_dict["FOOT_Y_OFFSET"])
 
-    TRACK_FOOTPRINT_MAX_DURATION = 8
-    TRACK_FOOTPRINT_MIN_DURATION = 5
-    FOOTPRINT_CHANCE = 40 # 40%
+    TRACK_FOOTPRINT_MAX_DURATION = float(param_dict["TRACK_FOOTPRINT_MAX_DURATION"])
+    TRACK_FOOTPRINT_MIN_DURATION = float(param_dict["TRACK_FOOTPRINT_MIN_DURATION"])
+    FOOTPRINT_CHANCE = float(param_dict["FOOTPRINT_CHANCE"]) # 40%
 
     def __init__(self):
         # Create a window

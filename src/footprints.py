@@ -1,11 +1,12 @@
 import time
 
 from object_base import ObjectBase
+from read_parameters import param_dict
 
 class Footprints(ObjectBase):
     NUM_FRAMES = 4
     ANIM_DELAY = 0.5
-    STAY_TIME = 10
+    STAY_TIME = float(param_dict["FOOTPRINT_STAY_TIME"])
 
     FOOTPRINTS_LEFT = "src/assets/animations/footprints_Left.gif"
     FOOTPRINTS_RIGHT = "src/assets/animations/footprints_right.gif"

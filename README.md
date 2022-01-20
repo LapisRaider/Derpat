@@ -1,6 +1,4 @@
-<a href="https://youtu.be/Tq4V-JX32vY">
-    <img src="media/derpat.png" alt="Trulli" style="width:20%">
-</a>
+<img src="media/derpat.png" alt="Trulli" style="width:20%" align="center">
 
 # Derpat (Derpy Cat) the Annoying Desktop Pet
 Ever wanted a desktop pet that will annoy you all the time? Me neither, which is why we created one. 
@@ -41,3 +39,10 @@ Currently, Derpat only works on Microsoft Windows.
 # Assets
 Free icons from https://icon-icons.com/.  
 Memes from Google Images.  
+
+# Customisability
+Want to customise Derpat? Want to replace it with another pet? Derpat is fully customisable!  
+Edit `src/assets/data/asset_params.txt`, `src/assets/data/note_params.txt` and `src/assets/data/state_params.txt` to change the look and behaviour of Derpat.
+
+Want more memes?  
+Just add more `.png` files to `src/assets/images/`.

@@ -8,7 +8,7 @@ Derpat is a desktop pet that will reduce your productivity to an all-time low. T
 # Preview of Derpat
 <figure>
     <a href="https://youtu.be/Tq4V-JX32vY">
-      <img src="Derpat.png" alt="Trulli" style="width:60%">
+      <img src="media/screenshot_0.png" alt="Trulli" style="width:60%">
     </a>
     <br>
     <figcaption align = "center">

@@ -3,7 +3,7 @@
 # Derpat (Derpy Cat) the Annoying Desktop Pet
 Ever wanted a desktop pet that will annoy you all the time? Me neither, which is why we created one. 
 
-Derpat is a desktop pet that will reduce your productivity to an all-time low. The perfect productivity pet.
+Derpat is a desktop pet that will reduce your productivity to an all-time low. The perfect productivity (or anti-productivity) pet.
 
 *This is not malware we swear UwU*
 

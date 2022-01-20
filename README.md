@@ -6,8 +6,15 @@ Derpat is a desktop pet that will reduce your productivity to an all-time low. T
 *This is not malware we swear UwU*
 
 # Preview of Derpat
-[![Screenshot of Derpat](Derpat.png)](https://youtu.be/Tq4V-JX32vY/Derpat.png)
-* Click on image to watch video *
+<figure>
+    <a href="https://youtu.be/Tq4V-JX32vY">
+      <img src="Derpat.png" alt="Trulli" style="width:60%">
+    </a>
+    <br>
+    <figcaption align = "center">
+      <i>Click on the image to watch the trailer video.</i>
+    </figcaption>
+</figure>
 
 # References
 Basic Tutorial: https://seebass22.github.io/python-desktop-pet-tutorial/  

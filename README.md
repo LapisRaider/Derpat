@@ -1,3 +1,7 @@
+<a href="https://youtu.be/Tq4V-JX32vY">
+    <img src="media/derpat.png" alt="Trulli" style="width:20%">
+</a>
+
 # Derpat (Derpy Cat) the Annoying Desktop Pet
 Ever wanted a desktop pet that will annoy you all the time? Me neither, which is why we created one. 
 

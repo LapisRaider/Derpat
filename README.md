@@ -5,9 +5,11 @@ Derpat is a desktop pet that will reduce your productivity to an all-time low. T
 
 *This is not malware we swear UwU*
 
-[![Screenshot of Derpat](https://youtu.be/Tq4V-JX32vY/Derpat.png)]
+# Preview of Derpat
+[![Screenshot of Derpat](Derpat.png)](https://youtu.be/Tq4V-JX32vY/Derpat.png)
+* Click on image to watch video *
 
-#References
+# References
 Basic Tutorial: https://seebass22.github.io/python-desktop-pet-tutorial/  
 Handling Mouse Input: https://pythonhosted.org/pynput/mouse.html  
 

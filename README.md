@@ -1,4 +1,13 @@
 # Derpat (Derpy Cat) the Annoying Desktop Pet
+Ever wanted a desktop pet that will annoy you all the time? Me neither, which is why we created one. 
+
+Derpat is a desktop pet that will reduce your productivity to an all-time low. The perfect productivity pet.
+
+*This is not malware we swear UwU*
+
+[![Screenshot of Derpat](https://youtu.be/Tq4V-JX32vY/Derpat.png)]
+
+#References
 Basic Tutorial: https://seebass22.github.io/python-desktop-pet-tutorial/  
 Handling Mouse Input: https://pythonhosted.org/pynput/mouse.html  
 

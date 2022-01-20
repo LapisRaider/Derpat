@@ -1,13 +1,13 @@
-#for assets
+# Assets Parameters
 
-#Custom Window
+# Custom Window
 IMAGE_ICON = assets/ico/image.ico
 NOTE_ICON = assets/ico/note.ico
 
-#Headpat
+# Headpat
 HEADPAT_SOUND = assets/sfx/cat_meow.mp3
 
-#footprints
+# Footprints
 FOOTPRINTS_LEFT = assets/animations/footprints_Left.gif
 FOOTPRINTS_RIGHT = assets/animations/footprints_right.gif
 
@@ -15,10 +15,10 @@ FOOTPRINT_NUM_FRAME = 4
 FOOTPRINT_ANIM_DELAY = 0.5
 FOOTPRINT_STAY_TIME = 3
 
-#Scream 
+# Scream 
 SCREAM_SOUND = assets/sfx/cat_scream.wav
 
-#pet sprite anim
+# Pet Sprite Animation
 PET_IDLE_ANIM = assets/animations/derpat/idle.gif
 PET_IDLE_ANIM_FRAME = 6
 

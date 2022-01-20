@@ -1,4 +1,4 @@
-#just type each sentence in a newline, only english cant get the encoding to work
+# Just type each sentence in a newline.
 
 Your GPA cannot even afford mentos.
 I couldn't think of anything to write.
@@ -8,3 +8,6 @@ Am I a Dog? A Cat? You'll never find out. ;)
 Bark Bark! Meow Meow?
 Your mouse looking real tasty right now.
 Doing work? Not when I'm here.
+てへぺろ！
+我爱草泥马。
+你是傻逼！

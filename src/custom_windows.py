@@ -2,8 +2,8 @@ import tkinter as tk
 import random
 
 from vector2 import Vector2
-from read_parameters import asset_param_dist
-from read_parameters import text_param
+from read_parameters import asset_param_dict
+from read_parameters import note_param
 
 class CustomWindow():
     def __init__(self):
@@ -63,7 +63,7 @@ class ImageWindow(CustomWindow):
 
         # Set icon.
         try:
-            self.window.wm_iconbitmap(asset_param_dist["IMAGE_ICON"])
+            self.window.wm_iconbitmap(asset_param_dict["IMAGE_ICON"])
         except:
             pass
 
@@ -77,7 +77,7 @@ class NoteWindow(CustomWindow):
     def __init__(self, width=400, height=300):
         super().__init__()
 
-        note = random.choice(text_param)
+        note = random.choice(note_param)
 
         # Set window attributes.
         self.window.title(NoteWindow.TITLE)
@@ -91,7 +91,7 @@ class NoteWindow(CustomWindow):
 
         # Set icon.
         try:
-            self.window.wm_iconbitmap(asset_param_dist["NOTE_ICON"])
+            self.window.wm_iconbitmap(asset_param_dict["NOTE_ICON"])
         except:
             pass
 

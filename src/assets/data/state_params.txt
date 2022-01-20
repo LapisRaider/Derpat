@@ -1,7 +1,7 @@
-#Impt note variableName = value
+# Example: VAR_NAME = VALUE
 #to write comments put on newline and start with #
 
-#idle State
+# Idle State
 MIN_DURATION_IDLE = 5
 MAX_DURATION_IDLE = 10
 
@@ -11,12 +11,10 @@ CHANCE_MOVE_WINDOW = 5
 CHANCE_SCREAM = 6
 CHANCE_STROLL = 4
 
-#stroll State
+# Stroll State
 STROLL_SPEED = 150
 
-#headpat State got nothing
-
-#chase mouse State
+# Chase Mouse State
 CHASE_FOLLOW_SPEED = 300
 MOUSE_CATCH_DIST = 5
 CHASE_MAX_TIME = 5
@@ -26,35 +24,35 @@ CHASE_MIN_TIME = 3
 CATCH_OFFSET_X = 64
 CATCH_OFFSET_Y = 64
 
-#got mouse State
+# Got Mouse State
 GOT_MIN_DURATION = 3
 GOT_MAX_DURATION = 5
 GOT_RUN_SPEED = 300
 
-# offset of the sprite to attach the mouse for left
+# Offset of the sprite to attach the mouse for left.
 MOUSE_OFFSET_RUN_LEFT_X = 10
 MOUSE_OFFSET_RUN_LEFT_Y = 70
 
-# offset of the sprite to attach the mouse for right
+# Offset of the sprite to attach the mouse for right.
 MOUSE_OFFSET_RUN_RIGHT_X = 110
 MOUSE_OFFSET_RUN_RIGHT_Y = 70
 
-#open window State
+# Open Window State
 OPEN_RUN_SPEED = 200
 
-#move window State
+# Move Window State
 MOVE_WIN_DIST_TO_TRAVEL = 500
 MOVE_WIN_RUN_SPEED = 300
 
-#scream state
+# Scream State
 SCREAM_MIN_TIME = 2
 SCREAM_MAX_TIME = 5
 SCREAM_INTERVAL = 1.5
 
-#Footprints
+# Footprints
 FOOT_PRINT_SPAWN_INTERVAL = 0.4
 
-# relative position to spawn the footprints
+# Relative position to spawn the footprints.
 FOOT_X_LEFT_OFFSET = 64
 FOOT_X_RIGHT_OFFSET = -5
 FOOT_Y_OFFSET = 80

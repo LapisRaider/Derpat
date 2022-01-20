@@ -5,10 +5,10 @@ from system import System
 from vector2 import Vector2
 from pet import PetState
 from pet import PetAnimState
-from read_parameters import param_dict
+from read_parameters import state_param_dict
 
 class Stroll(System):
-    STROLL_SPEED = float(param_dict["STROLL_SPEED"])
+    STROLL_SPEED = float(state_param_dict["STROLL_SPEED"])
 
     def on_enter(self, pet):
         print("On Enter Stroll")

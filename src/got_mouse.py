@@ -7,18 +7,18 @@ from vector2 import Vector2
 from mouse_controller import *
 from pet import PetState
 from pet import PetAnimState
-from read_parameters import param_dict
+from read_parameters import state_param_dict
 
 class GotMouse(System):
-    GOT_MIN_DURATION = float(param_dict["GOT_MIN_DURATION"]) # In seconds.
-    GOT_MAX_DURATION = float(param_dict["GOT_MAX_DURATION"])
-    GOT_RUN_SPEED = float(param_dict["GOT_RUN_SPEED"])
-    MOUSE_OFFSET_RUN_LEFT = Vector2(float(param_dict["MOUSE_OFFSET_RUN_LEFT_X"]), float(param_dict["MOUSE_OFFSET_RUN_LEFT_Y"]))
-    MOUSE_OFFSET_RUN_RIGHT = Vector2(float(param_dict["MOUSE_OFFSET_RUN_RIGHT_X"]), float(param_dict["MOUSE_OFFSET_RUN_RIGHT_Y"]))
+    GOT_MIN_DURATION = float(state_param_dict["GOT_MIN_DURATION"]) # In seconds.
+    GOT_MAX_DURATION = float(state_param_dict["GOT_MAX_DURATION"])
+    GOT_RUN_SPEED = float(state_param_dict["GOT_RUN_SPEED"])
+    MOUSE_OFFSET_RUN_LEFT = Vector2(float(state_param_dict["MOUSE_OFFSET_RUN_LEFT_X"]), float(state_param_dict["MOUSE_OFFSET_RUN_LEFT_Y"]))
+    MOUSE_OFFSET_RUN_RIGHT = Vector2(float(state_param_dict["MOUSE_OFFSET_RUN_RIGHT_X"]), float(state_param_dict["MOUSE_OFFSET_RUN_RIGHT_Y"]))
 
     # to be init at the start
     def on_enter(self, pet):
-        print("On Enter Snatch Mouse")
+        print("On Enter Got Mouse")
         self.start_time = time.time()
         self.duration = random.randrange(GotMouse.GOT_MIN_DURATION, GotMouse.GOT_MAX_DURATION)
         self.mouse_offset = GotMouse.MOUSE_OFFSET_RUN_LEFT if pet.anim_state == PetAnimState.WALK_LEFT else GotMouse.MOUSE_OFFSET_RUN_RIGHT

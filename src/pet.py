@@ -6,8 +6,8 @@ import enum
 from vector2 import *
 from sprite_anim import SpriteAnim
 from footprints import Footprints
-from read_parameters import param_dict
-from read_parameters import asset_param_dist
+from read_parameters import state_param_dict
+from read_parameters import asset_param_dict
 
 class PetState(enum.IntEnum):
     DEFAULT = 0
@@ -30,14 +30,14 @@ class PetAnimState(enum.IntEnum):
     ATTACK_RIGHT = 5
 
 class Pet():
-    FOOT_PRINT_SPAWN_INTERVAL = float(param_dict["FOOT_PRINT_SPAWN_INTERVAL"])
-    FOOT_X_LEFT_OFFSET = float(param_dict["FOOT_X_LEFT_OFFSET"])
-    FOOT_X_RIGHT_OFFSET = float(param_dict["FOOT_X_RIGHT_OFFSET"])
-    FOOT_Y_OFFSET = float(param_dict["FOOT_Y_OFFSET"])
+    FOOT_PRINT_SPAWN_INTERVAL = float(state_param_dict["FOOT_PRINT_SPAWN_INTERVAL"])
+    FOOT_X_LEFT_OFFSET = float(state_param_dict["FOOT_X_LEFT_OFFSET"])
+    FOOT_X_RIGHT_OFFSET = float(state_param_dict["FOOT_X_RIGHT_OFFSET"])
+    FOOT_Y_OFFSET = float(state_param_dict["FOOT_Y_OFFSET"])
 
-    TRACK_FOOTPRINT_MAX_DURATION = float(param_dict["TRACK_FOOTPRINT_MAX_DURATION"])
-    TRACK_FOOTPRINT_MIN_DURATION = float(param_dict["TRACK_FOOTPRINT_MIN_DURATION"])
-    FOOTPRINT_CHANCE = float(param_dict["FOOTPRINT_CHANCE"]) # 40%
+    TRACK_FOOTPRINT_MAX_DURATION = float(state_param_dict["TRACK_FOOTPRINT_MAX_DURATION"])
+    TRACK_FOOTPRINT_MIN_DURATION = float(state_param_dict["TRACK_FOOTPRINT_MIN_DURATION"])
+    FOOTPRINT_CHANCE = float(state_param_dict["FOOTPRINT_CHANCE"]) # 40%
 
     def __init__(self):
         # Create a window
@@ -65,15 +65,15 @@ class Pet():
         self.curr_state = PetState.DEFAULT
         self.prev_state = PetState.DEFAULT
 
-        #asset_param_dist["HEADPAT_SOUND"]
+        #asset_param_dict["HEADPAT_SOUND"]
         # Create animations.
         self.anims = [ \
-            SpriteAnim(asset_param_dist["PET_IDLE_ANIM"], int(asset_param_dist["PET_IDLE_ANIM_FRAME"])),
-            SpriteAnim(asset_param_dist["PET_HEADPAT_ANIM"], int(asset_param_dist["PET_HEADPAT_ANIM_FRAME"])), \
-            SpriteAnim(asset_param_dist["PET_WALK_LEFT_ANIM"], int(asset_param_dist["PET_WALK_LEFT_ANIM_FRAME"])), \
-            SpriteAnim(asset_param_dist["PET_WALK_RIGHT_ANIM"], int(asset_param_dist["PET_WALK_RIGHT_ANIM_FRAME"])), \
-            SpriteAnim(asset_param_dist["PET_ATTACK_LEFT_ANIM"], int(asset_param_dist["PET_ATTACK_LEFT_ANIM_FRAME"])), \
-            SpriteAnim(asset_param_dist["PET_ATTACK_RIGHT_ANIM"], int(asset_param_dist["PET_ATTACK_RIGHT_ANIM_FRAME"]))]
+            SpriteAnim(asset_param_dict["PET_IDLE_ANIM"], int(asset_param_dict["PET_IDLE_ANIM_FRAME"])),
+            SpriteAnim(asset_param_dict["PET_HEADPAT_ANIM"], int(asset_param_dict["PET_HEADPAT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dict["PET_WALK_LEFT_ANIM"], int(asset_param_dict["PET_WALK_LEFT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dict["PET_WALK_RIGHT_ANIM"], int(asset_param_dict["PET_WALK_RIGHT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dict["PET_ATTACK_LEFT_ANIM"], int(asset_param_dict["PET_ATTACK_LEFT_ANIM_FRAME"])), \
+            SpriteAnim(asset_param_dict["PET_ATTACK_RIGHT_ANIM"], int(asset_param_dict["PET_ATTACK_RIGHT_ANIM_FRAME"]))]
         self.anim_state = PetAnimState.IDLE
         self.label = tk.Label(self.window, image=self.anims[self.anim_state].get_frame(), bd=0, bg='black')
         self.label.pack()

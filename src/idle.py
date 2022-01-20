@@ -8,7 +8,7 @@ from pet import PetState
 from pet import PetAnimState
 from pynput import mouse
 from pynput.mouse import Button
-from read_parameters import param_dict
+from read_parameters import state_param_dict
 
 class ChanceState(enum.IntEnum):
     CHANCE_CHASE_MOUSE = 0
@@ -28,15 +28,14 @@ class _OnClick():
         return True
 
 class Idle(System):
-    MIN_DURATION_IDLE = float(param_dict["MIN_DURATION_IDLE"])
-    MAX_DURATION_IDLE = float(param_dict["MAX_DURATION_IDLE"])
+    MIN_DURATION_IDLE = float(state_param_dict["MIN_DURATION_IDLE"])
+    MAX_DURATION_IDLE = float(state_param_dict["MAX_DURATION_IDLE"])
 
-    CHANCES = [float(param_dict["CHANCE_CHASE_MOUSE"]), \
-        float(param_dict["CHANCE_OPEN_WINDOW"]), \
-        float(param_dict["CHANCE_MOVE_WINDOW"]),  \
-        float(param_dict["CHANCE_SCREAM"]), \
-        float(param_dict["CHANCE_STROLL"])
-        ]
+    CHANCES = [float(state_param_dict["CHANCE_CHASE_MOUSE"]), \
+        float(state_param_dict["CHANCE_OPEN_WINDOW"]), \
+        float(state_param_dict["CHANCE_MOVE_WINDOW"]),  \
+        float(state_param_dict["CHANCE_SCREAM"]), \
+        float(state_param_dict["CHANCE_STROLL"])]
     TOTAL_CHANCE = 0
 
     def on_enter(self, pet):

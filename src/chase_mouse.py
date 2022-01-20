@@ -5,21 +5,22 @@ from system import System
 from mouse_controller import *
 from pet import PetState
 from pet import PetAnimState
-from read_parameters import param_dict
+from read_parameters import state_param_dict
 
 class ChaseMouse(System):
-    CHASE_FOLLOW_SPEED = float(param_dict["CHASE_FOLLOW_SPEED"])
-    MOUSE_CATCH_DIST = float(param_dict["MOUSE_CATCH_DIST"])
+    CHASE_FOLLOW_SPEED = float(state_param_dict["CHASE_FOLLOW_SPEED"])
+    MOUSE_CATCH_DIST = float(state_param_dict["MOUSE_CATCH_DIST"])
 
-    CHASE_MAX_TIME = float(param_dict["CHASE_MAX_TIME"]) # after a certain amt of time give up
-    CHASE_MIN_TIME = float(param_dict["CHASE_MIN_TIME"])
+    CHASE_MAX_TIME = float(state_param_dict["CHASE_MAX_TIME"]) # after a certain amt of time give up
+    CHASE_MIN_TIME = float(state_param_dict["CHASE_MIN_TIME"])
 
-    CATCH_OFFSET = Vector2(float(param_dict["CATCH_OFFSET_X"]),float(param_dict["CATCH_OFFSET_Y"]))
+    CATCH_OFFSET = Vector2(float(state_param_dict["CATCH_OFFSET_X"]),float(state_param_dict["CATCH_OFFSET_Y"]))
 
     #to be init at the start
     def on_enter(self, pet):
-        pet.followStartTime = time.time()
-        pet.followAmt = random.randrange(ChaseMouse.CHASE_MIN_TIME, ChaseMouse.CHASE_MAX_TIME)
+        print("On Enter Chase Mouse")
+        self.start_time = time.time()
+        self.duration = random.randrange(ChaseMouse.CHASE_MIN_TIME, ChaseMouse.CHASE_MAX_TIME)
 
     #pet follows the mouse ard
     def follow_mouse(self, pet, delta_time):
@@ -41,7 +42,7 @@ class ChaseMouse(System):
     # update snatching the mouse
     def action(self, pet, delta_time):
         #give up chasing
-        if time.time() > pet.followStartTime + pet.followAmt:
+        if time.time() > self.start_time + self.duration:
             pet.change_state(PetState.IDLE)
             return
 

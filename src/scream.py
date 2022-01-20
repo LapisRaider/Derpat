@@ -5,14 +5,14 @@ from system import System
 from pet import PetState
 from pet import PetAnimState
 from playsound import playsound
-from read_parameters import param_dict
-from read_parameters import asset_param_dist
+from read_parameters import state_param_dict
+from read_parameters import asset_param_dict
 
 class Scream(System):
-    SCREAM_MIN_TIME = float(param_dict["SCREAM_MIN_TIME"])
-    SCREAM_MAX_TIME = float(param_dict["SCREAM_MAX_TIME"])
-    SCREAM_INTERVAL = float(param_dict["SCREAM_INTERVAL"])
-    AUDIO_FILE = asset_param_dist["SCREAM_SOUND"]
+    SCREAM_MIN_TIME = float(state_param_dict["SCREAM_MIN_TIME"])
+    SCREAM_MAX_TIME = float(state_param_dict["SCREAM_MAX_TIME"])
+    SCREAM_INTERVAL = float(state_param_dict["SCREAM_INTERVAL"])
+    AUDIO_FILE = asset_param_dict["SCREAM_SOUND"]
 
     def on_enter(self, pet):
         print("On Enter Scream")
